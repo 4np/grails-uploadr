@@ -1,0 +1,31 @@
+h1 {
+	font: 24px normal Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	color: #5585d7;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.68);
+}
+
+h1 a, h1 a:hover, h1:visited {
+	color: #5585d7;
+	text-decoration: none;
+	border-bottom: 2px dashed red;
+}
+
+h3 {
+	font: 12px normal Helvetica, Arial, sans-serif;
+	color: #5585d7;
+	padding-left: 20px;
+	font-style: italic;
+}
+
+h3 i {
+	color: #fd4239;
+	font-size: 14px;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.68);
+	font-weight: normal;
+	font-style: normal;
+}
+
+.syntaxhighlighter {
+	width: 600px;
+}
