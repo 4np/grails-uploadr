@@ -112,13 +112,13 @@ class UploadrTagLib {
 
 	def demo = { attrs, body ->
 		// pull in external resources
-		out << r.external(type:"css", dir:'css', file:'demo.css')
-		out << r.external(type:"css", dir:'css', file:'demopage.css')
-		out << r.external(type:"css", dir:'css', file:'shThemeEclipse.css')
-		out << r.external(type:"css", dir:'css', file:'shCore.css')
-		out << r.external(type:"js", dir:'js', file:'shCore.js')
-		out << r.external(type:"js", dir:'js', file:'shAutoloader.js')
-		out << r.external(type:"js", dir:'js', file:'shBrushXml.js')
+		out << r.external(type:"css", plugin:'uploadr', dir:'css', file:'demo.css')
+		out << r.external(type:"css", plugin:'uploadr', dir:'css', file:'demopage.css')
+		out << r.external(type:"css", plugin:'uploadr', dir:'css', file:'shThemeEclipse.css')
+		out << r.external(type:"css", plugin:'uploadr', dir:'css', file:'shCore.css')
+		out << r.external(type:"js", plugin:'uploadr', dir:'js', file:'shCore.js')
+		out << r.external(type:"js", plugin:'uploadr', dir:'js', file:'shAutoloader.js')
+		out << r.external(type:"js", plugin:'uploadr', dir:'js', file:'shBrushXml.js')
 
 		// initialize the syntax highlighter
 		out << r.script([:], "\$(document).ready(function() { SyntaxHighlighter.all(); });")
