@@ -14,9 +14,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
- *  $Author: work@osx.eu $
- *  $Rev: 628 $
- *  $Date: 2011-08-11 14:04:06 +0200 (Thu, 11 Aug 2011) $
+ *  $Author$
+ *  $Rev$
+ *  $Date$
  */
 class UploadrGrailsPlugin {
 	def version			= "0.4.2"
