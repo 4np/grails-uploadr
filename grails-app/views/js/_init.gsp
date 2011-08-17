@@ -53,15 +53,19 @@ $(document).ready(function() {
 </g:else>},<g:if test="${classname != 'uploadr'}">
 			dropableClass: '${classname}-dropable',
 			hoverClass: '${classname}-hover',</g:if>
-			uri: '${uri}',
+			uri: '${uri}',<g:if test="${sound}">
 			notificationSound: '${resource(plugin: 'uploadr', dir:'sounds', file:'notify.wav')}',
 			errorSound: '${resource(plugin: 'uploadr', dir:'sounds', file:'error.wav')}',
+			deleteSound: '${resource(plugin: 'uploadr', dir:'sounds', file:'delete.wav')}',</g:if>
+			labelDone: '<g:message code="uploadr.label.done" />',
+			labelFailed: '<g:message code="uploadr.label.failed" />',
+			labelAborted: '<g:message code="uploadr.label.aborted" />',
+			fileSelectText: '<g:if test="${fileselect}">${fileselect}</g:if><g:else><g:message code="uploadr.button.select" /></g:else>',
+			placeholderText: '<g:if test="${placeholder}">${placeholder}</g:if><g:else><g:message code="uploadr.placeholder.text" /></g:else>',
 			famfamfam: '${resource(plugin: 'famfamfam', dir: 'images/icons')}',
 			maxVisible: ${maxVisible},
 			insertDirection: '${direction}',
-			id: '${name}',<g:if test="${fileselect}">
-			fileSelectText: '${fileselect}',</g:if><g:if test="${placeholder}">
-			placeholderText: '${placeholder}',</g:if>
+			id: '${name}',
 			files: {<g:each var="file" in="${files}" status="s">
 				${s} : {
 					fileName 		: '${file.key.replaceAll("'","\\\\'")}',

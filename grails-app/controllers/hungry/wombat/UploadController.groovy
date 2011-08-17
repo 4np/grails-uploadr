@@ -143,7 +143,7 @@ class UploadController {
 
 		// render json response
 		response.setStatus(status, statusText)
-		render([written: true, fileName: file.name] as JSON)
+		render([written: (status == 200), fileName: file.name, status: status, statusText: statusText] as JSON)
 	}
 
 	def delete = {

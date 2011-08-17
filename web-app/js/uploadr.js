@@ -19,14 +19,22 @@
  *  $Date$
  */
 (function($){
+	var notificationSoundEffect = null;
+	var errorSoundEffect = null;
+	var deleteSoundEffect = null;
+
 	// methods
 	var methods = {
-		playNotification: function() {
-			if (notification) notification.play();
+		playNotification: function(options) {
+			if (options.workvars.notificationSoundEffect) options.workvars.notificationSoundEffect.play();
 		},
 
-		playError: function() {
-			if (error) error.play();
+		playError: function(options) {
+			if (options.workvars.errorSoundEffect) options.workvars.errorSoundEffect.play();
+		},
+
+		playDelete: function(options) {
+			if (options.workvars.deleteSoundEffect) options.workvars.deleteSoundEffect.play();
 		},
 
 		cancel: function(event) {
@@ -65,7 +73,7 @@
 			var fileDomObj = $(fileDiv);
 
 			// and set to complete
-			methods.onProgressHandler(fileDomObj, file, 100, 'done');
+			methods.onProgressHandler(fileDomObj, file, 100, options.labelDone);
 
 			// hide the placeholder text
 			$('.placeholder', domObj).hide();
@@ -124,7 +132,7 @@
 
 			var filePercentageDiv = document.createElement('div');
 				filePercentageDiv.setAttribute('class', 'percentage');
-				filePercentageDiv.innerHTML = ((showPercentage) ? '0%' : 'done');
+				filePercentageDiv.innerHTML = ((showPercentage) ? '0%' : options.labelDone);
 
 			var fileSpeedDiv = document.createElement('div');
 				fileSpeedDiv.setAttribute('class', 'speed');
@@ -180,6 +188,9 @@
 
 		removeFileElement: function(domObj, options) {
 			var parent = domObj.parent();
+
+			// play delete sound effect
+			methods.playDelete(options);
 
 			// remove file
 			domObj.animate({height: '0px'}, 200, 'swing', function() {
@@ -350,7 +361,6 @@
 
 			// check for filesize?
 			if (options.maxSize && file.fileSize > options.maxSize) {
-				console.log('file is too large!');
 				return false;
 			}
 
@@ -374,10 +384,10 @@
 			}, false);
 
 			upload.addEventListener("error", function (ev) {
-				methods.playError();
+				methods.playError(options);
 
 				if (options.onProgress(fileAttrs, domObj, 100)) {
-					methods.onProgressHandler(domObj, fileAttrs, 100);
+					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed);
 
 					// decrease upload counter
 					methods.handleBadge(-1,options);
@@ -390,7 +400,7 @@
 				if (options.errorSound) new Audio(options.errorSound).play();
 
 				if (options.onProgress(fileAttrs, domObj, 100)) {
-					methods.onProgressHandler(domObj, fileAttrs, 100, 'aborted');
+					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelAborted);
 				}
 
 				progressBar.addClass('failed');
@@ -431,8 +441,11 @@
 						// hide the spinner
 						spinner.hide();
 
+						// change percentage to 'done'
+						methods.onProgressHandler(domObj, fileAttrs, 100, options.labelDone);
+
 						// play notification sound?
-						methods.playNotification();
+						methods.playNotification(options);
 
 						// decrease upload counter
 						methods.handleBadge(-1,options);
@@ -441,11 +454,11 @@
 						methods.addButtons(fileAttrs, domObj, options);
 					});
 				} else {
-					methods.playError();
+					methods.playError(options);
 
 					// whoops, we've got an error!
 					if (options.onProgress(fileAttrs, domObj, 100)) {
-						methods.onProgressHandler(domObj, fileAttrs, 100);
+						methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed, response.statusText);
 
 						// decrease upload counter
 						methods.handleBadge(-1,options);
@@ -474,7 +487,7 @@
         	xhr.send(file);
 		},
 
-		onProgressHandler: function(domObj, fileAttrs, percentage, text) {
+		onProgressHandler: function(domObj, fileAttrs, percentage, text, tooltipText) {
 			var progressMaxWidth = domObj.parent().width();
 			var progressBar = $('.progress', domObj);
 
@@ -509,6 +522,11 @@
 			// handle progressbar width
 			progressBar.width((progressMaxWidth / 100) * percentage);
 			$('.percentage',domObj).html((text) ? text : percentage + '%');
+
+			// add tooltip?
+			if (text && tooltipText) {
+				$('.percentage',domObj).tipTip({content: tooltipText});
+			}
 
 			// are we done uploading?
 			if (percentage >= 100) {
@@ -670,6 +688,9 @@
 		var defaults = {
 			placeholderText		: 'drag and drop your files here to upload...',
 			fileSelectText 		: 'Select files to upload',
+			labelDone			: 'done',
+			labelFailed 		: 'failed',
+			labelAborted 		: 'aborted',
 			dropableClass		: 'uploadr-dropable',
 			hoverClass			: 'uploadr-hover',
 			uri					: '/upload/uri',
@@ -685,21 +706,23 @@
 			// default sound effects
 			notificationSound   : '',
 			errorSound          : '',
+			deleteSound 		: '',
 
 			// workvariables, internal use only
 			workvars 			: {
-				gotFiles		: false,
-				files			: [],
-				notification	: null,
-				error			: null,
-				viewing			: 0,
-				uploading		: 0,
-				badgeDiv 		: null,
-				uploadrDiv 		: null,
-				paginationDiv 	: null,
-				pagesDiv 		: null,
-				nextButton 		: null,
-				prevButton 		: null
+				gotFiles					: false,
+				files						: [],
+				notificationSoundEffect		: null,
+				errorSoundEffect			: null,
+				deleteSoundEffect 			: null,
+				viewing						: 0,
+				uploading					: 0,
+				badgeDiv 					: null,
+				uploadrDiv 					: null,
+				paginationDiv 				: null,
+				pagesDiv 					: null,
+				nextButton 					: null,
+				prevButton 					: null
 			},
 
 			// default event handlers
@@ -797,8 +820,9 @@
 			}
 
 			// initialize notification sounds?
-			if (options.notificationSound) notification = new Audio(options.notificationSound);
-			if (options.errorSound) error = new Audio(options.errorSound);
+			if (options.notificationSound) options.workvars.notificationSoundEffect = new Audio(options.notificationSound);
+			if (options.errorSound) options.workvars.errorSoundEffect = new Audio(options.errorSound);
+			if (options.deleteSound) options.workvars.deleteSoundEffect = new Audio(options.deleteSound);
 		});
 	};
 })(jQuery);

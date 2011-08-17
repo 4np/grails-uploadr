@@ -31,12 +31,13 @@ class UploadrTagLib {
 	 * @param Closure       body
 	 */
 	def add = { attrs, body ->
+		def sound 			= (attrs.get('noSound') && attrs.noSound) ? false : true;
 		def name			= (attrs.name) ? attrs.name : "uploadr"
 		def classname		= (attrs.class) ? attrs.class : 'uploadr'
 		def direction 		= (attrs.direction) ? attrs.direction : 'down'
 		def uri 			= createLink(controller: attrs.controller, action: attrs.action)
-		def placeholder		= (attrs.get('placeholder') ? attrs.get('placeholder') : 'Drop your files here to upload...')
-		def fileselect		= (attrs.get('fileselect') ? attrs.get('fileselect') : 'Select files to upload')
+		def placeholder		= (attrs.get('placeholder') ? attrs.get('placeholder') : '')
+		def fileselect		= (attrs.get('fileselect') ? attrs.get('fileselect') : '')
 		def maxVisible		= (attrs.get('maxVisible') ? attrs.get('maxVisible') : 0);
 
 		// define uri
@@ -103,6 +104,7 @@ class UploadrTagLib {
 				fileselect 	: fileselect,
 				classname	: classname,
 				maxVisible	: maxVisible,
+				sound 		: sound,
 				handlers	: pageScope.handlers,
 				files		: pageScope.files,
 				unsupported	: (attrs.get('unsupported')) ? attrs.unsupported : createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')

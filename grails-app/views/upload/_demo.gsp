@@ -173,8 +173,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/myFourthUploadr") %>
-<h1>4. Initial files, files are added to the bottom (default), custom <a href="${resource(plugin:'uploadr', dir:'css', file:'demo.css')}" target="_new">css</a>, custom drop text, custom file browse text and paginate to 4 files per page</h1>
-<uploadr:add name="myFourthUploadr" path="${path}" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4">
+<h1>4. Initial files, files are added to the top, custom <a href="${resource(plugin:'uploadr', dir:'css', file:'demo.css')}" target="_new">css</a>, custom drop text, custom file browse text, paginate to 4 files per page and no sound effects</h1>
+<uploadr:add name="myFourthUploadr" path="${path}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -184,7 +184,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 <% } %>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-&lt;uploadr:add name="myFourthUploadr" path="${path}" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4">
+&lt;uploadr:add name="myFourthUploadr" path="${path}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
 <% path.listFiles().each { file -> %>
 	&lt;uploadr:file name="${file.name}">
 		&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
