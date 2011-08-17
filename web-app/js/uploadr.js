@@ -19,10 +19,6 @@
  *  $Date$
  */
 (function($){
-	var notificationSoundEffect = null;
-	var errorSoundEffect = null;
-	var deleteSoundEffect = null;
-
 	// methods
 	var methods = {
 		playNotification: function(options) {

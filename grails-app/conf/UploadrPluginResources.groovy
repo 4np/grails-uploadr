@@ -22,8 +22,15 @@ modules = {
 	uploadr {
 		dependsOn 'jquery, modernizr, jquery-ui'
 
-		resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'uploadr.js']
-		resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.css']
+		if (false && grails.util.GrailsUtil.environment == "development") {
+			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'uploadr.js']
+			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.css']
+		} else {
+			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'uploadr.min.js']
+			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.min.css']
+		}
+
+		// tip tip resources
 		resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.tipTip.minified.js']
 		resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'tipTip.css']
 	}
