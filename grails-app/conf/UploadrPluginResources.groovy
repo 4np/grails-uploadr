@@ -22,7 +22,7 @@ modules = {
 	uploadr {
 		dependsOn 'jquery, modernizr, jquery-ui'
 
-		if (false && grails.util.GrailsUtil.environment == "development") {
+		if (grails.util.GrailsUtil.environment == "development") {
 			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'uploadr.js']
 			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.css']
 		} else {
