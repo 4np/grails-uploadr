@@ -241,7 +241,7 @@
 
 .uploadr .file .info .voting {
 	display: inline-block;
-	width: 36px;
+	width: 38px;
 	height: 23px;
 }
 
@@ -249,6 +249,7 @@
 	display: inline-block;
 	width: 18px;
 	height: 23px;
+	padding-left: 2px;
 	background-image: url(../images/like.png);
 	background-repeat: no-repeat;
 	background-position: left center;
