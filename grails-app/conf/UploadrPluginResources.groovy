@@ -23,10 +23,10 @@ modules = {
 		dependsOn 'jquery, modernizr, jquery-ui'
 
 		if (grails.util.GrailsUtil.environment == "development") {
-			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'uploadr.js']
+			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.js']
 			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.css']
 		} else {
-			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'uploadr.min.js']
+			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.min.js']
 			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.min.css']
 		}
 
