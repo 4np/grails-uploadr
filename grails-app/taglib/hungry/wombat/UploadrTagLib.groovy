@@ -38,7 +38,8 @@ class UploadrTagLib {
 		def uri 			= createLink(controller: attrs.controller, action: attrs.action)
 		def placeholder		= (attrs.get('placeholder') ? attrs.get('placeholder') : '')
 		def fileselect		= (attrs.get('fileselect') ? attrs.get('fileselect') : '')
-		def maxVisible		= (attrs.get('maxVisible') ? attrs.get('maxVisible') : 0);
+		def maxVisible		= (attrs.get('maxVisible') ? attrs.get('maxVisible') : 0)
+		def rating 			= (attrs.get('rating') ? attrs.get('rating') as Boolean : false);
 
 		// define uri
 		if (attrs.get('controller')) {
@@ -105,6 +106,7 @@ class UploadrTagLib {
 				classname	: classname,
 				maxVisible	: maxVisible,
 				sound 		: sound,
+				rating		: rating,
 				handlers	: pageScope.handlers,
 				files		: pageScope.files,
 				unsupported	: (attrs.get('unsupported')) ? attrs.unsupported : createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')
@@ -168,7 +170,9 @@ class UploadrTagLib {
 			size		: 0 as Long,
 			modified 	: 0 as Long,
 			id 			: "",
-			info 		: []
+			info 		: [],
+			color		: '',
+			rating		: 0
 		]
 
 		// do we have child tags to override the regular handler?
@@ -214,7 +218,20 @@ class UploadrTagLib {
 	}
 
 	def fileId = { attrs, body ->
-		pageScope.temp.id = body() as String
+		pageScope.temp.id = (body() as String).trim()
 		out << "fileId"
+	}
+
+	def color = { attrs, body ->
+		pageScope.temp.color = (body() as String).trim()
+	}
+
+	def rating = { attrs, body ->
+		def rating = body() as double
+
+		if (rating < 0) rating = 0;
+		if (rating > 1) rating = 1;
+
+		pageScope.temp.rating = rating
 	}
 }

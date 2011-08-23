@@ -32,7 +32,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/mySecondUploadr") %>
-<h1>2. Initial files are shown, files are added on top, paginate into 5 files per page</h1>
+<h1>2. Initial files, files added on top, paginate into 5 files per page</h1>
 <uploadr:add name="mySecondUploadr" path="${path}" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
@@ -55,9 +55,36 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/myThirdUploadr") %>
-<h1>3. Initial files, files are added to the bottom (default), custom event handlers</h1>
+<h1>3. Initial files, new files on top, 5 files per page, override default file colors to <span style="color:#f594cc">#f594cc</span>, enable rating and voting</h1>
+<uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+<% path.listFiles().each { file -> %>
+	<uploadr:file name="${file.name}">
+		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
+		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
+		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
+		<uploadr:color>#f594cc</uploadr:color>
+		<uploadr:rating>${new Random().nextFloat()}</uploadr:rating>
+	</uploadr:file>
+<% } %>
+</uploadr:add>
+<pre class="brush:html collapse:true">
+	&lt;uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+<% path.listFiles().each { file -> %>
+		&lt;uploadr:file name="${file.name}">
+			&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
+			&lt;uploadr:fileModified>${file.lastModified()}&lt;/uploadr:fileModified>
+			&lt;uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}&lt;/uploadr:fileId>
+			&lt;uploadr:color>#f594cc&lt;/uploadr:color>
+			&lt;uploadr:rating>${new Random().nextFloat()}&lt;/uploadr:rating>
+		&lt;/uploadr:file>
+<% } %>
+	&lt;/uploadr:add>
+</pre>
+
+<% path = new File("${desktop}/myFourthUploadr") %>
+<h1>4. Initial files, files are added to the bottom (default), custom event handlers</h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
-<uploadr:add name="myThirdUploadr" path="${path}">
+<uploadr:add name="myFourthUploadr" path="${path}">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -114,7 +141,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 	</uploadr:onDelete>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-&lt;uploadr:add name="myThirdUploadr" path="${path}">
+&lt;uploadr:add name="myFourthUploadr" path="${path}">
 <% path.listFiles().each { file -> %>
 	&lt;uploadr:file name="${file.name}">
 		&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
@@ -172,9 +199,9 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 &lt;/uploadr:add>
 </pre>
 
-<% path = new File("${desktop}/myFourthUploadr") %>
-<h1>4. Initial files, files are added to the top, custom <a href="${resource(plugin:'uploadr', dir:'css', file:'demo.css')}" target="_new">css</a>, custom drop text, custom file browse text, paginate to 4 files per page and no sound effects</h1>
-<uploadr:add name="myFourthUploadr" path="${path}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
+<% path = new File("${desktop}/myFifthUploadr") %>
+<h1>5. Initial files, files are added to the top, custom <a href="${resource(plugin:'uploadr', dir:'css', file:'demo.css')}" target="_new">css</a>, custom drop text, custom file browse text, paginate to 4 files per page, rating, no sound effects</h1>
+<uploadr:add name="myFifthUploadr" path="${path}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -184,7 +211,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 <% } %>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-&lt;uploadr:add name="myFourthUploadr" path="${path}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
+&lt;uploadr:add name="myFifthUploadr" path="${path}" direction="up" rating="true" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
 <% path.listFiles().each { file -> %>
 	&lt;uploadr:file name="${file.name}">
 		&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>

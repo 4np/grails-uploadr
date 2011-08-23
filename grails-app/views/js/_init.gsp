@@ -64,6 +64,7 @@ $(document).ready(function() {
 			placeholderText: '<g:if test="${placeholder}">${placeholder}</g:if><g:else><g:message code="uploadr.placeholder.text" /></g:else>',
 			famfamfam: '${resource(plugin: 'famfamfam', dir: 'images/icons')}',
 			maxVisible: ${maxVisible},
+			rating: ${rating},
 			insertDirection: '${direction}',
 			id: '${name}',
 			files: {<g:each var="file" in="${files}" status="s">
@@ -71,7 +72,9 @@ $(document).ready(function() {
 					fileName 		: '${file.key.replaceAll("'","\\\\'")}',
 					fileSize 		: ${file.value.size},
 					fileId 			: '${file.value.id.replaceAll("'","\\\\'")}',
-					fileDate 		: ${file.value.modified}<g:if test="${file.value.view}">,
+					fileDate 		: ${file.value.modified}<g:if test="${file.value.color}">,
+					fileColor 		: '${file.value.color}'</g:if><g:if test="${file.value.rating}">,
+					fileRating 		: '${file.value.rating}'</g:if><g:if test="${file.value.view}">,
 					fileInfo 		: [<g:each in="${file.value.info}" var="info" status="i">
 						'${info}'<g:if test="${(i+1) < file.value.info.size()}">,</g:if></g:each>
 					]</g:if>

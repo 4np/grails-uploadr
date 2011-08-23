@@ -190,6 +190,33 @@
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.33);
 }
 
+.uploadr .file .info .details .rating {
+	display: inline-block;
+	width: 90px;
+	height: 18px;
+}
+
+.uploadr .file .info .details .rating .empty {
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	background-image: url(../images/rating_empty.png);
+}
+
+.uploadr .file .info .details .rating .half {
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	background-image: url(../images/rating_half.png);
+}
+
+.uploadr .file .info .details .rating .full {
+	width: 18px;
+	height: 18px;
+	display: inline-block;
+	background-image: url(../images/rating_full.png);
+}
+
 .uploadr .file .info .spinner {
 	background-image: url(../images/importing.gif);
 	width: 16px;

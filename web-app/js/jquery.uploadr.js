@@ -68,8 +68,14 @@
 			var fileDiv = methods.addFileElements(domObj, file, options, false);
 			var fileDomObj = $(fileDiv);
 
+			// got a color?
+			if (file.fileColor) {
+				// yes override default background color
+				$('.progress', fileDomObj).css('background-color', file.fileColor);
+			}
+
 			// and set to complete
-			methods.onProgressHandler(fileDomObj, file, 100, options.labelDone);
+			methods.onProgressHandler(fileDomObj, file, 100, options.labelDone, '', options);
 
 			// hide the placeholder text
 			$('.placeholder', domObj).hide();
@@ -130,6 +136,9 @@
 				filePercentageDiv.setAttribute('class', 'percentage');
 				filePercentageDiv.innerHTML = ((showPercentage) ? '0%' : options.labelDone);
 
+			var ratingDiv = document.createElement('div');
+				ratingDiv.setAttribute('class', 'rating');
+
 			var fileSpeedDiv = document.createElement('div');
 				fileSpeedDiv.setAttribute('class', 'speed');
 
@@ -144,6 +153,7 @@
 			detailsDiv.appendChild(fileSizeDiv);
 			detailsDiv.appendChild(filePercentageDiv);
 			detailsDiv.appendChild(fileSpeedDiv);
+			detailsDiv.appendChild(ratingDiv);
 
 			// add divs to fileDiv
 			fileDiv.appendChild(backgroundDiv);
@@ -375,15 +385,16 @@
 			// attach listeners
 			upload.addEventListener("progress", function(ev) {
 				if (options.onProgress(fileAttrs, domObj, Math.ceil((ev.loaded / ev.total) * 100))) {
-					methods.onProgressHandler(domObj, fileAttrs, Math.ceil((ev.loaded / ev.total) * 100));
+					methods.onProgressHandler(domObj, fileAttrs, Math.ceil((ev.loaded / ev.total) * 100), '', '', options);
 				}
 			}, false);
 
+			// attach error listener
 			upload.addEventListener("error", function (ev) {
 				methods.playError(options);
 
 				if (options.onProgress(fileAttrs, domObj, 100)) {
-					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed);
+					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed, '', options);
 
 					// decrease upload counter
 					methods.handleBadge(-1,options);
@@ -392,11 +403,12 @@
 				progressBar.addClass('failed');
 			}, false);
 			
+			// attach abort listener
 			upload.addEventListener("abort", function (ev) {
 				if (options.errorSound) new Audio(options.errorSound).play();
 
 				if (options.onProgress(fileAttrs, domObj, 100)) {
-					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelAborted);
+					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelAborted, '', options);
 				}
 
 				progressBar.addClass('failed');
@@ -410,6 +422,7 @@
 				});
 			}, false);
 
+			// attach ready state listener
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState != 4) { return; }
 
@@ -425,7 +438,7 @@
 				// check if everything went well
 				if (xhr.status == 200) {
 					if (options.onProgress(fileAttrs, domObj, 100)) {
-						methods.onProgressHandler(domObj, fileAttrs, 100);
+						methods.onProgressHandler(domObj, fileAttrs, 100, '', '', options);
 					}
 
 					// show the spinner
@@ -438,7 +451,7 @@
 						spinner.hide();
 
 						// change percentage to 'done'
-						methods.onProgressHandler(domObj, fileAttrs, 100, options.labelDone);
+						methods.onProgressHandler(domObj, fileAttrs, 100, options.labelDone, '', options);
 
 						// play notification sound?
 						methods.playNotification(options);
@@ -454,7 +467,7 @@
 
 					// whoops, we've got an error!
 					if (options.onProgress(fileAttrs, domObj, 100)) {
-						methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed, response.statusText);
+						methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed, response.statusText, options);
 
 						// decrease upload counter
 						methods.handleBadge(-1,options);
@@ -483,9 +496,11 @@
         	xhr.send(file);
 		},
 
-		onProgressHandler: function(domObj, fileAttrs, percentage, text, tooltipText) {
-			var progressMaxWidth = domObj.parent().width();
-			var progressBar = $('.progress', domObj);
+		onProgressHandler: function(domObj, fileAttrs, percentage, text, tooltipText, options) {
+			var progressMaxWidth	= domObj.parent().width();
+			var progressBar			= $('.progress', domObj);
+			var percentageDiv 		= $('.percentage', domObj);
+			var speedDiv			= $('.speed', domObj);
 
 			// calculate speed
 			var time, seconds, data, speed, average, secondsLeft;
@@ -513,23 +528,42 @@
 			}
 
 			// show upload speed
-			$('.speed', domObj).html(speed);
+			speedDiv.html(speed);
 
 			// handle progressbar width
 			progressBar.width((progressMaxWidth / 100) * percentage);
-			$('.percentage',domObj).html((text) ? text : percentage + '%');
+			percentageDiv.html((text) ? text : percentage + '%');
 
 			// add tooltip?
 			if (text && tooltipText) {
-				$('.percentage',domObj).tipTip({content: tooltipText});
+				percentageDiv.tipTip({content: tooltipText});
 			}
 
 			// are we done uploading?
 			if (percentage >= 100) {
+				var ratingDiv = $('.rating', domObj);
+				var cancelButton = $('.cancel', domObj);
+
+				// set progress to complete
 				progressBar.addClass('complete');
 
-				// remove cancel button
-				$('.cancel', domObj).hide();
+				// remove button
+				cancelButton.hide();
+
+				// use rating?
+				if (options.rating) {
+					// remove speed div
+					speedDiv.hide();
+
+					// remove percentage div
+					percentageDiv.hide(1000);
+
+					// set the rating
+					methods.setRating(fileAttrs.fileRating, domObj);
+
+					// and show the rating div
+					ratingDiv.show(500);
+				}
 
 				// unset speed array to save memory
 				fileAttrs.speed = null;
@@ -578,6 +612,33 @@
 
 			return button;
 		},
+
+		setRating: function(rating, domObj) {
+			var ratingDiv = $('.rating', domObj);
+			var children = ratingDiv.children();
+
+			// make sure rating lies between 0 and 1
+			if (rating < 0 || !rating) rating = 0;
+			if (rating > 1) rating = 1;
+
+			// determine the rating
+			var r = Math.round(rating * 10);
+			var rr = Math.round(r/2);
+
+			// add rating
+			for (var i=1; i<=5; i++) {
+				// empty, half or full rate?
+				var type = (rr >= i) ? ((rr==i && (r % 2)) ? 'half' : 'full') : 'empty';
+
+				if (children.size()) {
+					$(children[i-1])[0].setAttribute('class', type);
+				} else {
+					var starDiv = document.createElement('div');
+						starDiv.setAttribute('class', type);
+					ratingDiv[0].appendChild(starDiv);
+				}
+			}
+		},
 		
 		/**
 		 * return human readable file sizes
@@ -591,6 +652,10 @@
 			return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 		},
 
+		/**
+		 * change seconds into seconds, minutes and hours
+		 * @param seconds
+		 */
 		secondsToTime: function(seconds) {
 			var sizes = [' seconds', 'minutes', 'hours'];
 			if (seconds == 0) return 'n/a';
@@ -667,7 +732,7 @@
 					// iterate through files
 					$.each(this.files, function(index,file) {
 						// add file DOM elements
-						var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize }
+						var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize, fileRating: 0, fileColor: '' }
 						var fileDiv = methods.addFileElements(domObj, fileAttrs, options);
 
 						// and start file upload
@@ -698,6 +763,7 @@
 			files				: [],
 			uploadField 		: true,
 			insertDirection 	: 'down',
+			rating 				: false,
 
 			// default sound effects
 			notificationSound   : '',
