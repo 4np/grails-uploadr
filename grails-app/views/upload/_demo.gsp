@@ -55,14 +55,13 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/myThirdUploadr") %>
-<h1>3. Initial files, new files on top, 5 files per page, override default file colors to <span style="color:#f594cc">#f594cc</span>, enable rating and voting</h1>
+<h1>3. Initial files, new files on top, 5 files per page, enable rating and voting</h1>
 <uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
 		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
-		<uploadr:color>#f594cc</uploadr:color>
 		<uploadr:rating>${new Random().nextFloat()}</uploadr:rating>
 	</uploadr:file>
 <% } %>
@@ -74,7 +73,6 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 			&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
 			&lt;uploadr:fileModified>${file.lastModified()}&lt;/uploadr:fileModified>
 			&lt;uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}&lt;/uploadr:fileId>
-			&lt;uploadr:color>#f594cc&lt;/uploadr:color>
 			&lt;uploadr:rating>${new Random().nextFloat()}&lt;/uploadr:rating>
 		&lt;/uploadr:file>
 <% } %>
@@ -82,14 +80,15 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/myFourthUploadr") %>
-<h1>4. Initial files, files are added to the bottom (default), custom event handlers</h1>
+<h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, and override default file colors to <span style="color:#f594cc">#f594cc</span></h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
-<uploadr:add name="myFourthUploadr" path="${path}">
+<uploadr:add name="myFourthUploadr" path="${path}" rating="true" voting="true">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
 		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
+		<uploadr:color>#f594cc</uploadr:color>
 	</uploadr:file>
 <% } %>
 	<!-- upload event handlers //-->
@@ -139,14 +138,31 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		// return true / false whether it was successful
 		return true;
 	</uploadr:onDelete>
+	<uploadr:onLike>
+		console.log('you clicked like:');
+		console.log(file);
+		console.log(domObj);
+
+		// callback if like action was successfull
+		callback();
+	</uploadr:onLike>
+	<uploadr:onUnlike>
+		console.log('you clicked unlike:');
+		console.log(file);
+		console.log(domObj);
+
+		// callback if unlike action was successfull
+		callback();
+	</uploadr:onUnlike>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-&lt;uploadr:add name="myFourthUploadr" path="${path}">
+&lt;uploadr:add name="myFourthUploadr" path="${path}" rating="true" voting="true">
 <% path.listFiles().each { file -> %>
 	&lt;uploadr:file name="${file.name}">
 		&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
 		&lt;uploadr:fileModified>${file.lastModified()}&lt;/uploadr:fileModified>
 		&lt;uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}&lt;/uploadr:fileId>
+		&lt;uploadr:color>#f594cc&lt;/uploadr:color>
 	&lt;/uploadr:file>
 <% } %>
 	&lt;!-- upload event handlers //-->
@@ -196,6 +212,22 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		// return true / false whether it was successful
 		return true;
 	&lt;/uploadr:onDelete>
+	&lt;uploadr:onLike>
+		console.log('you clicked like:');
+		console.log(file);
+		console.log(domObj);
+
+		// callback if like action was successfull
+		callback();
+	&lt;/uploadr:onLike>
+	&lt;uploadr:onUnlike>
+		console.log('you clicked unlike:');
+		console.log(file);
+		console.log(domObj);
+
+		// callback if unlike action was successfull
+		callback();
+	&lt;/uploadr:onUnlike>
 &lt;/uploadr:add>
 </pre>
 

@@ -234,9 +234,33 @@
 	float: right;
 }
 
-.uploadr .file .info .button {
+.uploadr .file .info .buttons .button {
 	display: inline-block;
 	float: right;
+}
+
+.uploadr .file .info .voting {
+	display: inline-block;
+	width: 36px;
+	height: 23px;
+}
+
+.uploadr .file .info .voting .like {
+	display: inline-block;
+	width: 18px;
+	height: 23px;
+	background-image: url(../images/like.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.uploadr .file .info .voting .unlike {
+	display: inline-block;
+	width: 18px;
+	height: 23px;
+	background-image: url(../images/dislike.png);
+	background-repeat: no-repeat;
+	background-position: left center;
 }
 
 .uploadr .pagination {

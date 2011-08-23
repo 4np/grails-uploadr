@@ -40,6 +40,7 @@ class UploadrTagLib {
 		def fileselect		= (attrs.get('fileselect') ? attrs.get('fileselect') : '')
 		def maxVisible		= (attrs.get('maxVisible') ? attrs.get('maxVisible') : 0)
 		def rating 			= (attrs.get('rating') ? attrs.get('rating') as Boolean : false);
+		def voting 			= (attrs.get('voting') ? attrs.get('voting') as Boolean : false);
 
 		// define uri
 		if (attrs.get('controller')) {
@@ -107,6 +108,7 @@ class UploadrTagLib {
 				maxVisible	: maxVisible,
 				sound 		: sound,
 				rating		: rating,
+				voting		: voting,
 				handlers	: pageScope.handlers,
 				files		: pageScope.files,
 				unsupported	: (attrs.get('unsupported')) ? attrs.unsupported : createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')
@@ -156,6 +158,14 @@ class UploadrTagLib {
 
 	def onDownload = { attrs, body ->
 		pageScope.handlers.onDownload = body()
+	}
+
+	def onLike = { attrs, body ->
+		pageScope.handlers.onLike = body()
+	}
+
+	def onUnlike = { attrs, body ->
+		pageScope.handlers.onUnlike = body()
 	}
 
 	def onView = { attrs, body ->

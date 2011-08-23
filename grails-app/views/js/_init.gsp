@@ -8,7 +8,9 @@ $(document).ready(function() {
 		var ${name} = $('.${classname}[name=${name}]').uploadr({<g:if test="${handlers.onStart}">
 			onStart: function(file) { ${handlers.onStart} },</g:if><g:if test="${handlers.onProgress}">
 			onProgress: function(file, domObj, percentage) { ${handlers.onProgress} },</g:if><g:if test="${handlers.onSuccess}">
-			onSuccess: function(file, domObj, callback) { ${handlers.onSuccess} },</g:if>
+			onSuccess: function(file, domObj, callback) { ${handlers.onSuccess} },</g:if><g:if test="${handlers.onLike}">
+			onLike: function(file, domObj, callback) { ${handlers.onLike} },</g:if><g:if test="${handlers.onUnlike}">
+			onUnlike: function(file, domObj, callback) { ${handlers.onUnlike} },</g:if>
 			onFailure: function(file, domObj) {
 				<g:if test="${handlers.onFailure}">${handlers.onFailure}</g:if>
 			},
@@ -64,7 +66,8 @@ $(document).ready(function() {
 			placeholderText: '<g:if test="${placeholder}">${placeholder}</g:if><g:else><g:message code="uploadr.placeholder.text" /></g:else>',
 			famfamfam: '${resource(plugin: 'famfamfam', dir: 'images/icons')}',
 			maxVisible: ${maxVisible},
-			rating: ${rating},
+			rating: ${rating as String},
+			voting: ${voting as String},
 			insertDirection: '${direction}',
 			id: '${name}',
 			files: {<g:each var="file" in="${files}" status="s">
@@ -74,7 +77,7 @@ $(document).ready(function() {
 					fileId 			: '${file.value.id.replaceAll("'","\\\\'")}',
 					fileDate 		: ${file.value.modified}<g:if test="${file.value.color}">,
 					fileColor 		: '${file.value.color}'</g:if><g:if test="${file.value.rating}">,
-					fileRating 		: '${file.value.rating}'</g:if><g:if test="${file.value.view}">,
+					fileRating 		: ${file.value.rating}</g:if><g:if test="${file.value.view}">,
 					fileInfo 		: [<g:each in="${file.value.info}" var="info" status="i">
 						'${info}'<g:if test="${(i+1) < file.value.info.size()}">,</g:if></g:each>
 					]</g:if>

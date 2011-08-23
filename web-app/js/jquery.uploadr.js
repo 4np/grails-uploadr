@@ -117,6 +117,9 @@
 			var fileButtonDiv = document.createElement('div');
 				fileButtonDiv.setAttribute('class', 'buttons');
 
+			var votingDiv = document.createElement('div');
+				votingDiv.setAttribute('class', 'voting');
+
 			var spinnerDiv = document.createElement('div');
 				spinnerDiv.setAttribute('class', 'spinner');
 				spinnerDiv.style.display = 'none';
@@ -145,6 +148,7 @@
 			// append child divs to infoDiv
 			infoDiv.appendChild(detailsDiv);
 			infoDiv.appendChild(fileButtonDiv);
+			infoDiv.appendChild(votingDiv);
 			infoDiv.appendChild(spinnerDiv);
 
 			fileNameDiv.appendChild(fileNameSpan);
@@ -345,7 +349,7 @@
 				// iterate through files
 				$.each(files, function(index, file) {
 					// add file DOM elements
-					var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize, startTime: new Date().getTime() }
+					var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize, startTime: new Date().getTime(), fileRating: 0 }
 					var fileDiv = methods.addFileElements(domObj, fileAttrs, options);
 
 					// and start file upload
@@ -570,6 +574,36 @@
 			}
 		},
 		
+		addVotingButtons: function(file, domObj, options) {
+			if (!options.voting) return true;
+
+			var votingDiv = $('.voting', domObj);
+			var likeDiv = document.createElement('div');
+				likeDiv.setAttribute('class', 'like');
+			var unlikeDiv = document.createElement('div');
+				unlikeDiv.setAttribute('class', 'unlike');
+			votingDiv[0].appendChild(likeDiv);
+			votingDiv[0].appendChild(unlikeDiv);
+
+			// add like and dislike handlers
+			$(likeDiv).bind('click', function() {
+				options.onLike(file, domObj, function() {
+					if (!file.fileRating) file.fileRating = 0;
+					file.fileRating += 0.1;
+					if (file.fileRating > 1) file.fileRating = 1;
+					methods.setRating(file.fileRating, domObj);
+				});
+			});
+			$(unlikeDiv).bind('click', function() {
+				options.onUnlike(file, domObj, function() {
+					if (!file.fileRating) file.fileRating = 0;
+					file.fileRating -= 0.1;
+					if (file.fileRating < 0) file.fileRating = 0;
+					methods.setRating(file.fileRating, domObj);
+				});
+			});
+		},
+
 		addButtons: function(file, domObj, options) {
 			// add view, download and delete buttons
 			methods.addButton(domObj, 'delete', 'delete.png', 'click to delete this file', 'are you sure you want to delete this file?', options, function() {
@@ -581,6 +615,8 @@
 			methods.addButton(domObj, 'view', 'magnifier.png', 'click to view this file', '', options, function() {
 				options.onView(file, domObj);
 			});
+
+			methods.addVotingButtons(file, domObj, options);
 		},
 
 		addButton: function(domObj, type, image, tooltipText, confirmationText, options, handler) {
@@ -764,6 +800,7 @@
 			uploadField 		: true,
 			insertDirection 	: 'down',
 			rating 				: false,
+			voting 				: false,
 
 			// default sound effects
 			notificationSound   : '',
@@ -798,7 +835,9 @@
 			onAbort             : function(file, domObj) { return true; },
 			onView              : function(file, domObj) { return true; },
 			onDownload          : function(file, domObj) { return true; },
-			onDelete            : function(file, domObj) { return true; }
+			onDelete            : function(file, domObj) { return true; },
+			onLike				: function(file, domObj, callback) { callback(); },
+			onUnlike			: function(file, domObj, callback) { callback(); }
 		};
 
 		// extend the jQuery options
