@@ -26,8 +26,8 @@ modules = {
 			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.js']
 			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.css']
 		} else {
-			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.min.js']
-			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.min.css']
+			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.minified.js']
+			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.minified.css']
 		}
 
 		// tip tip resources
