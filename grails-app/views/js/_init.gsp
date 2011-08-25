@@ -76,6 +76,7 @@ $(document).ready(function() {
 			maxVisible: ${maxVisible},
 			rating: ${rating as String},
 			voting: ${voting as String},
+			colorPicker: ${colorPicker as String},
 			insertDirection: '${direction}',
 			id: '${name}',
 			files: {<g:each var="file" in="${files}" status="s">

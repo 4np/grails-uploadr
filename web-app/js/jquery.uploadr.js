@@ -618,7 +618,7 @@
 			methods.addButton(domObj, 'download', 'page_link.png', options.fileDownloadText, '', options, function() {
 				options.onDownload(file, domObj);
 			});
-			if (options.colorpicker) {
+			if (options.colorPicker) {
 				var colorPicker = methods.addButton(domObj, 'color', 'application_view_tile.png', options.colorPickerText, '', options, function() {
 					var p = $('.progress', domObj);
 					var c = p.css('background-color');
@@ -894,9 +894,9 @@
 			files				: [],
 			uploadField 		: true,
 			insertDirection 	: 'down',
-			rating 				: false,
-			voting 				: false,
-			colorpicker 		: true,
+			rating 				: true,
+			voting 				: true,
+			colorPicker 		: true,
 
 			// default sound effects
 			notificationSound   : '',

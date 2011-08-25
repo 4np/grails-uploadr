@@ -31,7 +31,7 @@ class UploadrTagLib {
 	 * @param Closure       body
 	 */
 	def add = { attrs, body ->
-		def sound 			= (attrs.get('noSound') && attrs.noSound) ? false : true;
+		def sound 			= (attrs.get('noSound') && attrs.noSound) ? false : true
 		def name			= (attrs.name) ? attrs.name : "uploadr"
 		def classname		= (attrs.class) ? attrs.class : 'uploadr'
 		def direction 		= (attrs.direction) ? attrs.direction : 'down'
@@ -39,8 +39,9 @@ class UploadrTagLib {
 		def placeholder		= (attrs.get('placeholder') ? attrs.get('placeholder') : '')
 		def fileselect		= (attrs.get('fileselect') ? attrs.get('fileselect') : '')
 		def maxVisible		= (attrs.get('maxVisible') ? attrs.get('maxVisible') : 0)
-		def rating 			= (attrs.get('rating') ? attrs.get('rating') as Boolean : false);
-		def voting 			= (attrs.get('voting') ? attrs.get('voting') as Boolean : false);
+		def rating 			= (attrs.get('rating') ? attrs.get('rating') as Boolean : false)
+		def voting 			= (attrs.get('voting') ? attrs.get('voting') as Boolean : false)
+		def colorPicker		= (attrs.get('colorPicker') ? attrs.get('colorPicker') as Boolean : false)
 
 		// define uri
 		if (attrs.get('controller')) {
@@ -109,6 +110,7 @@ class UploadrTagLib {
 				sound 		: sound,
 				rating		: rating,
 				voting		: voting,
+				colorPicker	: colorPicker,
 				handlers	: pageScope.handlers,
 				files		: pageScope.files,
 				unsupported	: (attrs.get('unsupported')) ? attrs.unsupported : createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')
