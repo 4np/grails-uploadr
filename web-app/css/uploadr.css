@@ -83,7 +83,6 @@
 	background-repeat: no-repeat;
 	background-position: left center;
 	cursor: pointer;
-	cursor: hand;
 }
 
 .uploadr .fileinput input {
@@ -241,25 +240,26 @@
 
 .uploadr .file .info .voting {
 	display: inline-block;
-	width: 38px;
-	height: 23px;
+	width: 34px;
+	height: 16px;
+	border: 1px solid red;
 }
 
 .uploadr .file .info .voting .like {
 	display: inline-block;
-	width: 18px;
-	height: 23px;
+	width: 16px;
+	height: 16px;
 	padding-left: 2px;
-	background-image: url(../images/like.png);
+	background-image: url(../images/like_16x16.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
 
 .uploadr .file .info .voting .unlike {
 	display: inline-block;
-	width: 18px;
-	height: 23px;
-	background-image: url(../images/dislike.png);
+	width: 16px;
+	height: 16px;
+	background-image: url(../images/dislike_16x16.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
