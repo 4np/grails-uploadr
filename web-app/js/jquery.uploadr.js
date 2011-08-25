@@ -638,6 +638,36 @@
 			methods.addVotingButtons(file, domObj, options);
 		},
 
+		addButton: function(domObj, type, image, tooltipText, confirmationText, options, handler) {
+			var buttonDiv = document.createElement('div');
+				buttonDiv.setAttribute('class', 'button ' + type);
+				buttonDiv.setAttribute("style", "display: none");
+			var buttonImage = document.createElement('img');
+				buttonImage.setAttribute('src', options.famfamfam + '/' + image);
+				buttonDiv.appendChild(buttonImage);
+			var buttonsDiv = $('.buttons', domObj);
+
+			buttonsDiv[0].appendChild(buttonDiv);
+
+			var button = $('.' + type, domObj);
+
+			// add tooltip?
+			if (tooltipText) {
+				button.tipTip({content: tooltipText});
+			}
+
+			// bind event handler
+			button.bind('click', function(event) {
+			    if (!confirmationText || (confirm && confirm(confirmationText))) {
+					handler();
+			    }
+			});
+
+			button.show('slow');
+
+			return button;
+		},
+
 		launchColorPicker: function(domObj, currentColor, options, callback) {
 			var uploadr = domObj.parent().parent();
 			var cp = $('.pickr', uploadr);
@@ -705,36 +735,6 @@
 
 			// show color picker
 			cp.show(200);
-		},
-
-		addButton: function(domObj, type, image, tooltipText, confirmationText, options, handler) {
-			var buttonDiv = document.createElement('div');
-				buttonDiv.setAttribute('class', 'button ' + type);
-				buttonDiv.setAttribute("style", "display: none");
-			var buttonImage = document.createElement('img');
-				buttonImage.setAttribute('src', options.famfamfam + '/' + image);
-				buttonDiv.appendChild(buttonImage);
-			var buttonsDiv = $('.buttons', domObj);
-
-			buttonsDiv[0].appendChild(buttonDiv);
-
-			var button = $('.' + type, domObj);
-
-			// add tooltip?
-			if (tooltipText) {
-				button.tipTip({content: tooltipText});
-			}
-
-			// bind event handler
-			button.bind('click', function(event) {
-			    if (!confirmationText || (confirm && confirm(confirmationText))) {
-					handler();
-			    }
-			});
-
-			button.show('slow');
-
-			return button;
 		},
 
 		setRating: function(rating, domObj) {
