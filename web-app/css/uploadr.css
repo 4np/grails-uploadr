@@ -227,11 +227,18 @@
 
 .uploadr .file .info .controls {
 	display: inline-block;
-	width: 50px;
+	width: 66px;
+	height: 40px;
 	float: right;
+	overflow: hidden;
+	margin: -2px -2px 0px 0px;
 }
 .uploadr .file .info .controls .buttons {
 	display: block;
+	vertical-align: top;
+	width: 64px;
+	height: 16px;
+	margin: 2px 2px 2px 0px;
 }
 
 .uploadr .file .info .controls .buttons .button {
@@ -244,6 +251,7 @@
 	width: 34px;
 	height: 16px;
 	float: right;
+	margin: 0px 2px 0px 0px;
 }
 
 .uploadr .file .info .controls .voting .like {

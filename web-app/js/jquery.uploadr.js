@@ -727,7 +727,8 @@
 			}
 
 			// position color picker
-			var pos = domObj.offset();
+			var pos = domObj.position();
+
 			cp.css({
 				top: pos.top,
 				left: pos.left + domObj.width() + 2

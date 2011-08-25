@@ -81,6 +81,7 @@ $(document).ready(function() {
 			id: '${name}',
 			files: {<g:each var="file" in="${files}" status="s">
 				${s} : {
+					deletable 		: ${file.value.deletable},
 					fileName 		: '${file.key.replaceAll("'","\\\\'")}',
 					fileSize 		: ${file.value.size},
 					fileId 			: '${file.value.id.replaceAll("'","\\\\'")}',
