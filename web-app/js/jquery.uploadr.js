@@ -120,6 +120,11 @@
 			var votingDiv = document.createElement('div');
 				votingDiv.setAttribute('class', 'voting');
 
+			var controlsDiv = document.createElement('div');
+				controlsDiv.setAttribute('class', 'controls');
+				controlsDiv.appendChild(fileButtonDiv);
+				controlsDiv.appendChild(votingDiv);
+
 			var spinnerDiv = document.createElement('div');
 				spinnerDiv.setAttribute('class', 'spinner');
 				spinnerDiv.style.display = 'none';
@@ -147,8 +152,7 @@
 
 			// append child divs to infoDiv
 			infoDiv.appendChild(detailsDiv);
-			infoDiv.appendChild(fileButtonDiv);
-			infoDiv.appendChild(votingDiv);
+			infoDiv.appendChild(controlsDiv);
 			infoDiv.appendChild(spinnerDiv);
 
 			fileNameDiv.appendChild(fileNameSpan);
@@ -349,7 +353,7 @@
 				// iterate through files
 				$.each(files, function(index, file) {
 					// add file DOM elements
-					var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize, startTime: new Date().getTime(), fileRating: 0 }
+					var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize, startTime: new Date().getTime(), fileRating: 0, deletable: true }
 					var fileDiv = methods.addFileElements(domObj, fileAttrs, options);
 
 					// and start file upload
@@ -593,7 +597,7 @@
 					if (file.fileRating > 1) file.fileRating = 1;
 					methods.setRating(file.fileRating, domObj);
 				});
-			});
+			}).tipTip({content: options.likeText});
 			$(unlikeDiv).bind('click', function() {
 				options.onUnlike(file, domObj, function() {
 					if (!file.fileRating) file.fileRating = 0;
@@ -601,18 +605,20 @@
 					if (file.fileRating < 0) file.fileRating = 0;
 					methods.setRating(file.fileRating, domObj);
 				});
-			});
+			}).tipTip({content: options.unlikeText});
 		},
 
 		addButtons: function(file, domObj, options) {
 			// add view, download and delete buttons
-			methods.addButton(domObj, 'delete', 'delete.png', 'click to delete this file', 'are you sure you want to delete this file?', options, function() {
-				if (options.onDelete(file, domObj)) methods.removeFileElement(domObj, options);
-			});
-			methods.addButton(domObj, 'download', 'page_link.png', 'click to download this file', '', options, function() {
+			if (file.deletable) {
+				methods.addButton(domObj, 'delete', 'delete.png', options.fileDeleteText, options.fileDeleteConfirm, options, function() {
+					if (options.onDelete(file, domObj)) methods.removeFileElement(domObj, options);
+				});
+			}
+			methods.addButton(domObj, 'download', 'page_link.png', options.fileDownloadText, '', options, function() {
 				options.onDownload(file, domObj);
 			});
-			methods.addButton(domObj, 'view', 'magnifier.png', 'click to view this file', '', options, function() {
+			methods.addButton(domObj, 'view', 'magnifier.png', options.fileViewText, '', options, function() {
 				options.onView(file, domObj);
 			});
 
@@ -785,6 +791,12 @@
 		var defaults = {
 			placeholderText		: 'drag and drop your files here to upload...',
 			fileSelectText 		: 'Select files to upload',
+			fileDeleteText		: 'Click to delete this file',
+			fileDeleteConfirm	: 'Are you sure you want to delete this file?',
+			fileDownloadText	: 'Click to download this file',
+			fileViewText		: 'Click to view this file',
+			likeText			: 'Click to like',
+			unlikeText			: 'Click to unlike',
 			labelDone			: 'done',
 			labelFailed 		: 'failed',
 			labelAborted 		: 'aborted',

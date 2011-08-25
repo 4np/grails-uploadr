@@ -227,25 +227,28 @@
 	float:right;
 }
 
-.uploadr .file .info .buttons {
+.uploadr .file .info .controls {
 	display: inline-block;
 	width: 50px;
 	float: right;
 }
+.uploadr .file .info .controls .buttons {
+	display: block;
+}
 
-.uploadr .file .info .buttons .button {
+.uploadr .file .info .controls .buttons .button {
 	display: inline-block;
 	float: right;
 }
 
-.uploadr .file .info .voting {
-	display: inline-block;
+.uploadr .file .info .controls .voting {
+	display: block;
 	width: 34px;
 	height: 16px;
-	border: 1px solid red;
+	float: right;
 }
 
-.uploadr .file .info .voting .like {
+.uploadr .file .info .controls .voting .like {
 	display: inline-block;
 	width: 16px;
 	height: 16px;
@@ -255,7 +258,7 @@
 	background-position: left center;
 }
 
-.uploadr .file .info .voting .unlike {
+.uploadr .file .info .controls .voting .unlike {
 	display: inline-block;
 	width: 16px;
 	height: 16px;

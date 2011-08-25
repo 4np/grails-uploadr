@@ -179,6 +179,7 @@ class UploadrTagLib {
 		pageScope.temp = [
 			size		: 0 as Long,
 			modified 	: 0 as Long,
+			deletable	: true,
 			id 			: "",
 			info 		: [],
 			color		: '',
@@ -243,5 +244,9 @@ class UploadrTagLib {
 		if (rating > 1) rating = 1;
 
 		pageScope.temp.rating = rating
+	}
+
+	def deletable = { attrs, body ->
+		pageScope.temp.deletable = ((body() as String).toLowerCase().trim() == "true") ? true : false
 	}
 }

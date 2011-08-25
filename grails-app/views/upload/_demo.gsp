@@ -80,7 +80,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/myFourthUploadr") %>
-<h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, and override default file colors to <span style="color:#f594cc">#f594cc</span></h1>
+<h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, override default file colors to <span style="color:#f594cc">#f594cc</span> and disable file deletions</h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
 <uploadr:add name="myFourthUploadr" path="${path}" rating="true" voting="true">
 <% path.listFiles().each { file -> %>
@@ -89,6 +89,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
 		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
 		<uploadr:color>#f594cc</uploadr:color>
+		<uploadr:deletable>false</uploadr:deletable>
 	</uploadr:file>
 <% } %>
 	<!-- upload event handlers //-->
@@ -108,6 +109,14 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 
 		// set a random file id for demonstration purposes
 		file.fileId = 'my-random-id::'+text;
+
+		// set file to non-deletable (we do not get a delete icon)
+		file.deletable = false;
+		console.log('set file.deletable to false so the delete icon will not be shown');
+
+		// and override the background to purple (same as initial files)
+		$('.progress',domObj).css('background-color', '#f594cc');
+		console.log('and overrided the background color to #f594cc');
 
 		// callback when doen
 		callback();
@@ -163,6 +172,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		&lt;uploadr:fileModified>${file.lastModified()}&lt;/uploadr:fileModified>
 		&lt;uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}&lt;/uploadr:fileId>
 		&lt;uploadr:color>#f594cc&lt;/uploadr:color>
+		&lt;uploadr:deletable>false&lt;/uploadr:deletable>
 	&lt;/uploadr:file>
 <% } %>
 	&lt;!-- upload event handlers //-->
@@ -182,6 +192,14 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 
 		// set a random file id for demonstration purposes
 		file.fileId = 'my-random-id::'+text;
+
+		// set file to non-deletable (we do not get a delete icon)
+		file.deletable = false;
+		console.log('set file.deletable to false so the delete icon will not be shown');
+
+		// and override the background to purple (same as initial files)
+		$('.progress',domObj).css('background-color', '#f594cc');
+		console.log('and overrided the background color to #f594cc');
 
 		// callback when doen
 		callback();
