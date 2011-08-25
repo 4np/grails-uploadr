@@ -618,11 +618,93 @@
 			methods.addButton(domObj, 'download', 'page_link.png', options.fileDownloadText, '', options, function() {
 				options.onDownload(file, domObj);
 			});
+			if (options.colorpicker) {
+				var colorPicker = methods.addButton(domObj, 'color', 'application_view_tile.png', options.colorPickerText, '', options, function() {
+					var p = $('.progress', domObj);
+					var c = p.css('background-color');
+					methods.launchColorPicker(domObj, c, options, function(color) {
+						// change background color
+						p.css('background-color', color);
+
+						// and call color method
+						options.onChangeColor(file, domObj, color);
+					});
+				});
+			}
 			methods.addButton(domObj, 'view', 'magnifier.png', options.fileViewText, '', options, function() {
 				options.onView(file, domObj);
 			});
 
 			methods.addVotingButtons(file, domObj, options);
+		},
+
+		launchColorPicker: function(domObj, currentColor, options, callback) {
+			var uploadr = domObj.parent().parent();
+			var cp = $('.pickr', uploadr);
+
+			// got a colorpickrdiv?
+			if (!cp.length) {
+				// no, create it
+				var arrowDiv = document.createElement('div');
+					arrowDiv.setAttribute('class', 'arrow');
+				var contentDiv = document.createElement('div');
+					contentDiv.setAttribute('class', 'content');
+				var ul = document.createElement('ul');
+
+				// add colors to the color picker
+				for (var i in options.colorPickerColors) {
+					var li = document.createElement('li');
+						ul.appendChild(li);
+						$(li).css('background-color', options.colorPickerColors[i]);
+				}
+
+				var colorPickerDiv = document.createElement('div');
+					colorPickerDiv.setAttribute('class', 'pickr');
+					contentDiv.appendChild(ul);
+					colorPickerDiv.appendChild(contentDiv);
+					colorPickerDiv.appendChild(arrowDiv);
+
+				// add it to the DOM
+				uploadr[0].appendChild(colorPickerDiv);
+
+				cp = $('.pickr', uploadr);
+				cp.hide();
+			}
+
+			// iterate through colors
+			var colors = $('li', cp);
+			for (var i=0; i<colors.size(); i++) {
+				var color = $(colors[i]);
+				var rgb = color.css('background-color');
+
+				// mark the current color
+				if (rgb == currentColor) {
+					color.addClass('current');
+				} else {
+					color.removeClass('current');
+				}
+
+				// remove previous bind
+				color.unbind('click');
+
+				// and bind new handler
+				color.bind('click', function() {
+					callback($(this).css('background-color'));
+
+					// hide color picker
+					cp.hide(200);
+				});
+			}
+
+			// position color picker
+			var pos = domObj.offset();
+			cp.css({
+				top: pos.top,
+				left: pos.left + domObj.width() + 2
+			});
+
+			// show color picker
+			cp.show(200);
 		},
 
 		addButton: function(domObj, type, image, tooltipText, confirmationText, options, handler) {
@@ -797,6 +879,7 @@
 			fileViewText		: 'Click to view this file',
 			likeText			: 'Click to like',
 			unlikeText			: 'Click to unlike',
+			colorPickerText		: 'Click to change background color',
 			labelDone			: 'done',
 			labelFailed 		: 'failed',
 			labelAborted 		: 'aborted',
@@ -813,11 +896,22 @@
 			insertDirection 	: 'down',
 			rating 				: false,
 			voting 				: false,
+			colorpicker 		: true,
 
 			// default sound effects
 			notificationSound   : '',
 			errorSound          : '',
 			deleteSound 		: '',
+
+			// colorpickr colors
+			colorPickerColors 	: [
+				'#bce08a',	// default green
+				'#00a8e1',	// blue
+				'#ff6418',	// orange
+				'#c78cda',	// purple
+				'#ffcb00',	// yellow
+				'#e70033'	// red
+			],
 
 			// workvariables, internal use only
 			workvars 			: {
@@ -849,7 +943,8 @@
 			onDownload          : function(file, domObj) { return true; },
 			onDelete            : function(file, domObj) { return true; },
 			onLike				: function(file, domObj, callback) { callback(); },
-			onUnlike			: function(file, domObj, callback) { callback(); }
+			onUnlike			: function(file, domObj, callback) { callback(); },
+			onChangeColor		: function(file, domObj, color) { return true; }
 		};
 
 		// extend the jQuery options

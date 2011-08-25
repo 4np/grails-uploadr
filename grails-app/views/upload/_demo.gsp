@@ -80,7 +80,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/myFourthUploadr") %>
-<h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, override default file colors to <span style="color:#f594cc">#f594cc</span> and disable file deletions</h1>
+<h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, override default file colors to <span style="color:#c78cda">#c78cda</span> and disable file deletions</h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
 <uploadr:add name="myFourthUploadr" path="${path}" rating="true" voting="true">
 <% path.listFiles().each { file -> %>
@@ -88,7 +88,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
 		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
-		<uploadr:color>#f594cc</uploadr:color>
+		<uploadr:color>#c78cda</uploadr:color>
 		<uploadr:deletable>false</uploadr:deletable>
 	</uploadr:file>
 <% } %>
@@ -115,8 +115,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		console.log('set file.deletable to false so the delete icon will not be shown');
 
 		// and override the background to purple (same as initial files)
-		$('.progress',domObj).css('background-color', '#f594cc');
-		console.log('and overrided the background color to #f594cc');
+		$('.progress',domObj).css('background-color', '#c78cda');
+		console.log('and overrided the background color to #c78cda');
 
 		// callback when doen
 		callback();
@@ -163,6 +163,16 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		// callback if unlike action was successfull
 		callback();
 	</uploadr:onUnlike>
+	<uploadr:onChangeColor>
+		console.log('you changed the color to:');
+		console.log(color);
+		console.log(file);
+		console.log(domObj);
+
+		// you can perform an ajax call here
+		// to update the color in the back-end
+		// for this file
+	</uploadr:onChangeColor>
 </uploadr:add>
 <pre class="brush:html collapse:true">
 &lt;uploadr:add name="myFourthUploadr" path="${path}" rating="true" voting="true">
@@ -246,6 +256,16 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		// callback if unlike action was successfull
 		callback();
 	&lt;/uploadr:onUnlike>
+	&lt;uploadr:onChangeColor>
+		console.log('you changed the color to:');
+		console.log(color);
+		console.log(file);
+		console.log(domObj);
+
+		// you can perform an ajax call here
+		// to update the color in the back-end
+		// for this file
+	&lt;/uploadr:onChangeColor>
 &lt;/uploadr:add>
 </pre>
 

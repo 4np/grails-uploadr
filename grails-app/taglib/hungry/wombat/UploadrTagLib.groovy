@@ -168,6 +168,10 @@ class UploadrTagLib {
 		pageScope.handlers.onUnlike = body()
 	}
 
+	def onChangeColor = { attrs, body ->
+		pageScope.handlers.onChangeColor = body()
+	}
+
 	def onView = { attrs, body ->
 		pageScope.handlers.onView = body()
 	}

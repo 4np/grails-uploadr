@@ -10,7 +10,8 @@ $(document).ready(function() {
 			onProgress: function(file, domObj, percentage) { ${handlers.onProgress} },</g:if><g:if test="${handlers.onSuccess}">
 			onSuccess: function(file, domObj, callback) { ${handlers.onSuccess} },</g:if><g:if test="${handlers.onLike}">
 			onLike: function(file, domObj, callback) { ${handlers.onLike} },</g:if><g:if test="${handlers.onUnlike}">
-			onUnlike: function(file, domObj, callback) { ${handlers.onUnlike} },</g:if>
+			onUnlike: function(file, domObj, callback) { ${handlers.onUnlike} },</g:if><g:if test="${handlers.onChangeColor}">
+			onChangeColor: function(file, domObj, color) { ${handlers.onChangeColor} },</g:if>
 			onFailure: function(file, domObj) {
 				<g:if test="${handlers.onFailure}">${handlers.onFailure}</g:if>
 			},
@@ -70,6 +71,7 @@ $(document).ready(function() {
 			fileViewText: '<g:message code="uploadr.button.view" />',
 			likeText: '<g:message code="uploadr.button.like" />',
 			unlikeText: '<g:message code="uploadr.button.unlike" />',
+			colorPickerText: '<g:message code="uploadr.button.color.picker" />',
 			famfamfam: '${resource(plugin: 'famfamfam', dir: 'images/icons')}',
 			maxVisible: ${maxVisible},
 			rating: ${rating as String},
