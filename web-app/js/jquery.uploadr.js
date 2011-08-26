@@ -323,8 +323,14 @@
 		},
 
 		addFileTooltip: function(domObj, file) {
+			// change unix timestamp into date object
+			var date = new Date();
+				date.setTime(file.fileDate);
+
+			// attach tooltip
 			domObj.tipTip({
-				content		: 'name: ' + file.fileName + '<br/>size: ' + methods.bytesToSize(file.fileSize) + ((file.fileDate) ? ('<br/>date: ' + file.fileDate) : '')
+				content		: 'name: ' + file.fileName + '<br/>size: ' + methods.bytesToSize(file.fileSize) + ((file.fileDate) ? ('<br/>date: ' + date.toString()) : ''),
+				maxWidth	: 600
 			});
 		},
 
@@ -544,7 +550,7 @@
 
 			// add tooltip?
 			if (text && tooltipText) {
-				percentageDiv.tipTip({content: tooltipText});
+				percentageDiv.tipTip({content: tooltipText, maxWidth: 600});
 			}
 
 			// are we done uploading?
@@ -574,7 +580,7 @@
 
 					// add tooltip
 					if (fileAttrs.fileRatingText) {
-						ratingDiv.tipTip({content: fileAttrs.fileRatingText});
+						ratingDiv.tipTip({content: fileAttrs.fileRatingText, maxWidth: 600});
 					}
 				}
 
@@ -602,7 +608,7 @@
 					if (file.fileRating > 1) file.fileRating = 1;
 					methods.setRating(file.fileRating, domObj);
 				});
-			}).tipTip({content: options.likeText});
+			}).tipTip({content: options.likeText, maxWidth: 600});
 			$(unlikeDiv).bind('click', function() {
 				options.onUnlike(file, domObj, function() {
 					if (!file.fileRating) file.fileRating = 0;
@@ -610,7 +616,7 @@
 					if (file.fileRating < 0) file.fileRating = 0;
 					methods.setRating(file.fileRating, domObj);
 				});
-			}).tipTip({content: options.unlikeText});
+			}).tipTip({content: options.unlikeText, maxWidth: 600});
 		},
 
 		addButtons: function(file, domObj, options) {
@@ -658,7 +664,7 @@
 
 			// add tooltip?
 			if (tooltipText) {
-				button.tipTip({content: tooltipText});
+				button.tipTip({content: tooltipText, maxWidth: 600});
 			}
 
 			// bind event handler
