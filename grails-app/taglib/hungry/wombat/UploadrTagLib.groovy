@@ -207,8 +207,6 @@ class UploadrTagLib {
 				println "ignoring predefined file '${file}' as it does not exist!"
 			}
 		} else {
-println pageScope.temp
-
 			pageScope.files[ "${attrs.name}" ] = pageScope.temp
 		}
 	}

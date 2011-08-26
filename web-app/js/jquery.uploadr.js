@@ -601,7 +601,7 @@
 			votingDiv[0].appendChild(unlikeDiv);
 
 			// add like and dislike handlers
-			$(likeDiv).bind('click', function() {
+			$(likeDiv).bind('click.uploadr', function() {
 				options.onLike(file, domObj, function() {
 					if (!file.fileRating) file.fileRating = 0;
 					file.fileRating += 0.1;
@@ -609,7 +609,7 @@
 					methods.setRating(file.fileRating, domObj);
 				});
 			}).tipTip({content: options.likeText, maxWidth: 600});
-			$(unlikeDiv).bind('click', function() {
+			$(unlikeDiv).bind('click.uploadr', function() {
 				options.onUnlike(file, domObj, function() {
 					if (!file.fileRating) file.fileRating = 0;
 					file.fileRating -= 0.1;
@@ -668,7 +668,7 @@
 			}
 
 			// bind event handler
-			button.bind('click', function(event) {
+			button.bind('click.uploadr', function(event) {
 			    if (!confirmationText || (confirm && confirm(confirmationText))) {
 					handler();
 			    }
@@ -682,6 +682,7 @@
 		launchColorPicker: function(domObj, currentColor, options, callback) {
 			var uploadr = domObj.parent().parent();
 			var cp = $('.pickr', uploadr);
+			var clickEventHandler = null;
 
 			// got a colorpickrdiv?
 			if (!cp.length) {
@@ -705,7 +706,7 @@
 					colorPickerDiv.appendChild(contentDiv);
 					colorPickerDiv.appendChild(arrowDiv);
 
-				// add it to the DOM
+				// add it to the DOM and hide it
 				uploadr[0].appendChild(colorPickerDiv);
 
 				cp = $('.pickr', uploadr);
@@ -726,11 +727,14 @@
 				}
 
 				// remove previous bind
-				color.unbind('click');
+				color.unbind('click.uploadr');
 
 				// and bind new handler
-				color.bind('click', function() {
+				color.bind('click.uploadr', function() {
 					callback($(this).css('background-color'));
+
+					// unbind the document click event
+					$(document).unbind('click.uploadr');
 
 					// hide color picker
 					cp.hide(200);
@@ -739,14 +743,32 @@
 
 			// position color picker
 			var pos = domObj.position();
-
 			cp.css({
 				top: pos.top,
 				left: pos.left + domObj.width() + 2
 			});
 
 			// show color picker
-			cp.show(200);
+			cp.show(200, function() {
+				// when color picker animation is done,
+				// bind a click handler to the document
+				$(document).bind('click.uploadr', function(e) {
+					if (
+						e.pageX < cp.position().left ||
+						e.pageX > (cp.position().left + cp.width()) ||
+						e.pageY < cp.position().top ||
+						e.pageY > (cp.position().top + cp.height())
+						) {
+
+						// click was outside the color picker
+						// unbind the click handler
+						$(document).unbind('click.uploadr');
+
+						// and hide the color picker
+						cp.hide(200);
+					}
+				});
+			});
 		},
 
 		setRating: function(rating, domObj) {
@@ -850,13 +872,13 @@
 			var inputField = $('input[type=file]',j);
 
 			// bind image click to file input click
-			$('.message', j).bind('click', function() {
+			$('.message', j).bind('click.uploadr', function() {
 				// trigger click event on file input field
 				inputField[0].click();
 			});
 
 			// bind file field event handler
-			inputField.bind('change', function() {
+			inputField.bind('change.uploadr', function() {
 				// iterate through files
 				if (typeof this.files !== "undefined") {
 					// hide the placeholder text
@@ -1022,11 +1044,11 @@
 			filesDiv.addEventListener('drop', function(event) { methods['drop'](event, $(this), e, defaults.hoverClass, options); }, false);
 
 			// register pagination event handlers
-			$(prevButtonDiv).bind('click', function() {
+			$(prevButtonDiv).bind('click.uploadr', function() {
 				options.workvars.viewing = options.workvars.viewing - options.maxVisible;
 				methods.handlePagination(e,options);
 			});
-			$(nextButtonDiv).bind('click', function() {
+			$(nextButtonDiv).bind('click.uploadr', function() {
 				options.workvars.viewing = options.workvars.viewing + options.maxVisible;
 				methods.handlePagination(e,options);
 			});
