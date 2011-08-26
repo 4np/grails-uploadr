@@ -249,7 +249,7 @@
 			badgeDiv.html(uploading);
 
 			// add tooltip
-			var tooltipText = (uploading > 1) ? options.badgeTooltipPlural : options.badgeTooltipSingular;
+			var tooltipText = (uploading == 1) ? options.badgeTooltipSingular : options.badgeTooltipPlural;
 			badgeDiv.tipTip({content: tooltipText.replace("%d", uploading)});
 
 			// show / hide?
