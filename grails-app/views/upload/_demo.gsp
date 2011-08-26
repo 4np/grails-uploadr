@@ -157,7 +157,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		console.log(domObj);
 
 		// callback if like action was successfull
-		callback();
+		// and pass the new file rating
+		callback(file.fileRating + 0.1);
 	</uploadr:onLike>
 	<uploadr:onUnlike>
 		console.log('you clicked unlike:');
@@ -165,7 +166,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		console.log(domObj);
 
 		// callback if unlike action was successfull
-		callback();
+		// and pass the new file rating
+		callback(file.fileRating - 0.1);
 	</uploadr:onUnlike>
 	<uploadr:onChangeColor>
 		console.log('you changed the color to:');
@@ -254,7 +256,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		console.log(domObj);
 
 		// callback if like action was successfull
-		callback();
+		// and pass the new file rating
+		callback(file.fileRating + 0.1);
 	&lt;/uploadr:onLike>
 	&lt;uploadr:onUnlike>
 		console.log('you clicked unlike:');
@@ -262,7 +265,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		console.log(domObj);
 
 		// callback if unlike action was successfull
-		callback();
+		// and pass the new file rating
+		callback(file.fileRating - 0.1);
 	&lt;/uploadr:onUnlike>
 	&lt;uploadr:onChangeColor>
 		console.log('you changed the color to:');

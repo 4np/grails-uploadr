@@ -67,6 +67,8 @@ $(document).ready(function() {
 			placeholderText: '<g:if test="${placeholder}">${placeholder}</g:if><g:else><g:message code="uploadr.placeholder.text" /></g:else>',
 			fileDeleteText: '<g:message code="uploadr.button.delete" />',
 			fileDeleteConfirm: '<g:message code="uploadr.button.delete.confirm" />',
+			fileAbortText: '<g:message code="uploadr.button.abort" />',
+			fileAbortConfirm: '<g:message code="uploadr.button.abort.confirm" />',
 			fileDownloadText: '<g:message code="uploadr.button.download" />',
 			fileViewText: '<g:message code="uploadr.button.view" />',
 			likeText: '<g:message code="uploadr.button.like" />',

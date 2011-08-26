@@ -398,7 +398,7 @@
 				progressBar	= $('.progress', domObj);
 
 			// add cancel button
-			methods.addButton(domObj, 'cancel', 'click to abort file transfer', 'are you sure you would like to abort this tranfer?', options, function(e) {
+			methods.addButton(domObj, 'cancel', options.fileAbortText, options.fileAbortConfirm, options, function(e) {
 				// abort transfer
 				status = "abort";
 				xhr.abort();
@@ -610,18 +610,18 @@
 
 			// add like and dislike handlers
 			$(likeDiv).bind('click.uploadr', function() {
-				options.onLike(file, domObj, function() {
-					if (!file.fileRating) file.fileRating = 0;
-					file.fileRating += 0.1;
+				options.onLike(file, domObj, function(rating) {
+					file.fileRating = rating;
+					if (!file.fileRating || file.fileRating < 0) file.fileRating = 0;
 					if (file.fileRating > 1) file.fileRating = 1;
 					methods.setRating(file.fileRating, domObj);
 				});
 			}).tipTip({content: options.likeText, maxWidth: 600});
 			$(unlikeDiv).bind('click.uploadr', function() {
-				options.onUnlike(file, domObj, function() {
-					if (!file.fileRating) file.fileRating = 0;
-					file.fileRating -= 0.1;
-					if (file.fileRating < 0) file.fileRating = 0;
+				options.onUnlike(file, domObj, function(rating) {
+					file.fileRating = rating;
+					if (!file.fileRating || file.fileRating < 0) file.fileRating = 0;
+					if (file.fileRating > 1) file.fileRating = 1;
 					methods.setRating(file.fileRating, domObj);
 				});
 			}).tipTip({content: options.unlikeText, maxWidth: 600});
@@ -912,6 +912,8 @@
 		var defaults = {
 			placeholderText		: 'drag and drop your files here to upload...',
 			fileSelectText 		: 'Select files to upload',
+			fileAbortText		: 'Click to abort file transfer',
+			fileAbortConfirm	: 'Are you sure you would like to abort this tranfer?',
 			fileDeleteText		: 'Click to delete this file',
 			fileDeleteConfirm	: 'Are you sure you want to delete this file?',
 			fileDownloadText	: 'Click to download this file',
@@ -982,8 +984,8 @@
 			onView              : function(file, domObj) { return true; },
 			onDownload          : function(file, domObj) { return true; },
 			onDelete            : function(file, domObj) { return true; },
-			onLike				: function(file, domObj, callback) { callback(); },
-			onUnlike			: function(file, domObj, callback) { callback(); },
+			onLike				: function(file, domObj, callback) { callback(file.fileRating + 0.1); },
+			onUnlike			: function(file, domObj, callback) { callback(file.fileRating - 0.1); },
 			onChangeColor		: function(file, domObj, color) { return true; }
 		};
 
