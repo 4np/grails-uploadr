@@ -82,7 +82,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 <% path = new File("${desktop}/myFourthUploadr") %>
 <h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, rating tooltips, override default file colors to <span style="color:#c78cda">#c78cda</span>, colorpicker, and disable file deletions</h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
-<uploadr:add name="myFourthUploadr" path="${path}" maxVisible="8" rating="true" voting="true" colorPicker="true">
+<uploadr:add name="myFourthUploadr" path="${path}" maxVisible="5" rating="true" voting="true" colorPicker="true">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -179,7 +179,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 	</uploadr:onChangeColor>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-&lt;uploadr:add name="myFourthUploadr" path="${path}" maxVisible="8" rating="true" voting="true" colorPicker="true">
+&lt;uploadr:add name="myFourthUploadr" path="${path}" maxVisible="5" rating="true" voting="true" colorPicker="true">
 <% path.listFiles().each { file -> %>
 	&lt;uploadr:file name="${file.name}">
 		&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>

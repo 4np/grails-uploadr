@@ -188,20 +188,20 @@
 
 .demo .pagination .previous {
 	display: inline-block;
-	background-image: url(../images/previous.gif);
+	background-image: url(../images/previous.png);
 	background-repeat: no-repeat;
 	background-position: left center;
-	width: 19px;
-	height: 18px;
+	width: 20px;
+	height: 20px;
 }
 
 .demo .pagination .next {
 	display: inline-block;
-	background-image: url(../images/next.gif);
+	background-image: url(../images/next.png);
 	background-repeat: no-repeat;
 	background-position: left center;
-	width: 19px;
-	height: 18px;
+	width: 20px;
+	height: 20px;
 }
 
 .demo .pagination .pages {

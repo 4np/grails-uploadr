@@ -248,10 +248,18 @@
 			// set badge upload count
 			badgeDiv.html(uploading);
 
+			// add tooltip
+			var tooltipText = (uploading > 1) ? options.badgeTooltipPlural : options.badgeTooltipSingular;
+			badgeDiv.tipTip({content: tooltipText.replace("%d", uploading)});
+
+			// show / hide?
 			if (uploading < 1 && count < 0) {
 				badgeDiv.animate({opacity:0}, { duration: 1000 });
 			} else if (uploading == 1 && count > 0) {
 				badgeDiv.animate({opacity:1 }, { duration: 700 });
+
+				// remove old tooltip
+				badgeDiv.unbind('hover');
 			}
 		},
 
@@ -626,9 +634,6 @@
 					if (options.onDelete(file, domObj)) methods.removeFileElement(domObj, options);
 				});
 			}
-			methods.addButton(domObj, 'download', options.fileDownloadText, '', options, function() {
-				options.onDownload(file, domObj);
-			});
 			if (options.colorPicker) {
 				var colorPicker = methods.addButton(domObj, 'color', options.colorPickerText, '', options, function() {
 					var p = $('.progress', domObj);
@@ -642,6 +647,9 @@
 					});
 				});
 			}
+			methods.addButton(domObj, 'download', options.fileDownloadText, '', options, function() {
+				options.onDownload(file, domObj);
+			});
 			methods.addButton(domObj, 'view', options.fileViewText, '', options, function() {
 				options.onView(file, domObj);
 			});
@@ -911,6 +919,8 @@
 			likeText			: 'Click to like',
 			unlikeText			: 'Click to unlike',
 			colorPickerText		: 'Click to change background color',
+			badgeTooltipSingular: '%d file is still being uploaded...',
+			badgeTooltipPlural	: '%d files are still being uploaded...',
 			labelDone			: 'done',
 			labelFailed 		: 'failed',
 			labelAborted 		: 'aborted',
@@ -918,7 +928,6 @@
 			hoverClass			: 'uploadr-hover',
 			uri					: '/upload/uri',
 			id					: 'uploadr',
-			famfamfam 			: '/images/icons',
 			maxFileNameLength	: 34,
 			maxSize				: 0,	// 0 = unlimited
 			maxVisible 			: 5,	// 0 = unlimited

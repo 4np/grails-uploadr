@@ -233,6 +233,7 @@
 	overflow: hidden;
 	margin: -2px -2px 0px 0px;
 }
+
 .uploadr .file .info .controls .buttons {
 	display: block;
 	vertical-align: top;
@@ -249,19 +250,19 @@
 }
 
 .uploadr .file .info .controls .buttons .view {
-	background-image: url(../images/search.png);
+	background-image: url(../images/view.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
 
 .uploadr .file .info .controls .buttons .download {
-	background-image: url(../images/image.png);
+	background-image: url(../images/download.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
 
 .uploadr .file .info .controls .buttons .color {
-	background-image: url(../images/contrast.png);
+	background-image: url(../images/color.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
@@ -291,7 +292,7 @@
 	width: 16px;
 	height: 16px;
 	padding-left: 2px;
-	background-image: url(../images/add.png);
+	background-image: url(../images/like.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
@@ -300,7 +301,7 @@
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	background-image: url(../images/remove.png);
+	background-image: url(../images/unlike.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
@@ -314,20 +315,20 @@
 
 .uploadr .pagination .previous {
 	display: inline-block;
-	background-image: url(../images/previous.gif);
+	background-image: url(../images/previous.png);
 	background-repeat: no-repeat;
 	background-position: left center;
-	width: 19px;
-	height: 18px;
+	width: 20px;
+	height: 20px;
 }
 
 .uploadr .pagination .next {
 	display: inline-block;
-	background-image: url(../images/next.gif);
+	background-image: url(../images/next.png);
 	background-repeat: no-repeat;
 	background-position: left center;
-	width: 19px;
-	height: 18px;
+	width: 20px;
+	height: 20px;
 }
 
 .uploadr .pagination .pages {
