@@ -569,8 +569,13 @@
 					// set the rating
 					methods.setRating(fileAttrs.fileRating, domObj);
 
-					// and show the rating div
+					// show the rating div
 					ratingDiv.show(500);
+
+					// add tooltip
+					if (fileAttrs.fileRatingText) {
+						ratingDiv.tipTip({content: fileAttrs.fileRatingText});
+					}
 				}
 
 				// unset speed array to save memory

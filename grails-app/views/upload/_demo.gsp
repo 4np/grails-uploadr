@@ -80,7 +80,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/myFourthUploadr") %>
-<h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, override default file colors to <span style="color:#c78cda">#c78cda</span>, colorpicker, and disable file deletions</h1>
+<h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, rating tooltips, override default file colors to <span style="color:#c78cda">#c78cda</span>, colorpicker, and disable file deletions</h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
 <uploadr:add name="myFourthUploadr" path="${path}" rating="true" voting="true" colorPicker="true">
 <% path.listFiles().each { file -> %>
@@ -90,6 +90,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
 		<uploadr:color>#c78cda</uploadr:color>
 		<uploadr:deletable>false</uploadr:deletable>
+		<uploadr:ratingText>This is the tooltip text of the rating for ${file.name}</uploadr:ratingText>
 	</uploadr:file>
 <% } %>
 	<!-- upload event handlers //-->
@@ -114,9 +115,12 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		file.deletable = false;
 		console.log('set file.deletable to false so the delete icon will not be shown');
 
-		// and override the background to purple (same as initial files)
+		// override the background to purple (same as initial files)
 		$('.progress',domObj).css('background-color', '#c78cda');
 		console.log('and overrided the background color to #c78cda');
+
+		// and set the rating tooltip text for the rating
+		file.fileRatingText = 'you just uploaded this file and in the onSuccess handler the rating tooltip text is added';
 
 		// callback when doen
 		callback();
@@ -183,6 +187,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		&lt;uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}&lt;/uploadr:fileId>
 		&lt;uploadr:color>#f594cc&lt;/uploadr:color>
 		&lt;uploadr:deletable>false&lt;/uploadr:deletable>
+		&lt;uploadr:ratingText>This is the tooltip text of the rating for ${file.name}&lt;/uploadr:ratingText>
 	&lt;/uploadr:file>
 <% } %>
 	&lt;!-- upload event handlers //-->
@@ -207,9 +212,12 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		file.deletable = false;
 		console.log('set file.deletable to false so the delete icon will not be shown');
 
-		// and override the background to purple (same as initial files)
+		// override the background to purple (same as initial files)
 		$('.progress',domObj).css('background-color', '#f594cc');
 		console.log('and overrided the background color to #f594cc');
+
+		// and set the rating tooltip text for the rating
+		file.fileRatingText = 'you just uploaded this file and in the onSuccess handler the rating tooltip text is added';
 
 		// callback when doen
 		callback();

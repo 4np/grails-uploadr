@@ -87,7 +87,8 @@ $(document).ready(function() {
 					fileId 			: '${file.value.id.replaceAll("'","\\\\'")}',
 					fileDate 		: ${file.value.modified}<g:if test="${file.value.color}">,
 					fileColor 		: '${file.value.color}'</g:if><g:if test="${file.value.rating}">,
-					fileRating 		: ${file.value.rating}</g:if><g:if test="${file.value.view}">,
+					fileRating 		: ${file.value.rating}</g:if><g:if test="${file.value.ratingText}">,
+					fileRatingText 	: '${file.value.ratingText.replaceAll("'","\\\\'")}'</g:if><g:if test="${file.value.view}">,
 					fileInfo 		: [<g:each in="${file.value.info}" var="info" status="i">
 						'${info}'<g:if test="${(i+1) < file.value.info.size()}">,</g:if></g:each>
 					]</g:if>

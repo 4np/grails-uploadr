@@ -189,7 +189,8 @@ class UploadrTagLib {
 			id 			: "",
 			info 		: [],
 			color		: '',
-			rating		: 0
+			rating		: 0,
+			ratingText	: ''
 		]
 
 		// do we have child tags to override the regular handler?
@@ -206,6 +207,8 @@ class UploadrTagLib {
 				println "ignoring predefined file '${file}' as it does not exist!"
 			}
 		} else {
+println pageScope.temp
+
 			pageScope.files[ "${attrs.name}" ] = pageScope.temp
 		}
 	}
@@ -250,6 +253,10 @@ class UploadrTagLib {
 		if (rating > 1) rating = 1;
 
 		pageScope.temp.rating = rating
+	}
+
+	def ratingText = { attrs, body ->
+		pageScope.temp.ratingText = body() as String
 	}
 
 	def deletable = { attrs, body ->
