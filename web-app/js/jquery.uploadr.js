@@ -390,7 +390,7 @@
 				progressBar	= $('.progress', domObj);
 
 			// add cancel button
-			methods.addButton(domObj, 'cancel', 'cancel.png', 'click to abort file transfer', 'are you sure you would like to abort this tranfer?', options, function(e) {
+			methods.addButton(domObj, 'cancel', 'click to abort file transfer', 'are you sure you would like to abort this tranfer?', options, function(e) {
 				// abort transfer
 				status = "abort";
 				xhr.abort();
@@ -431,7 +431,7 @@
 				options.onAbort(fileAttrs, domObj);
 
 				// add a delete button to remove the file div
-				methods.addButton(domObj, 'delete', 'delete.png', 'click to remove this aborted transfer from your view', '', options, function() {
+				methods.addButton(domObj, 'delete', 'click to remove this aborted transfer from your view', '', options, function() {
 					methods.removeFileElement(domObj, options);
 				});
 			}, false);
@@ -622,15 +622,15 @@
 		addButtons: function(file, domObj, options) {
 			// add view, download and delete buttons
 			if (file.deletable) {
-				methods.addButton(domObj, 'delete', 'delete.png', options.fileDeleteText, options.fileDeleteConfirm, options, function() {
+				methods.addButton(domObj, 'delete', options.fileDeleteText, options.fileDeleteConfirm, options, function() {
 					if (options.onDelete(file, domObj)) methods.removeFileElement(domObj, options);
 				});
 			}
-			methods.addButton(domObj, 'download', 'page_link.png', options.fileDownloadText, '', options, function() {
+			methods.addButton(domObj, 'download', options.fileDownloadText, '', options, function() {
 				options.onDownload(file, domObj);
 			});
 			if (options.colorPicker) {
-				var colorPicker = methods.addButton(domObj, 'color', 'application_view_tile.png', options.colorPickerText, '', options, function() {
+				var colorPicker = methods.addButton(domObj, 'color', options.colorPickerText, '', options, function() {
 					var p = $('.progress', domObj);
 					var c = p.css('background-color');
 					methods.launchColorPicker(domObj, c, options, function(color) {
@@ -642,20 +642,17 @@
 					});
 				});
 			}
-			methods.addButton(domObj, 'view', 'magnifier.png', options.fileViewText, '', options, function() {
+			methods.addButton(domObj, 'view', options.fileViewText, '', options, function() {
 				options.onView(file, domObj);
 			});
 
 			methods.addVotingButtons(file, domObj, options);
 		},
 
-		addButton: function(domObj, type, image, tooltipText, confirmationText, options, handler) {
+		addButton: function(domObj, type, tooltipText, confirmationText, options, handler) {
 			var buttonDiv = document.createElement('div');
 				buttonDiv.setAttribute('class', 'button ' + type);
 				buttonDiv.setAttribute("style", "display: none");
-			var buttonImage = document.createElement('img');
-				buttonImage.setAttribute('src', options.famfamfam + '/' + image);
-				buttonDiv.appendChild(buttonImage);
 			var buttonsDiv = $('.buttons', domObj);
 
 			buttonsDiv[0].appendChild(buttonDiv);

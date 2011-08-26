@@ -244,6 +244,38 @@
 .uploadr .file .info .controls .buttons .button {
 	display: inline-block;
 	float: right;
+	width: 16px;
+	height: 16px;
+}
+
+.uploadr .file .info .controls .buttons .view {
+	background-image: url(../images/search.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.uploadr .file .info .controls .buttons .download {
+	background-image: url(../images/image.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.uploadr .file .info .controls .buttons .color {
+	background-image: url(../images/contrast.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.uploadr .file .info .controls .buttons .delete {
+	background-image: url(../images/delete.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+.uploadr .file .info .controls .buttons .cancel {
+	background-image: url(../images/cancel.png);
+	background-repeat: no-repeat;
+	background-position: left center;
 }
 
 .uploadr .file .info .controls .voting {
@@ -259,7 +291,7 @@
 	width: 16px;
 	height: 16px;
 	padding-left: 2px;
-	background-image: url(../images/like_16x16.png);
+	background-image: url(../images/add.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
@@ -268,7 +300,7 @@
 	display: inline-block;
 	width: 16px;
 	height: 16px;
-	background-image: url(../images/dislike_16x16.png);
+	background-image: url(../images/remove.png);
 	background-repeat: no-repeat;
 	background-position: left center;
 }
