@@ -122,7 +122,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		// and set the rating tooltip text for the rating
 		file.fileRatingText = 'you just uploaded this file and in the onSuccess handler the rating tooltip text is added';
 
-		// callback when doen
+		// callback when done
 		callback();
 	</uploadr:onSuccess>
 	<uploadr:onFailure>
@@ -221,7 +221,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		// and set the rating tooltip text for the rating
 		file.fileRatingText = 'you just uploaded this file and in the onSuccess handler the rating tooltip text is added';
 
-		// callback when doen
+		// callback when done
 		callback();
 	&lt;/uploadr:onSuccess>
 	&lt;uploadr:onFailure>

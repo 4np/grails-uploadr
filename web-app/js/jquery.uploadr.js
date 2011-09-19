@@ -895,7 +895,7 @@
 					// iterate through files
 					$.each(this.files, function(index,file) {
 						// add file DOM elements
-						var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize, fileRating: 0, fileColor: '' }
+						var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize, startTime: new Date().getTime(), fileRating: 0, deletable: true }
 						var fileDiv = methods.addFileElements(domObj, fileAttrs, options);
 
 						// and start file upload
