@@ -84,16 +84,16 @@ $(document).ready(function() {
 			id: '${name}',
 			files: {<g:each var="file" in="${files}" status="s">
 				${s} : {
-					deletable 		: ${file.value.deletable},
-					fileName 		: '${file.key.replaceAll("'","\\\\'")}',
-					fileSize 		: ${file.value.size},
-					fileId 			: '${file.value.id.replaceAll("'","\\\\'")}',
-					fileDate 		: ${file.value.modified}<g:if test="${file.value.color}">,
-					fileColor 		: '${file.value.color}'</g:if><g:if test="${file.value.rating}">,
-					fileRating 		: ${file.value.rating}</g:if><g:if test="${file.value.ratingText}">,
-					fileRatingText 	: '${file.value.ratingText.replaceAll("'","\\\\'")}'</g:if><g:if test="${file.value.view}">,
-					fileInfo 		: [<g:each in="${file.value.info}" var="info" status="i">
-						'${info}'<g:if test="${(i+1) < file.value.info.size()}">,</g:if></g:each>
+					deletable 		: ${file.deletable},
+					fileName 		: '${file.name.replaceAll("'","\\\\'")}',
+					fileSize 		: ${file.size},
+					fileId 			: '${file.id.replaceAll("'","\\\\'")}',
+					fileDate 		: ${file.modified}<g:if test="${file.color}">,
+					fileColor 		: '${file.color}'</g:if><g:if test="${file.rating}">,
+					fileRating 		: ${file.rating}</g:if><g:if test="${file.ratingText}">,
+					fileRatingText 	: '${file.ratingText.replaceAll("'","\\\\'")}'</g:if><g:if test="${file.view}">,
+					fileInfo 		: [<g:each in="${file.info}" var="info" status="i">
+						'${info}'<g:if test="${(i+1) < file.info.size()}">,</g:if></g:each>
 					]</g:if>
 				}<g:if test="${(s+1) < files.size()}">,</g:if></g:each>
 			}

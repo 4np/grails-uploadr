@@ -86,7 +86,7 @@ class UploadrTagLib {
 		pageScope.name			= name
 		pageScope.path			= session.uploadr[name].path
 		pageScope.handlers		= [:]
-		pageScope.files			= [:]
+		pageScope.files			= []
 		pageScope.temp			= [:]
 
 		// make sure body tags are handled
@@ -183,6 +183,7 @@ class UploadrTagLib {
 
 		// use child tags to insert file
 		pageScope.temp = [
+			name 		: attrs.name,
 			size		: 0 as Long,
 			modified 	: 0 as Long,
 			deletable	: true,
@@ -199,7 +200,8 @@ class UploadrTagLib {
 			def file = new File(pageScope.path, attrs.name)
 
 			if (file.exists()) {
-				pageScope.files[ "${attrs.name}" ] = [
+				pageScope.files[ pageScope.files.size() ] = [
+					name 		: attrs.name,
 				    size 		: file.size(),
 					modified 	: file.lastModified()
 				]
@@ -207,7 +209,7 @@ class UploadrTagLib {
 				println "ignoring predefined file '${file}' as it does not exist!"
 			}
 		} else {
-			pageScope.files[ "${attrs.name}" ] = pageScope.temp
+			pageScope.files[ pageScope.files.size() ] = pageScope.temp
 		}
 	}
 
