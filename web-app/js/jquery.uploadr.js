@@ -367,7 +367,7 @@
 				// iterate through files
 				$.each(files, function(index, file) {
 					// add file DOM elements
-					var fileAttrs = { fileName: file.fileName, fileSize: file.fileSize, startTime: new Date().getTime(), fileRating: 0, deletable: true }
+					var fileAttrs = { fileName: ((file.name) ? file.name : file.fileName), fileSize: ((file.size) ? file.size : file.fileSize), startTime: new Date().getTime(), fileRating: 0, deletable: true }
 					var fileDiv = methods.addFileElements(domObj, fileAttrs, options);
 
 					// and start file upload
@@ -511,10 +511,10 @@
 			xhr.open("POST",options.uri);
         	xhr.setRequestHeader("Cache-Control", "no-cache");
         	xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        	xhr.setRequestHeader("X-File-Name", file.fileName);
-        	xhr.setRequestHeader("X-File-Size", file.fileSize);
+        	xhr.setRequestHeader("X-File-Name", (file.name) ? file.name : file.fileName);
+        	xhr.setRequestHeader("X-File-Size", (file.size) ? file.size : file.fileSize);
         	xhr.setRequestHeader("X-Uploadr-Name", options.id);
-			xhr.setRequestHeader("Content-Type", file.contentType);
+			xhr.setRequestHeader("Content-Type", (file.type) ? file.type : file.contentType);
         	xhr.send(file);
 		},
 
