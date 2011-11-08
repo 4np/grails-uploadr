@@ -244,6 +244,7 @@ class UploadrTagLib {
 
 	def color = { attrs, body ->
 		pageScope.temp.color = (body() as String).trim()
+		out << "color"
 	}
 
 	def rating = { attrs, body ->
@@ -253,13 +254,19 @@ class UploadrTagLib {
 		if (rating > 1) rating = 1;
 
 		pageScope.temp.rating = rating
+
+		out << "rating"
 	}
 
 	def ratingText = { attrs, body ->
 		pageScope.temp.ratingText = body() as String
+
+		out << "ratingText"
 	}
 
 	def deletable = { attrs, body ->
 		pageScope.temp.deletable = ((body() as String).toLowerCase().trim() == "true") ? true : false
+
+		out << "deletable"
 	}
 }
