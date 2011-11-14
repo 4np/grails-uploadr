@@ -42,6 +42,7 @@ class UploadrTagLib {
 		def rating 			= (attrs.get('rating') ? attrs.get('rating') as Boolean : false)
 		def voting 			= (attrs.get('voting') ? attrs.get('voting') as Boolean : false)
 		def colorPicker		= (attrs.get('colorPicker') ? attrs.get('colorPicker') as Boolean : false)
+		def maxSize			= (attrs.get('maxSize') ? attrs.get('maxSize') as Integer : 0)
 
 		// define uri
 		if (attrs.get('controller')) {
@@ -101,6 +102,7 @@ class UploadrTagLib {
 			template:'/js/init',
 			model	:[
 				name		: name,
+				maxSize		: maxSize,
 				uri			: uri,
 				direction 	: direction,
 				placeholder	: placeholder,

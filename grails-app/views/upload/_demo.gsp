@@ -55,8 +55,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/myThirdUploadr") %>
-<h1>3. Initial files, new files on top, 5 files per page, enable rating and voting</h1>
-<uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+<h1>3. Initial files, new files on top, 5 files per page, max file size is 200kb, enable rating and voting</h1>
+<uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" maxSize="204800" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -67,7 +67,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 <% } %>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-	&lt;uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+	&lt;uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" maxSize="204800" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
 <% path.listFiles().each { file -> %>
 		&lt;uploadr:file name="${file.name}">
 			&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>

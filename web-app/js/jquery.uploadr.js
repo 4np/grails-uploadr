@@ -387,15 +387,40 @@
 			// call onStart event handler
 			options.onStart(fileAttrs);
 
-			// check for filesize?
-			if (options.maxSize && file.fileSize > options.maxSize) {
-				return false;
-			}
-
 			// initialze XML Http Request
 			var xhr			= new XMLHttpRequest(),
 				upload		= xhr.upload,
 				progressBar	= $('.progress', domObj);
+
+			// check for filesize?
+			if (options.maxSize && (((file.fileSize) ? file.fileSize : file.size) > options.maxSize)) {
+				// too big!
+				methods.playError(options);
+
+				if (options.onProgress(fileAttrs, domObj, 100)) {
+					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFileTooLarge, '', options, true);
+
+					// attach tooltip on status
+					var tooltipText = options.fileTooLargeText.replace('%s',methods.bytesToSize(((file.fileSize) ? file.fileSize : file.size)));
+						tooltipText = tooltipText.replace('%s',methods.bytesToSize(options.maxSize));
+					$('div.percentage', domObj).tipTip({content: tooltipText, maxWidth: 600});
+
+					// decrease upload counter
+					methods.handleBadge(-1, options);
+
+					// add a delete button to remove the file div
+					methods.addButton(domObj, 'delete', options.removeFromViewText, '', options, function() {
+						methods.removeFileElement(domObj, options);
+					});
+
+					// remember we failed
+					fileAttrs.failed = true;
+				}
+
+				progressBar.addClass('failed');
+
+				return false;
+			}
 
 			// add cancel button
 			methods.addButton(domObj, 'cancel', options.fileAbortText, options.fileAbortConfirm, options, function(e) {
@@ -416,21 +441,26 @@
 				methods.playError(options);
 
 				if (options.onProgress(fileAttrs, domObj, 100)) {
-					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed, '', options);
+					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed, '', options, true);
 
 					// decrease upload counter
 					methods.handleBadge(-1,options);
 				}
 
 				progressBar.addClass('failed');
+
+				// add a delete button to remove the file div
+				methods.addButton(domObj, 'delete', options.removeFromViewText, '', options, function() {
+					methods.removeFileElement(domObj, options);
+				});
 			}, false);
 			
 			// attach abort listener
 			upload.addEventListener("abort", function (ev) {
-				if (options.errorSound) new Audio(options.errorSound).play();
+				methods.playError(options);
 
 				if (options.onProgress(fileAttrs, domObj, 100)) {
-					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelAborted, '', options);
+					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelAborted, '', options, true);
 				}
 
 				progressBar.addClass('failed');
@@ -439,7 +469,7 @@
 				options.onAbort(fileAttrs, domObj);
 
 				// add a delete button to remove the file div
-				methods.addButton(domObj, 'delete', 'click to remove this aborted transfer from your view', '', options, function() {
+				methods.addButton(domObj, 'delete', options.removeFromViewText, '', options, function() {
 					methods.removeFileElement(domObj, options);
 				});
 			}, false);
@@ -518,7 +548,7 @@
         	xhr.send(file);
 		},
 
-		onProgressHandler: function(domObj, fileAttrs, percentage, text, tooltipText, options) {
+		onProgressHandler: function(domObj, fileAttrs, percentage, text, tooltipText, options, failed) {
 			var progressMaxWidth	= domObj.parent().width();
 			var progressBar			= $('.progress', domObj);
 			var percentageDiv 		= $('.percentage', domObj);
@@ -573,7 +603,7 @@
 				cancelButton.hide();
 
 				// use rating?
-				if (options.rating) {
+				if (options.rating && !failed) {
 					// remove speed div
 					speedDiv.hide();
 
@@ -918,14 +948,17 @@
 			fileDeleteConfirm	: 'Are you sure you want to delete this file?',
 			fileDownloadText	: 'Click to download this file',
 			fileViewText		: 'Click to view this file',
+			fileTooLargeText	: 'The upload size of %s is larger than allowed maximum of %s',
 			likeText			: 'Click to like',
 			unlikeText			: 'Click to unlike',
 			colorPickerText		: 'Click to change background color',
 			badgeTooltipSingular: '%d file is still being uploaded...',
 			badgeTooltipPlural	: '%d files are still being uploaded...',
+			removeFromViewText	: 'Click to remove this aborted transfer from your view',
 			labelDone			: 'done',
 			labelFailed 		: 'failed',
 			labelAborted 		: 'aborted',
+			labelFileTooLarge	: 'too large',
 			dropableClass		: 'uploadr-dropable',
 			hoverClass			: 'uploadr-hover',
 			uri					: '/upload/uri',

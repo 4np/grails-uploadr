@@ -71,7 +71,10 @@ $(document).ready(function() {
 			fileAbortConfirm: '<g:message code="uploadr.button.abort.confirm" />',
 			fileDownloadText: '<g:message code="uploadr.button.download" />',
 			fileViewText: '<g:message code="uploadr.button.view" />',
+			fileTooLargeText: '<g:message code="uploadr.error.maxsize" />',
+			labelFileTooLarge: '<g:message code="uploadr.label.maxsize" />',
 			likeText: '<g:message code="uploadr.button.like" />',
+			removeFromViewText: '<g:message code="uploadr.button.remove"/>',
 			unlikeText: '<g:message code="uploadr.button.unlike" />',
 			badgeTooltipSingular: '<g:message code="uploadr.badge.tooltip.singular" />',
 			badgeTooltipPlural: '<g:message code="uploadr.badge.tooltip.plural" />',
@@ -96,7 +99,8 @@ $(document).ready(function() {
 						'${info}'<g:if test="${(i+1) < file.info.size()}">,</g:if></g:each>
 					]</g:if>
 				}<g:if test="${(s+1) < files.size()}">,</g:if></g:each>
-			}
+			},
+			maxSize: ${maxSize}
 		});
 	} else {
 		// Show warning
