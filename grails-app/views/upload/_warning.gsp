@@ -44,7 +44,8 @@ def msie = request.getHeader('user-agent').contains("MSIE")
 	</div>
 <g:if test="${msie}">
 	<div class="message">
-		or install the <a href="http://www.google.com/chromeframe" target="_chromeframe">Google Chrome Frame</a> browser plugin for Internet Explorer:
+		upgrade to <a href="http://ie.microsoft.com/testdrive/" target="_ie10">Internet Explorer 10</a> or install the<br/>
+		<a href="http://www.google.com/chromeframe" target="_chromeframe">Google Chrome Frame</a> browser plugin for Internet Explorer:
 	</div>
 	<div class="button">
 		<a href="http://www.google.com/chromeframe" target="_chromeframe">Install Google Chrome Frame Plugin</a>

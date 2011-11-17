@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var msie = (navigator.appVersion.indexOf("MSIE") != -1);
 	var version = (msie) ? parseFloat(navigator.appVersion.split("MSIE")[1]) : 0;
 
-	if (Modernizr.draganddrop && !msie) {
+	if (Modernizr.draganddrop && (!msie || (msie && version > 9))) {
 		// Browser supports HTML5 drag & drop
 		// initialize uploadr and use native HTML5 implementation
 		var ${name} = $('.${classname}[name=${name}]').uploadr({<g:if test="${handlers.onStart}">
