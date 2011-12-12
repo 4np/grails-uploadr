@@ -608,7 +608,13 @@
 					speedDiv.hide();
 
 					// remove percentage div
-					percentageDiv.hide(1000);
+					percentageDiv.hide(1000, function() {
+						// if jquery tabs are used with an uploadr
+						// the times hide does not work. To make sure
+						// the element is hidden we have to explicitly
+						// call it again
+						$(this).hide();
+					});
 
 					// set the rating
 					methods.setRating(fileAttrs.fileRating, domObj);
