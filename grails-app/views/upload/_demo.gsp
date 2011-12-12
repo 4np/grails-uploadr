@@ -26,14 +26,14 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 
 <% path = new File("${desktop}/myFirstUploadr") %>
 <h1>1. Default uploadr</h1>
-<uploadr:add name="myFirstUploadr" path="${path}"/>
+<uploadr:add name="myFirstUploadr" path="${path}" maxSize="52428800"/>
 <pre class="brush:html collapse:true">
 &lt;uploadr:add name="myFirstUploadr" path="${path}"/>
 </pre>
 
 <% path = new File("${desktop}/mySecondUploadr") %>
 <h1>2. Initial files, files added on top, paginate into 5 files per page</h1>
-<uploadr:add name="mySecondUploadr" path="${path}" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+<uploadr:add name="mySecondUploadr" path="${path}" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxSize="52428800">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -82,7 +82,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 <% path = new File("${desktop}/myFourthUploadr") %>
 <h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, rating tooltips, override default file colors to <span style="color:#c78cda">#c78cda</span>, colorpicker, and disable file deletions</h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
-<uploadr:add name="myFourthUploadr" path="${path}" maxVisible="5" rating="true" voting="true" colorPicker="true">
+<uploadr:add name="myFourthUploadr" path="${path}" maxVisible="5" rating="true" voting="true" colorPicker="true" maxSize="52428800">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -283,7 +283,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 
 <% path = new File("${desktop}/myFifthUploadr") %>
 <h1>5. Initial files, files are added to the top, custom <a href="${resource(plugin:'uploadr', dir:'css', file:'demo.css')}" target="_new">css</a>, custom drop text, custom file browse text, paginate to 4 files per page, rating, no sound effects</h1>
-<uploadr:add name="myFifthUploadr" path="${path}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
+<uploadr:add name="myFifthUploadr" path="${path}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true" maxSize="52428800">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
