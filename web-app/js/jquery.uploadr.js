@@ -665,7 +665,7 @@
 
 		addButtons: function(file, domObj, options) {
 			// add view, download and delete buttons
-			if (file.deletable) {
+			if (file.deletable && options.deletable) {
 				methods.addButton(domObj, 'delete', options.fileDeleteText, options.fileDeleteConfirm, options, function() {
 					if (options.onDelete(file, domObj)) methods.removeFileElement(domObj, options);
 				});
@@ -683,13 +683,16 @@
 					});
 				});
 			}
-			methods.addButton(domObj, 'download', options.fileDownloadText, '', options, function() {
-				options.onDownload(file, domObj);
-			});
-			methods.addButton(domObj, 'view', options.fileViewText, '', options, function() {
-				options.onView(file, domObj);
-			});
-
+			if (options.downloadable) {
+				methods.addButton(domObj, 'download', options.fileDownloadText, '', options, function() {
+					options.onDownload(file, domObj);
+				});
+			}
+			if (options.viewable) {
+				methods.addButton(domObj, 'view', options.fileViewText, '', options, function() {
+					options.onView(file, domObj);
+				});
+			}
 			methods.addVotingButtons(file, domObj, options);
 		},
 
@@ -978,6 +981,9 @@
 			rating 				: true,
 			voting 				: true,
 			colorPicker 		: true,
+			deletable 			: true,	// delete button visible?
+			downloadable 		: true,	// download button visible?
+			viewable 			: true,	// view button visible?
 
 			// default sound effects
 			notificationSound   : '',

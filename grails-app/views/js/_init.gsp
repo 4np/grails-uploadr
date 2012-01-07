@@ -83,6 +83,9 @@ $(document).ready(function() {
 			rating: ${rating as String},
 			voting: ${voting as String},
 			colorPicker: ${colorPicker as String},
+			deletable: ${deletable as String},
+			viewable: ${viewable as String},
+			downloadable: ${downloadable as String},
 			insertDirection: '${direction}',
 			id: '${name}',
 			files: {<g:each var="file" in="${files}" status="s">

@@ -32,17 +32,20 @@ class UploadrTagLib {
 	 */
 	def add = { attrs, body ->
 		def uri
-		def sound 			= !(attrs.get('noSound') && attrs.noSound)
-		def name			= (attrs.name) ? attrs.name : "uploadr"
-		def classname		= (attrs.class) ? attrs.class : 'uploadr'
-		def direction 		= (attrs.direction) ? attrs.direction : 'down'
-		def placeholder		= (attrs.get('placeholder') ? attrs.get('placeholder') : '')
-		def fileselect		= (attrs.get('fileselect') ? attrs.get('fileselect') : '')
-		def maxVisible		= (attrs.get('maxVisible') ? attrs.get('maxVisible') : 0)
-		def rating 			= (attrs.get('rating') ? attrs.get('rating') as Boolean : false)
-		def voting 			= (attrs.get('voting') ? attrs.get('voting') as Boolean : false)
-		def colorPicker		= (attrs.get('colorPicker') ? attrs.get('colorPicker') as Boolean : false)
-		def maxSize			= (attrs.get('maxSize') ? attrs.get('maxSize') as Integer : 0)
+		def sound 			= !(attrs.containsKey('noSound') && attrs.get('noSound').toString().toBoolean())
+		def name			= (attrs.containsKey('name') ? attrs.get('name') : 'uploadr')
+		def classname		= (attrs.containsKey('class') ? attrs.get('class') : 'uploadr')
+		def direction 		= (attrs.containsKey('direction') ? attrs.get('direction') : 'down')
+		def placeholder		= (attrs.containsKey('placeholder') ? attrs.get('placeholder') : '')
+		def fileselect		= (attrs.containsKey('fileselect') ? attrs.get('fileselect') : '')
+		def maxVisible		= (attrs.containsKey('maxVisible') ? attrs.get('maxVisible') : 0)
+		def rating 			= (attrs.containsKey('rating') ? attrs.get('rating').toString().toBoolean() : false)
+		def voting 			= (attrs.containsKey('voting') ? attrs.get('voting').toString().toBoolean() : false)
+		def colorPicker		= (attrs.containsKey('colorPicker') ? attrs.get('colorPicker').toString().toBoolean() : false)
+		def maxSize			= (attrs.containsKey('maxSize') ? attrs.get('maxSize') as Integer : 0)
+		def deletable		= (attrs.containsKey('deletable') ? attrs.get('deletable').toString().toBoolean() : true)
+		def viewable		= (attrs.containsKey('viewable') ? attrs.get('viewable').toString().toBoolean() : true)
+		def downloadable	= (attrs.containsKey('downloadable') ? attrs.get('downloadable').toString().toBoolean() : true)
 
 		// define uri
 		if (attrs.get('controller')) {
@@ -113,6 +116,9 @@ class UploadrTagLib {
 				rating		: rating,
 				voting		: voting,
 				colorPicker	: colorPicker,
+				viewable	: viewable,
+				downloadable: downloadable,
+				deletable	: deletable,
 				handlers	: pageScope.handlers,
 				files		: pageScope.files,
 				unsupported	: (attrs.get('unsupported')) ? attrs.unsupported : createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')
