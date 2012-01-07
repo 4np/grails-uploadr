@@ -26,7 +26,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 
 <% path = new File("${desktop}/myFirstUploadr") %>
 <h1>1. Default uploadr</h1>
-<uploadr:add name="myFirstUploadr" path="${path}" maxSize="52428800"/>
+<uploadr:add name="myFirstUploadr" path="${path}" maxSize="52428800" />
 <pre class="brush:html collapse:true">
 &lt;uploadr:add name="myFirstUploadr" path="${path}"/>
 </pre>
