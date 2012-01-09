@@ -28,4 +28,16 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.13'
     }
+
+    // [jquery: "1.4 => *", jqueryUi: "1.8 => *", modernizr: "1.7.2 => *", resources: "1.0 => *"]
+    plugins {
+        build(":tomcat:$grailsVersion",
+              ":release:1.0.0") {
+            export = false
+        }
+	compile ":resources:1.0"
+	runtime ":jquery:1.7.1",
+		":jquery-ui:1.8.15",
+		":modernizr:1.7.2"
+    }
 }
