@@ -19,19 +19,37 @@
  *  $Date$
  */
 modules = {
+//	uploadr {
+//		dependsOn 'jquery, jquery-ui, modernizr'
+//
+//		if (grails.util.GrailsUtil.environment == "development") {
+//			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.js']
+//			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.css']
+//		} else {
+//			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.minified.js']
+//			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.minified.css']
+//		}
+//
+//		// tip tip resources
+//		resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.tipTip.minified.js']
+//		resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'tipTip.css']
+//	}
+
+	tipTip {
+		// tip tip resources
+		resource url:'/js/jquery.tipTip.minified.js'
+		resource url:'/css/tipTip.css'
+	}
+
 	uploadr {
-		dependsOn 'jquery, modernizr, jquery-ui'
+		dependsOn 'jquery,  jquery-ui,  modernizr, tipTip'
 
 		if (grails.util.GrailsUtil.environment == "development") {
-			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.js']
-			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.css']
+			resource url:'/js/jquery.uploadr.js'
+			resource url:'/css/uploadr.css'
 		} else {
-			resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.uploadr.minified.js']
-			resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'uploadr.minified.css']
+			resource url:'/js/jquery.uploadr.minified.js'
+			resource url:'/css/uploadr.minified.css'
 		}
-
-		// tip tip resources
-		resource id:'js', url:[plugin: 'uploadr', dir:'js', file: 'jquery.tipTip.minified.js']
-		resource id:'css', url:[plugin: 'uploadr', dir:'css', file: 'tipTip.css']
 	}
 }
