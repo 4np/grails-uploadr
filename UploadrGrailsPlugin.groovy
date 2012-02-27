@@ -19,9 +19,9 @@
  *  $Date$
  */
 class UploadrGrailsPlugin {
-	def version			= "0.5.8"
+	def version			= "0.5.9"
 	def grailsVersion	= "1.3.7 > *"
-	def dependsOn		= [jquery: "1.4 => *", jqueryUi: "1.8 => *", modernizr: "1.7.2 => *", resources: "1.0 => *"]
+	def dependsOn		= [jquery: "1.4 > *", jqueryUi: "1.8 > *", modernizr: "1.7.2 > *", resources: "1.0 > *"]
 	def pluginExcludes	= [
 		"grails-app/views/error.gsp"
 	]
