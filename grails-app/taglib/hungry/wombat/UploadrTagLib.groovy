@@ -241,7 +241,8 @@ class UploadrTagLib {
 	}
 
 	def fileModified = { attrs, body ->
-		pageScope.temp.modified = body() as Long
+        String bodyString = body()
+        pageScope.temp.modified = bodyString as Long
 		out << "fileModified"
 	}
 
@@ -256,7 +257,8 @@ class UploadrTagLib {
 	}
 
 	def rating = { attrs, body ->
-		def rating = body() as double
+        String bodyString = body()
+        def rating = bodyString as double
 
 		if (rating < 0) rating = 0;
 		if (rating > 1) rating = 1;
