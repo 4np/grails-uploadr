@@ -55,13 +55,13 @@ This plugin heavily relies on the HTML5 Drag and Drop and File API's which Micro
 ## Quickstart
 The plugin incorporates a demo tag which demonstrates some examples of how to use the uploadr tag with examples and source code. You can see a live (continuous integration) demo [here](http://ci.uploadr.nmcdsp.org/):
 
-```html
+```rhtml
 <uploadr:demo/>
 ```
 	
 *As the *uploadr* plugin depends on the resources plugin to pull in dependencies, your project should use the resources plugin as well (as will be the standard in Grails 2.x). If you are not familiar with the [resources plugin|http://grails.org/plugin/resources], the _demo_ tag can be used in a view as follows:*
 
-```html
+```rhtml
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -78,7 +78,7 @@ The plugin incorporates a demo tag which demonstrates some examples of how to us
 ## Adding an uploadr to your view
 This tag will initialize the uploadr
 
-```html
+```rhtml
 <uploadr:add name="myUploadrName" path="/my/upload/path" direction="up" maxVisible="8" unsupported="/my/controller/action" rating="true" voting="true" colorPicker="true" maxSize="204800" />
 ```
 
@@ -115,7 +115,7 @@ A screenshot of the default warning when an unsupported browser is used. This ca
 ## Adding initial files
 You could just use the uploadr as an upload facility, but it can also be used to show a list of existing files you already uploaded previously and allow the user to view, download or delete the files. To add initial files you can use the ```uploadr:file``` tag as follows:
 
-```html
+```rhtml
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
@@ -125,7 +125,7 @@ You could just use the uploadr as an upload facility, but it can also be used to
 
 If you would like to show the list of files in a certain folder on disk, you could do that by doing something like this (also see the demo tag's second example) although it would be better to pass the file list from the controller to your view:
 
-```html
+```rhtml
 <% def path = new File("/path/to/folder") %>
 <uploadr:add name="mySecondUploadr" path="${path}" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
 <% path.listFiles().each { file -> %>
@@ -140,25 +140,25 @@ If you would like to show the list of files in a certain folder on disk, you cou
 
 To override the color of a file you can user the color attribute:
 
-```html
+```rhtml
         <uploadr:color>#f594cc</uploadr:color>
 ```
 
 To hide the delete icon / action set the delete attribute to false. Note that if the global deletable parameter is set to false (in the uploadr tag), all delete buttons will be disabled / hidden. This attribute can be used to disable the delete button on a per-file basis: 
 
-```html
+```rhtml
         <uploadr:deletable>false</uploadr:deletable>
 ```
 
 To set a rating, use the rating attribute:
 
-```html
+```rhtml
         <uploadr:rating>0.33</uploadr:rating>
 ```
 
 To add a rating tooltip text, use the ratingText attribute:
 
-```html
+```rhtml
         <uploadr:ratingText>This is the tooltip text of the rating for Assignment 2.pdf</uploadr:ratingText>
 ```
 
@@ -170,7 +170,7 @@ Screenshot of most of the features enabled and shown (e.g. pagination, color pic
 ## Event handlers
 By default the uploadr is fully functional as is, but it is possible to add your own event handles for certain types of events:
 
-```html+smarty
+```rhtml
 	<!-- upload event handlers //-->
 	<uploadr:onStart>
 		console.log('start uploading \'' + file.fileName + '\'');
@@ -262,7 +262,7 @@ By default the uploadr is fully functional as is, but it is possible to add your
 ## Internationalization / custom texts
 The text labels the plugin uses are stored in i18n messages, which can be overwritten / internationalized in your own application:
 
-```html
+```properties
 # labels that appears in the uploadr's percentage text when
 # an upload is complete, failed or aborted
 uploadr.label.done=done
@@ -298,7 +298,7 @@ uploadr.button.remove=Click to remove this aborted transfer from your view
 
 In addition to these _default_ labels you can overwrite the _placeholder text_ (the text inside the drop area) and the the _select_ text (the text on the file upload link) on a per-uploadr basis using the following tags:
 
-```html
+```rhtml
 <uploadr:add ... placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" ...>
 ...
 </uploadr:add>
@@ -307,7 +307,7 @@ In addition to these _default_ labels you can overwrite the _placeholder text_ (
 ## Disabling sound effects
 The plugin plays some sound effects whether a file upload was completed, aborted or has failed. To disable these sound effects use the ```noSound``` parameter:
 
-```html
+```rhtml
 <uploadr:add ... noSound="true" ...>
 ...
 </uploadr:add>
@@ -316,7 +316,7 @@ The plugin plays some sound effects whether a file upload was completed, aborted
 ## Advanced usage: Creating your custom controller to handle file uploads
 While the default controller works out of the box, your project's requirements might require a custom plugin. For example, if you would like to deploy your application on cloudfoundry, you need to create your own controller as you do not have file access. In order to accomplish this you can write your own controller, and specify to use it in your uploadr tag:
 
-```html
+```rhtml
 <uploadr:add ... controller="myController" action="myAction" ...>
 ...
 </uploadr:add>
@@ -324,7 +324,7 @@ While the default controller works out of the box, your project's requirements m
 
 To have the file uploads being handled by _myAction_ action of _myController_. 
 
-```html
+```rhtml
 <uploadr:add ... controller="myController" action="myAction" plugin="myPlugin" ...>
 ...
 </uploadr:add>
