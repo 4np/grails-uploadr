@@ -170,11 +170,11 @@ Screenshot of most of the features enabled and shown (e.g. pagination, color pic
 ## Event handlers
 By default the uploadr is fully functional as is, but it is possible to add your own event handles for certain types of events:
 
-```html
+```html+javascript
 	<!-- upload event handlers //-->
-	<uploadr:onStart>```javascript
+	<uploadr:onStart>
 		console.log('start uploading \'' + file.fileName + '\'');
-	```</uploadr:onStart>
+	</uploadr:onStart>
 	<uploadr:onProgress>
 		console.log('\'' + file.fileName + '\' upload progress: ' + percentage + '%');
 		return true; // return false to disable default progress handler
