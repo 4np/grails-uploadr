@@ -403,16 +403,23 @@ Take a look at the documentation above, and the default event handlers in the up
 The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](grails-uploadr/blob/master/web-app/css/uploadr.css), [minified](grails-uploadr/blob/master/web-app/css/uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
 
 ## Changelog
-*Version 0.5.7* - Added three global parameters (downloadable, deletable, viewable) to define whether the file control buttons are visible (default) or not. Thanks to Michael Aube for the feedback :)
+###Version 0.5.7
+Added three global parameters (downloadable, deletable, viewable) to define whether the file control buttons are visible (default) or not. Thanks to Michael Aube for the feedback :)
 
-*Version 0.5.6* - If the uploadr is put in a jquery-ui tab (http://jqueryui.com/demos/tabs/) there seems to be an issue with hiding elements by duration (e.g. $('myElement').hide(1000); ) which is ignored. This resulted in 'done' to remain visible in the percentage div when used in combination in a jquery-ui tab. To resolve this, the div is now explicitly hidden when the transition supposedly finished (e.g. $('myElement').hide(1000,function() { $(this).hide(); }); }
+###Version 0.5.6
+If the uploadr is put in a jquery-ui tab (http://jqueryui.com/demos/tabs/) there seems to be an issue with hiding elements by duration (e.g. $('myElement').hide(1000); ) which is ignored. This resulted in 'done' to remain visible in the percentage div when used in combination in a jquery-ui tab. To resolve this, the div is now explicitly hidden when the transition supposedly finished (e.g. ```javascript $('myElement').hide(1000,function() { $(this).hide(); });``` )
 
-*Version 0.5.5* - FireFox drag and drop issue was fixed in 0.5.1 (see below), however the same issue apparently still existed in the 'click to upload' button
+###Version 0.5.5
+FireFox drag and drop issue was fixed in 0.5.1 (see below), however the same issue apparently still existed in the 'click to upload' button
 
-*Version 0.5.4* - confirmed the File and Drag & Drop HTML5 API's to be working in Internet Explorer 10 10.0.8102.0 (part of Windows 8). Updated browser check to reflect this support, and improved the default warning message for unsupported browsers.
+###Version 0.5.4
+confirmed the File and Drag & Drop HTML5 API's to be working in Internet Explorer 10 10.0.8102.0 (part of Windows 8). Updated browser check to reflect this support, and improved the default warning message for unsupported browsers.
 
-*Version 0.5.3* - added support for maxSize argument (in bytes, so 204800 is 200KB). When a user tries to upload a file that is larger than the maximum size, the upload is not performed and a warning is shown. By default there is no limit (maxSize=0). Three i18n texts were added (uploadr.error.maxsize, uploadr.label.maxsize & uploadr.button.remove). Added some tweaks that rating and voting does not show when an upload was not successful, and that a delete button will show to remove the failed / aborted transfer from view. Added maxSize limitation of 200KB to Example 3 in the <uploadr:demo/> tag.
+###Version 0.5.3
+added support for maxSize argument (in bytes, so 204800 is 200KB). When a user tries to upload a file that is larger than the maximum size, the upload is not performed and a warning is shown. By default there is no limit (maxSize=0). Three i18n texts were added (uploadr.error.maxsize, uploadr.label.maxsize & uploadr.button.remove). Added some tweaks that rating and voting does not show when an upload was not successful, and that a delete button will show to remove the failed / aborted transfer from view. Added maxSize limitation of 200KB to Example 3 in the ```html <uploadr:demo/>``` tag.
 
-*Version 0.5.2* - Fixed an issue where some file tags did not always work properly (color, rating, ratingText and deletable)
+###Version 0.5.2
+Fixed an issue where some file tags did not always work properly (color, rating, ratingText and deletable)
 
-*Version 0.5.1* - Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in _file.fileSize_ , _file.fileName_ and _file.contentType_ , Firefox 7's File API now uses _file.name_ , _file.size_ and _file.type_ instead. Implemented a fix to support this new behavior.
+###Version 0.5.1
+Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in _file.fileSize_ , _file.fileName_ and _file.contentType_ , Firefox 7's File API now uses _file.name_ , _file.size_ and _file.type_ instead. Implemented a fix to support this new behavior.
