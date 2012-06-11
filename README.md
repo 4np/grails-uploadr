@@ -170,7 +170,7 @@ Screenshot of most of the features enabled and shown (e.g. pagination, color pic
 ## Event handlers
 By default the uploadr is fully functional as is, but it is possible to add your own event handles for certain types of events:
 
-```js+erb
+```rhtml
 	<!-- upload event handlers //-->
 	<uploadr:onStart>
 		console.log('start uploading \'' + file.fileName + '\'');
