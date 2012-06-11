@@ -104,16 +104,16 @@ Parameters
 |action | use your own action to handle file uploads | action="myAction" | default controller/action | no|
 |plugin | plugin that contains your custom controller/action | plugin="myPlugin" | default plugin | no|
 
-A screenshot of how the _maxSize_ parameter (maxSize="204800") is handled in the front end:
+A screenshot of how the ```maxSize``` parameter (maxSize="204800") is handled in the front end:
 
 ![example1](http://grails.org/wikiImage/plugin-uploadr-screenshots/uploadr-maxsize-200kb.png)
 
-A screenshot of the default warning when an unsupported browser is used. This can be changed by setting the _unsupported_ parameter to load your own warning or fallback upload support (e.g. unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}"):
+A screenshot of the default warning when an unsupported browser is used. This can be changed by setting the _unsupported_ parameter to load your own warning or fallback upload support (e.g. ```unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}"```):
 
 ![example1](http://grails.org/wikiImage/plugin-uploadr-screenshots/Screen_Shot_2011-11-17_at_12.08.01_PM.png)
 
 ## Adding initial files
-You could just use the uploadr as an upload facility, but it can also be used to show a list of existing files you already uploaded previously and allow the user to view, download or delete the files. To add initial files you can use the _uploadr:file_ tag as follows:
+You could just use the uploadr as an upload facility, but it can also be used to show a list of existing files you already uploaded previously and allow the user to view, download or delete the files. To add initial files you can use the ```uploadr:file``` tag as follows:
 
 ```html
 	<uploadr:file name="${file.name}">
@@ -305,7 +305,7 @@ In addition to these _default_ labels you can overwrite the _placeholder text_ (
 ```
 
 ## Disabling sound effects
-The plugin plays some sound effects whether a file upload was completed, aborted or has failed. To disable these sound effects use the _noSound_ parameter:
+The plugin plays some sound effects whether a file upload was completed, aborted or has failed. To disable these sound effects use the ```noSound``` parameter:
 
 ```html
 <uploadr:add ... noSound="true" ...>
@@ -330,13 +330,13 @@ To have the file uploads being handled by _myAction_ action of _myController_.
 </uploadr:add>
 ```
 
-This would make the uploadr use the _myAction_ of _myController_ in _myPlugin_ . 
+This would make the uploadr use the ```myAction``` of ```myController``` in ```myPlugin```. 
 
-View the default [controller](grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy)'s _handle_ action to get an idea of how to implement your own controller to handle file uploads.
+View the default [controller](grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy)'s ```handle``` action to get an idea of how to implement your own controller to handle file uploads.
 
-If you do this, you probably also want to create your own code to view, download and delete uploaded files. You can do this by creating your own event handlers (respectively: _onView_ , _onDownload_ and _onDelete_ ). 
+If you do this, you probably also want to create your own code to view, download and delete uploaded files. You can do this by creating your own event handlers (respectively: ```onView``` , ```onDownload``` and ```onDelete``` ). 
 
-For example, if you store your files in a custom controller using MongoDB's GridFS, you could create your own download handler by using the _onDownload_ event handler:
+For example, if you store your files in a custom controller using MongoDB's GridFS, you could create your own download handler by using the ```onDownload``` event handler:
 
 ```javascript
             uploadr.onDownload {
@@ -345,13 +345,13 @@ For example, if you store your files in a custom controller using MongoDB's Grid
             }
 ```
 
-where the view _/js/uploadr/onDownload_ contains the following code:
+where the view ```/js/uploadr/onDownload``` contains the following code:
 
 ```javascript
 window.open('<g:createLink plugin="myPlugin" controller="uploadedFile" action="downloadUploadedFile"/>?fileId='+file.fileId);
 ```
 
-and the _uploadedFile_ controller's _downloadUploadedFile_ action in _myPlugin_ contains something like the following:
+and the ```uploadedFile``` controller's ```downloadUploadedFile``` action in ```myPlugin``` contains something like the following:
 
 ```groovy
     def downloadUploadedFile = {
@@ -407,7 +407,7 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 Added three global parameters (downloadable, deletable, viewable) to define whether the file control buttons are visible (default) or not. Thanks to Michael Aube for the feedback :)
 
 ###Version 0.5.6
-If the uploadr is put in a jquery-ui tab (http://jqueryui.com/demos/tabs/) there seems to be an issue with hiding elements by duration (e.g. $('myElement').hide(1000); ) which is ignored. This resulted in 'done' to remain visible in the percentage div when used in combination in a jquery-ui tab. To resolve this, the div is now explicitly hidden when the transition supposedly finished (e.g. ```javascript $('myElement').hide(1000,function() { $(this).hide(); });``` )
+If the uploadr is put in a jquery-ui tab (http://jqueryui.com/demos/tabs/) there seems to be an issue with hiding elements by duration (e.g. ```$('myElement').hide(1000);```) which is ignored. This resulted in 'done' to remain visible in the percentage div when used in combination in a jquery-ui tab. To resolve this, the div is now explicitly hidden when the transition supposedly finished (e.g. ```$('myElement').hide(1000,function() { $(this).hide(); });``` )
 
 ###Version 0.5.5
 FireFox drag and drop issue was fixed in 0.5.1 (see below), however the same issue apparently still existed in the 'click to upload' button
@@ -416,10 +416,10 @@ FireFox drag and drop issue was fixed in 0.5.1 (see below), however the same iss
 confirmed the File and Drag & Drop HTML5 API's to be working in Internet Explorer 10 10.0.8102.0 (part of Windows 8). Updated browser check to reflect this support, and improved the default warning message for unsupported browsers.
 
 ###Version 0.5.3
-added support for maxSize argument (in bytes, so 204800 is 200KB). When a user tries to upload a file that is larger than the maximum size, the upload is not performed and a warning is shown. By default there is no limit (maxSize=0). Three i18n texts were added (uploadr.error.maxsize, uploadr.label.maxsize & uploadr.button.remove). Added some tweaks that rating and voting does not show when an upload was not successful, and that a delete button will show to remove the failed / aborted transfer from view. Added maxSize limitation of 200KB to Example 3 in the ```html <uploadr:demo/>``` tag.
+added support for ```maxSize``` argument (in bytes, so 204800 is 200KB). When a user tries to upload a file that is larger than the maximum size, the upload is not performed and a warning is shown. By default there is no limit (```maxSize=0```). Three i18n texts were added (```uploadr.error.maxsize```, ```uploadr.label.maxsize``` & ```uploadr.button.remove```). Added some tweaks that rating and voting does not show when an upload was not successful, and that a delete button will show to remove the failed / aborted transfer from view. Added ```maxSize``` limitation of 200KB to Example 3 in the ```<uploadr:demo/>``` tag.
 
 ###Version 0.5.2
 Fixed an issue where some file tags did not always work properly (color, rating, ratingText and deletable)
 
 ###Version 0.5.1
-Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in _file.fileSize_ , _file.fileName_ and _file.contentType_ , Firefox 7's File API now uses _file.name_ , _file.size_ and _file.type_ instead. Implemented a fix to support this new behavior.
+Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in ```file.fileSize``` , ```file.fileName``` and ```file.contentType``` , Firefox 7's File API now uses ```file.name``` , ```file.size``` and ```file.type``` instead. Implemented a fix to support this new behavior.
