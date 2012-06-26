@@ -406,6 +406,15 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 ###Version 0.5.11
 Upgraded to Grails 2.0.4 and Grails Central
 
+###Version 0.5.10
+Minor bugfix with casting string to double in Grails 2.0.1
+
+###Version 0.5.9
+Dependency map used >= which was wrong, changed it into >
+
+###Version 0.5.8
+Added grails 2.0 dependency configuration
+
 ###Version 0.5.7
 Added three global parameters (downloadable, deletable, viewable) to define whether the file control buttons are visible (default) or not. Thanks to Michael Aube for the feedback :)
 
