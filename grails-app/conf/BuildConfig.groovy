@@ -1,7 +1,9 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+grails.project.target.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
+
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
@@ -10,14 +12,13 @@ grails.project.dependency.resolution = {
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
-        grailsPlugins()
-        grailsHome()
         grailsCentral()
+	grailsRepo "http://grails.org/plugins"
 
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
-        //mavenLocal()
         //mavenCentral()
+        //mavenLocal()
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
@@ -26,18 +27,25 @@ grails.project.dependency.resolution = {
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
-        // runtime 'mysql:mysql-connector-java:5.1.13'
+        // runtime 'mysql:mysql-connector-java:5.1.5'
     }
 
-    // [jquery: "1.4 => *", jqueryUi: "1.8 => *", modernizr: "1.7.2 => *", resources: "1.0 => *"]
     plugins {
-        build(":tomcat:$grailsVersion",":release:1.0.0") {
-            export = false
+        build(":tomcat:$grailsVersion",
+              ":release:latest.integration") {
+                // plugin only plugin, should not be transitive to the application
+                export = false
         }
-		compile ":resources:1.0"
-		runtime ":jquery:1.7.1",
-				":jquery-ui:1.8.15",
-				":modernizr:1.7.2",
-				":hibernate:$grailsVersion"
+
+        compile(":resources:latest.integration") {
+                export = false
+        }
+
+        runtime(":jquery:latest.integration",
+		":jquery-ui:latest.integration",
+		":modernizr:latest.integration") {
+                export = false
+        }
+
     }
 }

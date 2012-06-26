@@ -19,44 +19,59 @@
  *  $Date$
  */
 class UploadrGrailsPlugin {
-	def version			= "0.5.10"
-	def grailsVersion	= "1.3.7 > *"
-	def dependsOn		= [jquery: "1.4 > *", jqueryUi: "1.8 > *", modernizr: "1.7.2 > *", resources: "1.0 > *"]
-	def pluginExcludes	= [
-		"grails-app/views/error.gsp"
-	]
-	def author			= "Jeroen Wesbeek"
-	def authorEmail		= "work@osx.eu"
-	def title			= "A HTML5 drag and drop multi-file upload plugin"
-	def documentation	= "http://grails.org/plugin/uploadr"
-	def description		= '''\\
+        def version		= "0.5.11"
+        def grailsVersion	= "1.3.7 > *"
+        def dependsOn		= [jquery: "1.4 > *", jqueryUi: "1.8 > *", modernizr: "1.7.2 > *", resources: "1.0 > *"]
+        def pluginExcludes	= [
+                "grails-app/views/error.gsp"
+        ]
+        def author		= "Jeroen Wesbeek"
+        def authorEmail		= "work@osx.eu"
+        def title		= "A HTML5 drag and drop multi-file upload plugin"
+        def description		= '''\\
 A HTML5 drag and drop multi-file upload plugin
 '''
+	def documentation   = "https://github.com/4np/grails-uploadr/blob/master/README.md"
+	def license         = "APACHE"
+	def issueManagement = [ system: "github", url: "https://github.com/4np/grails-uploadr/issues" ]
+	def scm             = [ url: "https://github.com/4np/grails-uploadr" ]
 
-	def doWithWebDescriptor = { xml ->
-		// TODO Implement additions to web.xml (optional), this event occurs before
-	}
+    // Extra (optional) plugin metadata
 
-	def doWithSpring = {
-		// TODO Implement runtime spring config (optional)
-	}
+    // Details of company behind the plugin (if there is one)
+//    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
 
-	def doWithDynamicMethods = { ctx ->
-		// TODO Implement registering dynamic methods to classes (optional)
-	}
+    // Any additional developers beyond the author specified above.
+//    def developers = [ [ name: "Joe Bloggs", email: "joe@bloggs.net" ]]
 
-	def doWithApplicationContext = { applicationContext ->
-		// TODO Implement post initialization spring config (optional)
-	}
+    def doWithWebDescriptor = { xml ->
+        // TODO Implement additions to web.xml (optional), this event occurs before
+    }
 
-	def onChange = { event ->
-		// TODO Implement code that is executed when any artefact that this plugin is
-		// watching is modified and reloaded. The event contains: event.source,
-		// event.application, event.manager, event.ctx, and event.plugin.
-	}
+    def doWithSpring = {
+        // TODO Implement runtime spring config (optional)
+    }
 
-	def onConfigChange = { event ->
-		// TODO Implement code that is executed when the project configuration changes.
-		// The event is the same as for 'onChange'.
-	}
+    def doWithDynamicMethods = { ctx ->
+        // TODO Implement registering dynamic methods to classes (optional)
+    }
+
+    def doWithApplicationContext = { applicationContext ->
+        // TODO Implement post initialization spring config (optional)
+    }
+
+    def onChange = { event ->
+        // TODO Implement code that is executed when any artefact that this plugin is
+        // watching is modified and reloaded. The event contains: event.source,
+        // event.application, event.manager, event.ctx, and event.plugin.
+    }
+
+    def onConfigChange = { event ->
+        // TODO Implement code that is executed when the project configuration changes.
+        // The event is the same as for 'onChange'.
+    }
+
+    def onShutdown = { event ->
+        // TODO Implement code that is executed when the application shuts down (optional)
+    }
 }

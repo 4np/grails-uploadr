@@ -403,6 +403,9 @@ Take a look at the documentation above, and the default event handlers in the up
 The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](grails-uploadr/blob/master/web-app/css/uploadr.css), [minified](grails-uploadr/blob/master/web-app/css/uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
 
 ## Changelog
+###Version 0.5.11
+Upgraded to Grails 2.0.4 and Grails Central
+
 ###Version 0.5.7
 Added three global parameters (downloadable, deletable, viewable) to define whether the file control buttons are visible (default) or not. Thanks to Michael Aube for the feedback :)
 
