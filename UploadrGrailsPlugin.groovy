@@ -19,22 +19,22 @@
  *  $Date$
  */
 class UploadrGrailsPlugin {
-        def version		= "0.5.11"
+        def version		    = "0.5.11"
         def grailsVersion	= "1.3.7 > *"
         def dependsOn		= [jquery: "1.4 > *", jqueryUi: "1.8 > *", modernizr: "1.7.2 > *", resources: "1.0 > *"]
         def pluginExcludes	= [
                 "grails-app/views/error.gsp"
         ]
-        def author		= "Jeroen Wesbeek"
+        def author		    = "Jeroen Wesbeek"
         def authorEmail		= "work@osx.eu"
-        def title		= "A HTML5 drag and drop multi-file upload plugin"
+        def title		    = "A HTML5 drag and drop multi-file upload plugin"
         def description		= '''\\
 A HTML5 drag and drop multi-file upload plugin
 '''
-	def documentation   = "https://github.com/4np/grails-uploadr/blob/master/README.md"
-	def license         = "APACHE"
-	def issueManagement = [ system: "github", url: "https://github.com/4np/grails-uploadr/issues" ]
-	def scm             = [ url: "https://github.com/4np/grails-uploadr" ]
+	def documentation       = "https://github.com/4np/grails-uploadr/blob/master/README.md"
+	def license             = "APACHE"
+	def issueManagement     = [ system: "github", url: "https://github.com/4np/grails-uploadr/issues" ]
+	def scm                 = [ url: "https://github.com/4np/grails-uploadr" ]
 
     // Extra (optional) plugin metadata
 
