@@ -260,7 +260,7 @@ By default the uploadr is fully functional as is, but it is possible to add your
 ```
 
 ## Internationalization / custom texts
-The text labels the plugin uses are stored in [i18n messages](blob/master/grails-app/i18n/messages.properties), which can be overwritten / internationalized in your own application:
+The text labels the plugin uses are stored in [i18n messages](grails-uploadr/blob/master/grails-app/i18n/messages.properties), which can be overwritten / internationalized in your own application:
 
 ```properties
 # labels that appears in the uploadr's percentage text when
@@ -405,7 +405,7 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 ## Changelog
 
 ###Version 0.6.0
-Added support for an ```allowedExtensions``` parameter comma separated list (feature request [#1](issues/1)). When undefined/empty, all file uploads are allowed.
+Added support for an ```allowedExtensions``` parameter comma separated list (feature request [#1](grails-uploadr/issues/1)). When undefined/empty, all file uploads are allowed.
 
 example:
 ```groovy
@@ -416,7 +416,7 @@ allowedExtensions="jpg,gif,png"
 This means that _"jpg, gif, png"_ does not work and will try to validate the ```. png``` extentions (```bla. png```) instead
 of the desired ```.png``` (```bla.png```).*
 
-This new feature has also introduced two new [i18n internationalization labels](blob/master/grails-app/i18n/messages.properties), namely:
+This new feature has also introduced two new [i18n internationalization labels](grails-uploadr/blob/master/grails-app/i18n/messages.properties), namely:
 
 ```groovy
 uploadr.label.invalidFileExtension=invalid
