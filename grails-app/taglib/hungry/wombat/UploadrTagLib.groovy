@@ -13,10 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
- *  $Author$
- *  $Rev$
- *  $Date$
  */
 
 package hungry.wombat
@@ -46,6 +42,7 @@ class UploadrTagLib {
 		def deletable		= (attrs.containsKey('deletable') ? attrs.get('deletable').toString().toBoolean() : true)
 		def viewable		= (attrs.containsKey('viewable') ? attrs.get('viewable').toString().toBoolean() : true)
 		def downloadable	= (attrs.containsKey('downloadable') ? attrs.get('downloadable').toString().toBoolean() : true)
+		def allowedExtensions   = (attrs.containsKey('allowedExtensions') ? attrs.get('allowedExtensions').toString() : "")
 
 		// define uri
 		if (attrs.get('controller')) {
@@ -104,24 +101,25 @@ class UploadrTagLib {
 			plugin	: 'uploadr',
 			template:'/js/init',
 			model	:[
-				name		: name,
-				maxSize		: maxSize,
-				uri			: uri,
-				direction 	: direction,
-				placeholder	: placeholder,
-				fileselect 	: fileselect,
-				classname	: classname,
-				maxVisible	: maxVisible,
-				sound 		: sound,
-				rating		: rating,
-				voting		: voting,
-				colorPicker	: colorPicker,
-				viewable	: viewable,
-				downloadable: downloadable,
-				deletable	: deletable,
-				handlers	: pageScope.handlers,
-				files		: pageScope.files,
-				unsupported	: (attrs.get('unsupported')) ? attrs.unsupported : createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')
+				name		        : name,
+				maxSize		        : maxSize,
+				uri			        : uri,
+				direction 	        : direction,
+				placeholder	        : placeholder,
+				fileselect 	        : fileselect,
+				classname	        : classname,
+				maxVisible	        : maxVisible,
+				sound 		        : sound,
+				rating		        : rating,
+				voting		        : voting,
+				colorPicker	        : colorPicker,
+				viewable	        : viewable,
+				downloadable        : downloadable,
+				deletable	        : deletable,
+				handlers	        : pageScope.handlers,
+				files		        : pageScope.files,
+				allowedExtensions   : allowedExtensions,
+				unsupported	        : (attrs.get('unsupported')) ? attrs.unsupported : createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')
 			]
 		))
 	}

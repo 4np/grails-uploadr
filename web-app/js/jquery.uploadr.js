@@ -13,10 +13,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
- *  $Author$
- *  $Rev$
- *  $Date$
  */
 (function($){
 	// methods
@@ -391,6 +387,43 @@
 			var xhr			= new XMLHttpRequest(),
 				upload		= xhr.upload,
 				progressBar	= $('.progress', domObj);
+
+			// check for file extension?
+			if (options.allowedExtensions.length>0) {
+				var allowedExtensions = options.allowedExtensions.split(",");
+				var fileName = file.name.split(".");
+				var fileExtension = fileName[ fileName.length-1 ];
+
+				// check if extension matched the whitelist
+				if ($.inArray(fileExtension, allowedExtensions) < 0) {
+					// no, deny upload
+					methods.playError(options);
+
+					if (options.onProgress(fileAttrs, domObj, 100)) {
+						methods.onProgressHandler(domObj, fileAttrs, 100, options.labelInvalidFileExtension, '', options, true);
+
+						// attach tooltip on status
+						var tooltipText = options.fileExtensionNotAllowedText.replace('%s',fileExtension);
+						tooltipText = tooltipText.replace('%s',options.allowedExtensions);
+						$('div.percentage', domObj).tipTip({content: tooltipText, maxWidth: 600});
+
+						// decrease upload counter
+						methods.handleBadge(-1, options);
+
+						// add a delete button to remove the file div
+						methods.addButton(domObj, 'delete', options.removeFromViewText, '', options, function() {
+							methods.removeFileElement(domObj, options);
+						});
+
+						// remember we failed
+						fileAttrs.failed = true;
+					}
+
+					progressBar.addClass('failed');
+
+					return false;
+				}
+			}
 
 			// check for filesize?
 			if (options.maxSize && (((file.fileSize) ? file.fileSize : file.size) > options.maxSize)) {
@@ -952,12 +985,14 @@
 			placeholderText		: 'drag and drop your files here to upload...',
 			fileSelectText 		: 'Select files to upload',
 			fileAbortText		: 'Click to abort file transfer',
-			fileAbortConfirm	: 'Are you sure you would like to abort this tranfer?',
+			fileAbortConfirm	: 'Are you sure you would like to abort this transfer?',
+			fileAbortConfirm	: 'Are you sure you would like to abort this transfer?',
 			fileDeleteText		: 'Click to delete this file',
 			fileDeleteConfirm	: 'Are you sure you want to delete this file?',
 			fileDownloadText	: 'Click to download this file',
 			fileViewText		: 'Click to view this file',
 			fileTooLargeText	: 'The upload size of %s is larger than allowed maximum of %s',
+			fileExtensionNotAllowedText : 'You tried to upload a file with extension "%s" while only files with extensions "%s" are allowed to be uploaded',
 			likeText			: 'Click to like',
 			unlikeText			: 'Click to unlike',
 			colorPickerText		: 'Click to change background color',
@@ -968,6 +1003,7 @@
 			labelFailed 		: 'failed',
 			labelAborted 		: 'aborted',
 			labelFileTooLarge	: 'too large',
+			labelInvalidFileExtension : 'invalid',
 			dropableClass		: 'uploadr-dropable',
 			hoverClass			: 'uploadr-hover',
 			uri					: '/upload/uri',
@@ -984,6 +1020,7 @@
 			deletable 			: true,	// delete button visible?
 			downloadable 		: true,	// download button visible?
 			viewable 			: true,	// view button visible?
+			allowedExtensions   : "",   // comma ceperated list of allowed extensions, all if empty
 
 			// default sound effects
 			notificationSound   : '',
@@ -1037,7 +1074,7 @@
 		// extend the jQuery options
 		var options = $.extend(defaults, options);
 
-		return this.each(function() {  
+		return this.each(function() {
 			var obj	= $(this);
 			var e	= obj.get(0);
 

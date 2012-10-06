@@ -15,10 +15,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
- *  $Author$
- *  $Rev$
- *  $Date$
  */
 def path = null;
 def desktop = "${System.getProperty('user.home')}/Desktop"
@@ -32,8 +28,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 </pre>
 
 <% path = new File("${desktop}/mySecondUploadr") %>
-<h1>2. Initial files, files added on top, paginate into 5 files per page</h1>
-<uploadr:add name="mySecondUploadr" path="${path}" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxSize="52428800">
+<h1>2. Initial files, files added on top, paginate into 5 files per page, allowed extensions .jpg, .png and .gif</h1>
+<uploadr:add name="mySecondUploadr" path="${path}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxSize="52428800">
 <% path.listFiles().each { file -> %>
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>

@@ -73,6 +73,8 @@ $(document).ready(function() {
 			fileViewText: '<g:message code="uploadr.button.view" />',
 			fileTooLargeText: '<g:message code="uploadr.error.maxsize" />',
 			labelFileTooLarge: '<g:message code="uploadr.label.maxsize" />',
+			fileExtensionNotAllowedText: '<g:message code="uploadr.error.wrongExtension" />',
+			labelInvalidFileExtension: '<g:message code="uploadr.label.invalidFileExtension" />',
 			likeText: '<g:message code="uploadr.button.like" />',
 			removeFromViewText: '<g:message code="uploadr.button.remove"/>',
 			unlikeText: '<g:message code="uploadr.button.unlike" />',
@@ -86,6 +88,7 @@ $(document).ready(function() {
 			deletable: ${deletable as String},
 			viewable: ${viewable as String},
 			downloadable: ${downloadable as String},
+			allowedExtensions: '${allowedExtensions as String}',
 			insertDirection: '${direction}',
 			id: '${name}',
 			files: {<g:each var="file" in="${files}" status="s">
