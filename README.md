@@ -421,6 +421,8 @@ uploadr.error.wrongExtension=You tried to upload a file with extension "%s" whil
   are allowed to be uploaded
 ```
 
+![example user feedback](http://grails.org/wikiImage/plugin-uploadr-screenshots/uploadr-invalid-extension.png)
+
 ###Version 0.5.11
 Upgraded to Grails 2.0.4 and Grails Central
 
