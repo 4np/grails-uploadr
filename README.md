@@ -405,7 +405,7 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 ## Changelog
 
 ###Version 0.6.0
-Added support for an ```allowedExtensions``` parameter comma separated list (feature request #1). When undefined/empty, all file uploads are allowed.
+Added support for an ```allowedExtensions``` parameter comma separated list (feature request [#1](issues/1)). When undefined/empty, all file uploads are allowed.
 
 example:
 ```groovy
