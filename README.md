@@ -403,6 +403,22 @@ Take a look at the documentation above, and the default event handlers in the up
 The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](grails-uploadr/blob/master/web-app/css/uploadr.css), [minified](grails-uploadr/blob/master/web-app/css/uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
 
 ## Changelog
+
+###Version 0.6.0
+Added support for an ```allowedExtensions``` parameter comma separated list (feature request #1). When undefined/empty, all file uploads are allowed.
+
+example:
+```allowedExtensions="jpg,gif,png"```
+
+This new feature has also introduced two new i18n internationalization labels, namely:
+
+```groovy
+uploadr.label.invalidFileExtension=invalid
+...
+uploadr.error.wrongExtension=You tried to upload a file with extension "%s" while only files with extensions "%s" \
+  are allowed to be uploaded
+```
+
 ###Version 0.5.11
 Upgraded to Grails 2.0.4 and Grails Central
 
