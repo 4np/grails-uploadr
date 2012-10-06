@@ -408,7 +408,9 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 Added support for an ```allowedExtensions``` parameter comma separated list (feature request #1). When undefined/empty, all file uploads are allowed.
 
 example:
-```allowedExtensions="jpg,gif,png"```
+```groovy
+allowedExtensions="jpg,gif,png"
+```
 
 This new feature has also introduced two new i18n internationalization labels, namely:
 
