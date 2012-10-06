@@ -59,7 +59,7 @@ The plugin incorporates a demo tag which demonstrates some examples of how to us
 <uploadr:demo/>
 ```
 	
-*As the *uploadr* plugin depends on the resources plugin to pull in dependencies, your project should use the resources plugin as well (as will be the standard in Grails 2.x). If you are not familiar with the [resources plugin|http://grails.org/plugin/resources], the _demo_ tag can be used in a view as follows:*
+As the *uploadr* plugin depends on the resources plugin to pull in dependencies, your project should use the resources plugin as well (as will be the standard in Grails 2.x). If you are not familiar with the [resources plugin|http://grails.org/plugin/resources], the _demo_ tag can be used in a view as follows:*
 
 ```rhtml
 <!DOCTYPE HTML>
@@ -411,6 +411,9 @@ example:
 ```groovy
 allowedExtensions="jpg,gif,png"
 ```
+
+*Note that you should not add spaces to the allowed extensions parameter's value as spaces are evaluated as regular characters.
+This means that _"jpg, gif, png"_ does not work and will ```bla. png``` instead of the desired ```bla.png```.*
 
 This new feature has also introduced two new i18n internationalization labels, namely:
 
