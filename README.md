@@ -100,6 +100,7 @@ Parameters
 |downloadable | enable / disable download button | downloadable="false" | true | no|
 |deletable | enable / disable delete button | deletable="false" | true | no|
 |maxSize | max allowed size in bytes | maxSize="204800" | 0 (=unlimited) | no|
+|allowedExtensions | only allow these extensions to be uploaded | allowedExtensions="gif,png,jpg,jpeg" | "" (= all) | no |
 |controller | use your own controller to handle file uploads | controller="myController" | default controller/action | no|
 |action | use your own action to handle file uploads | action="myAction" | default controller/action | no|
 |plugin | plugin that contains your custom controller/action | plugin="myPlugin" | default plugin | no|
