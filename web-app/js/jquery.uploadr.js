@@ -986,7 +986,6 @@
 			fileSelectText 		: 'Select files to upload',
 			fileAbortText		: 'Click to abort file transfer',
 			fileAbortConfirm	: 'Are you sure you would like to abort this transfer?',
-			fileAbortConfirm	: 'Are you sure you would like to abort this transfer?',
 			fileDeleteText		: 'Click to delete this file',
 			fileDeleteConfirm	: 'Are you sure you want to delete this file?',
 			fileDownloadText	: 'Click to download this file',
