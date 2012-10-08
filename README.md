@@ -139,6 +139,12 @@ If you would like to show the list of files in a certain folder on disk, you cou
 </uploadr:add>
 ```
 
+_note though that these examples use RandomStringUtils which you should include:_
+
+```rhtml
+<%@ page import="org.apache.commons.lang.RandomStringUtils" %>
+```
+
 To override the color of a file you can user the color attribute:
 
 ```rhtml
