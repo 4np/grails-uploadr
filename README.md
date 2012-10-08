@@ -139,6 +139,21 @@ If you would like to show the list of files in a certain folder on disk, you cou
 </uploadr:add>
 ```
 
+Of course in MVC one should not put logic in a view, and the above examples are merely here to provide some insight. Normally you
+would pass -for example- a ```files``` variable to your view from your controller. So the example would be something like:
+
+```rhtml
+<uploadr:add name="mySecondUploadr" path="${path}" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+<g:each in="${files}" var="file">
+	<uploadr:file name="${file.name}">
+		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
+		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
+		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
+	</uploadr:file>
+</g:each>
+</uploadr:add>
+```
+
 _note though that these examples use RandomStringUtils which you should include:_
 
 ```rhtml
