@@ -39,7 +39,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 <% } %>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-	&lt;uploadr:add name="mySecondUploadr" path="${path}" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+	&lt;uploadr:add name="mySecondUploadr" path="${path}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
 <% path.listFiles().each { file -> %>
 		&lt;uploadr:file name="${file.name}">
 			&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
