@@ -15,24 +15,22 @@
  *  limitations under the License.
  */
 class UploadrGrailsPlugin {
-        def version		    = "0.6.0"
-        def grailsVersion	= "1.3.7 > *"
-        def dependsOn		= [jquery: "1.4 > *", jqueryUi: "1.8 > *", modernizr: "1.7.2 > *", resources: "1.0 > *"]
-        def pluginExcludes	= [
-                "grails-app/views/error.gsp"
-        ]
-        def author		    = "Jeroen Wesbeek"
-        def authorEmail		= "work@osx.eu"
-        def title		    = "A HTML5 drag and drop multi-file upload plugin"
-        def description		= '''\\
-A HTML5 drag and drop multi-file upload plugin
-'''
-	def documentation       = "https://github.com/4np/grails-uploadr/blob/master/README.md"
-	def license             = "APACHE"
-	def issueManagement     = [ system: "github", url: "https://github.com/4np/grails-uploadr/issues" ]
-	def scm                 = [ url: "https://github.com/4np/grails-uploadr" ]
+	def version = "0.6.0.1"
+	def grailsVersion = "1.3.7 > *"
+	def dependsOn = [jquery: "1.4 > *", jqueryUi: "1.8 > *", modernizr: "1.7.2 > *", resources: "1.0 > *"]
+	def pluginExcludes = [
+			"grails-app/views/error.gsp"
+	]
+	def author = "Jeroen Wesbeek"
+	def authorEmail = "work@osx.eu"
+	def title = "A HTML5 drag and drop multi-file upload plugin"
+	def description = "A HTML5 drag and drop multi-file upload plugin"
+	def documentation = "https://github.com/4np/grails-uploadr/blob/master/README.md"
+	def license = "APACHE"
+	def issueManagement = [system: "github", url: "https://github.com/4np/grails-uploadr/issues"]
+	def scm = [url: "https://github.com/4np/grails-uploadr"]
 
-    // Extra (optional) plugin metadata
+	// Extra (optional) plugin metadata
 
     // Details of company behind the plugin (if there is one)
 //    def organization = [ name: "My Company", url: "http://www.my-company.com/" ]
