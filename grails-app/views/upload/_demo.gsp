@@ -16,70 +16,75 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-def path = null;
+
+// Note that normally you should pass these variables to your view from your
+// controller, as in MVC your controller should never contain business logic
+// and just provide the view to your data. But for clarity sake I am breaking
+// this rule and defining them in here...
 def desktop = "${System.getProperty('user.home')}/Desktop"
+def path1 = new File("${desktop}/myFirstUploadr")
+def path2 = new File("${desktop}/mySecondUploadr")
+def path3 = new File("${desktop}/myThirdUploadr")
+def path4 = new File("${desktop}/myFourthUploadr")
+def path5 = new File("${desktop}/myFifthUploadr")
 %>
 
-<% path = new File("${desktop}/myFirstUploadr") %>
 <h1>1. Default uploadr</h1>
-<uploadr:add name="myFirstUploadr" path="${path}" maxSize="52428800" />
+<uploadr:add name="myFirstUploadr" path="${path1}" maxSize="52428800" />
 <pre class="brush:html collapse:true">
-&lt;uploadr:add name="myFirstUploadr" path="${path}"/>
+&lt;uploadr:add name="myFirstUploadr" path="${path1}"/>
 </pre>
 
-<% path = new File("${desktop}/mySecondUploadr") %>
 <h1>2. Initial files, files added on top, paginate into 5 files per page, allowed extensions .jpg, .png and .gif</h1>
-<uploadr:add name="mySecondUploadr" path="${path}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxSize="52428800">
-<% path.listFiles().each { file -> %>
+<uploadr:add name="mySecondUploadr" path="${path2}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxSize="52428800">
+    <g:each in="${path2.listFiles()}" var="file">
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
 		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
 	</uploadr:file>
-<% } %>
+    </g:each>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-	&lt;uploadr:add name="mySecondUploadr" path="${path}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
-<% path.listFiles().each { file -> %>
+	&lt;uploadr:add name="mySecondUploadr" path="${path2}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+    <g:each in="${path2.listFiles()}" var="file">
 		&lt;uploadr:file name="${file.name}">
 			&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
 			&lt;uploadr:fileModified>${file.lastModified()}&lt;/uploadr:fileModified>
 			&lt;uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}&lt;/uploadr:fileId>
 		&lt;/uploadr:file>
-<% } %>
+    </g:each>
 	&lt;/uploadr:add>
 </pre>
 
-<% path = new File("${desktop}/myThirdUploadr") %>
 <h1>3. Initial files, new files on top, 5 files per page, max file size is 200kb, enable rating and voting</h1>
-<uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" maxSize="204800" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
-<% path.listFiles().each { file -> %>
+<uploadr:add name="myThirdUploadr" path="${path3}" direction="up" maxVisible="5" maxSize="204800" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+    <g:each in="${path3.listFiles()}" var="file">
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
 		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
 		<uploadr:rating>${new Random().nextFloat()}</uploadr:rating>
 	</uploadr:file>
-<% } %>
+    </g:each>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-	&lt;uploadr:add name="myThirdUploadr" path="${path}" direction="up" maxVisible="5" maxSize="204800" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
-<% path.listFiles().each { file -> %>
+	&lt;uploadr:add name="myThirdUploadr" path="${path3}" direction="up" maxVisible="5" maxSize="204800" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+    <g:each in="${path3.listFiles()}" var="file">
 		&lt;uploadr:file name="${file.name}">
 			&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
 			&lt;uploadr:fileModified>${file.lastModified()}&lt;/uploadr:fileModified>
 			&lt;uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}&lt;/uploadr:fileId>
 			&lt;uploadr:rating>${new Random().nextFloat()}&lt;/uploadr:rating>
 		&lt;/uploadr:file>
-<% } %>
+    </g:each>
 	&lt;/uploadr:add>
 </pre>
 
-<% path = new File("${desktop}/myFourthUploadr") %>
 <h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, rating tooltips, override default file colors to <span style="color:#c78cda">#c78cda</span>, colorpicker, and disable file deletions</h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
-<uploadr:add name="myFourthUploadr" path="${path}" maxVisible="5" rating="true" voting="true" colorPicker="true" maxSize="52428800">
-<% path.listFiles().each { file -> %>
+<uploadr:add name="myFourthUploadr" path="${path4}" maxVisible="5" rating="true" voting="true" colorPicker="true" maxSize="52428800">
+    <g:each in="${path4.listFiles()}" var="file">
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
@@ -88,7 +93,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		<uploadr:deletable>false</uploadr:deletable>
 		<uploadr:ratingText>This is the tooltip text of the rating for ${file.name}</uploadr:ratingText>
 	</uploadr:file>
-<% } %>
+    </g:each>
 	<!-- upload event handlers //-->
 	<uploadr:onStart>
 		console.log('start uploading \'' + file.fileName + '\'');
@@ -177,8 +182,8 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 	</uploadr:onChangeColor>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-&lt;uploadr:add name="myFourthUploadr" path="${path}" maxVisible="5" rating="true" voting="true" colorPicker="true">
-<% path.listFiles().each { file -> %>
+&lt;uploadr:add name="myFourthUploadr" path="${path4}" maxVisible="5" rating="true" voting="true" colorPicker="true">
+    <g:each in="${path4.listFiles()}" var="file">
 	&lt;uploadr:file name="${file.name}">
 		&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
 		&lt;uploadr:fileModified>${file.lastModified()}&lt;/uploadr:fileModified>
@@ -187,7 +192,7 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 		&lt;uploadr:deletable>false&lt;/uploadr:deletable>
 		&lt;uploadr:ratingText>This is the tooltip text of the rating for ${file.name}&lt;/uploadr:ratingText>
 	&lt;/uploadr:file>
-<% } %>
+    </g:each>
 	&lt;!-- upload event handlers //-->
 	&lt;uploadr:onStart>
 		console.log('start uploading \'' + file.fileName + '\'');
@@ -277,25 +282,24 @@ def desktop = "${System.getProperty('user.home')}/Desktop"
 &lt;/uploadr:add>
 </pre>
 
-<% path = new File("${desktop}/myFifthUploadr") %>
 <h1>5. Initial files, files are added to the top, custom <a href="${resource(plugin:'uploadr', dir:'css', file:'demo.css')}" target="_new">css</a>, custom drop text, custom file browse text, paginate to 4 files per page, rating, no sound effects</h1>
-<uploadr:add name="myFifthUploadr" path="${path}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true" maxSize="52428800">
-<% path.listFiles().each { file -> %>
+<uploadr:add name="myFifthUploadr" path="${path5}" direction="up" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true" maxSize="52428800">
+    <g:each in="${path5.listFiles()}" var="file">
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
 		<uploadr:fileModified>${file.lastModified()}</uploadr:fileModified>
 		<uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}</uploadr:fileId>
 	</uploadr:file>
-<% } %>
+    </g:each>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-&lt;uploadr:add name="myFifthUploadr" path="${path}" direction="up" rating="true" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
-<% path.listFiles().each { file -> %>
+&lt;uploadr:add name="myFifthUploadr" path="${path5}" direction="up" rating="true" class="demo" placeholder="Behold: the drop area!" fileselect="Behold: the fileselect!" maxVisible="4" noSound="true">
+    <g:each in="${path5.listFiles()}" var="file">
 	&lt;uploadr:file name="${file.name}">
 		&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
 		&lt;uploadr:fileModified>${file.lastModified()}&lt;/uploadr:fileModified>
 		&lt;uploadr:fileId>myId-${RandomStringUtils.random(32, true, true)}&lt;/uploadr:fileId>
 	&lt;/uploadr:file>
-<% } %>
+    </g:each>
 &lt;/uploadr:add>
 </pre>
