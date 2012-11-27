@@ -192,7 +192,7 @@ To add a rating tooltip text, use the ratingText attribute:
 
 Screenshot of most of the features enabled and shown (e.g. pagination, color picker, voting, rating, tooltips, buttons):
 
-![example1](https://dl.dropbox.com/s/37293qml4isyo94/uploadr-allFeatures.jpg?dl=1)
+![example1](https://dl.dropbox.com/s/svncwqerzvbs157/uploadr-allFeatures.png?dl=1)
  
 
 ## Event handlers
