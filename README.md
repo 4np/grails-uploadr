@@ -1,11 +1,13 @@
 # About
 This plugin allows dragging and dropping files on your browser window to upload them. It works out of the box, and it is also possible to add custom (javascript / ajax) event handlers and add initial files.
 
-Screenshot showing 6 files being uploaded.
+![example](https://dl.dropbox.com/s/yjkgq00jd7l6oca/uploadr-blank.png?dl=1)
+
+Screenshot showing 6 files being uploaded:
 
 ![example1](https://dl.dropbox.com/s/y1hn2ix5jb3ianj/uploadr-uploading.png?dl=1)
 
-Screenshot showing 7 files being uploaded, separated into two pages (maximum of 5 uploads visible).
+Screenshot showing 7 files being uploaded, separated into two pages (maximum of 5 uploads visible):
 
 ![example2](https://dl.dropbox.com/s/mhc6nelsc2nnd5l/uploadr-uploadingPaginated.png?dl=1)
 
