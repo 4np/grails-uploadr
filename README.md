@@ -1,9 +1,13 @@
 # About
 This plugin allows dragging and dropping files on your browser window to upload them. It works out of the box, and it is also possible to add custom (javascript / ajax) event handlers and add initial files.
 
-Screenshot showing 12 files being uploaded, separated into two pages (maximum of 8 uploads visible).
+Screenshot showing 6 files being uploaded.
 
-![example1](https://dl.dropbox.com/s/6k08mdku6s7s8fn/uploadr-uploading.jpg?dl=1)
+![example1](https://dl.dropbox.com/s/y1hn2ix5jb3ianj/uploadr-uploading.png?dl=1)
+
+Screenshot showing 7 files being uploaded, separated into two pages (maximum of 5 uploads visible).
+
+![example2](https://dl.dropbox.com/s/mhc6nelsc2nnd5l/uploadr-uploadingPaginated.png?dl=1)
 
 ## Features
 * upload files by
@@ -107,7 +111,7 @@ Parameters
 
 A screenshot of how the ```maxSize``` parameter (maxSize="204800") is handled in the front end:
 
-![example1](https://dl.dropbox.com/s/njt12j5ig8xncnt/uploadr-tooLarge.jpg?dl=1)
+![example1](https://dl.dropbox.com/s/dgwtupymrjt1ujs/uploadr-tooLarge.png?dl=1)
 
 A screenshot of the default warning when an unsupported browser is used. This can be changed by setting the _unsupported_ parameter to load your own warning or fallback upload support (e.g. ```unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}"```):
 
@@ -447,7 +451,7 @@ uploadr.error.wrongExtension=You tried to upload a file with extension "%s" whil
   are allowed to be uploaded
 ```
 
-![example user feedback](https://dl.dropbox.com/s/mdn7yq5gkx79rdj/uploadr-allowedExtensions.jpg?dl=1)
+![example user feedback](https://dl.dropbox.com/s/bq5cqiecgz8fa0h/uploadr-allowedExtensions.png?dl=1)
 
 ###Version 0.5.11
 Upgraded to Grails 2.0.4 and Grails Central
