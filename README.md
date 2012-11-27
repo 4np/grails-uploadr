@@ -3,7 +3,7 @@ This plugin allows dragging and dropping files on your browser window to upload 
 
 Screenshot showing 12 files being uploaded, separated into two pages (maximum of 8 uploads visible).
 
-![example1](http://grails.org/wikiImage/plugin-uploadr-screenshots/uploadr-uploading.png)
+![example1](https://dl.dropbox.com/s/6k08mdku6s7s8fn/uploadr-uploading.jpg?dl=1)
 
 ## Features
 * upload files by
@@ -107,11 +107,11 @@ Parameters
 
 A screenshot of how the ```maxSize``` parameter (maxSize="204800") is handled in the front end:
 
-![example1](http://grails.org/wikiImage/plugin-uploadr-screenshots/uploadr-maxsize-200kb.png)
+![example1](https://dl.dropbox.com/s/njt12j5ig8xncnt/uploadr-tooLarge.jpg?dl=1)
 
 A screenshot of the default warning when an unsupported browser is used. This can be changed by setting the _unsupported_ parameter to load your own warning or fallback upload support (e.g. ```unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}"```):
 
-![example1](http://grails.org/wikiImage/plugin-uploadr-screenshots/Screen_Shot_2011-11-17_at_12.08.01_PM.png)
+![example1](https://dl.dropbox.com/s/qvk054yg5ic9x8j/uploadr-unsupported.jpg?dl=1)
 
 ## Adding initial files
 You could just use the uploadr as an upload facility, but it can also be used to show a list of existing files you already uploaded previously and allow the user to view, download or delete the files. To add initial files you can use the ```uploadr:file``` tag as follows:
@@ -186,7 +186,7 @@ To add a rating tooltip text, use the ratingText attribute:
 
 Screenshot of most of the features enabled and shown (e.g. pagination, color picker, voting, rating, tooltips, buttons):
 
-![example1](http://grails.org/wikiImage/plugin-uploadr-screenshots/uploadr.png)
+![example1](https://dl.dropbox.com/s/37293qml4isyo94/uploadr-allFeatures.jpg?dl=1)
  
 
 ## Event handlers
