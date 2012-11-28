@@ -117,7 +117,7 @@ A screenshot of how the ```maxSize``` parameter (maxSize="204800") is handled in
 
 A screenshot of the default warning when an unsupported browser is used. This can be changed by setting the _unsupported_ parameter to load your own warning or fallback upload support (e.g. ```unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}"```):
 
-![example1](https://dl.dropbox.com/s/qvk054yg5ic9x8j/uploadr-unsupported.jpg?dl=1)
+![example1](https://dl.dropbox.com/s/28s73s21bcfr5zz/uploadr-unsupported.png?dl=1)
 
 ## Adding initial files
 You could just use the uploadr as an upload facility, but it can also be used to show a list of existing files you already uploaded previously and allow the user to view, download or delete the files. To add initial files you can use the ```uploadr:file``` tag as follows:
