@@ -60,16 +60,21 @@ grails.project.dependency.resolution = {
 			// plugin only plugin, should not be transitive to the application
 			export = false
 		}
-//
-//		compile(":resources:latest.integration",
-//				":hibernate:$grailsVersion") {
-//			export = false
-//		}
-//
-//		runtime(":jquery:latest.integration",
-//				":jquery-ui:latest.integration",
-//				":modernizr:latest.integration") {
-//			export = false
-//		}
+
+        // continuous integration specific plugins
+        if (System.getProperty("grails.env") == "ci") {
+            // as the ci should be able to run natively, we require
+            // a couple of plugins to function properly
+            compile(":resources:latest.integration",
+                    ":hibernate:$grailsVersion") {
+                export = false
+            }
+
+            runtime(":jquery:latest.integration",
+                    ":jquery-ui:latest.integration",
+                    ":modernizr:latest.integration") {
+                export = false
+            }
+        }
 	}
 }
