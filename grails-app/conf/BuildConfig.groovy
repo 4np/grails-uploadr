@@ -1,29 +1,43 @@
+grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
 grails.project.target.level = 1.6
+grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 
-grails.project.dependency.resolution = {
-	// inherit Grails' default dependencies
-	inherits("global") {
-		// uncomment to disable ehcache
-		// excludes 'ehcache'
-	}
-	log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
-	repositories {
-		grailsCentral()
-		grailsRepo "http://grails.org/plugins"
+// uncomment (and adjust settings) to fork the JVM to isolate classpaths
+//grails.project.fork = [
+//   run: [maxMemory:1024, minMemory:64, debug:false, maxPerm:256]
+//]
 
-		// uncomment the below to enable remote dependency resolution
-		// from public Maven repositories
-		//mavenCentral()
-		//mavenLocal()
-		//mavenRepo "http://snapshots.repository.codehaus.org"
-		//mavenRepo "http://repository.codehaus.org"
-		//mavenRepo "http://download.java.net/maven/2/"
-		//mavenRepo "http://repository.jboss.com/maven2/"
-	}
+grails.project.dependency.resolution = {
+    // inherit Grails' default dependencies
+    inherits("global") {
+        // specify dependency exclusions here; for example, uncomment this to disable ehcache:
+        // excludes 'ehcache'
+    }
+    log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
+    checksums true // Whether to verify checksums on resolve
+    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+
+    repositories {
+        inherits true // Whether to inherit repository definitions from plugins
+
+        grailsPlugins()
+        grailsHome()
+        grailsCentral()
+
+        mavenLocal()
+        mavenCentral()
+
+        // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
+        //mavenRepo "http://snapshots.repository.codehaus.org"
+        //mavenRepo "http://repository.codehaus.org"
+        //mavenRepo "http://download.java.net/maven/2/"
+        //mavenRepo "http://repository.jboss.com/maven2/"
+    }
+
 	dependencies {
 		// specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
@@ -31,22 +45,31 @@ grails.project.dependency.resolution = {
 	}
 
 	plugins {
-		build(":tomcat:$grailsVersion",
+		provided(
+                ":tomcat:$grailsVersion",
 				":release:latest.integration",
-				":rest-client-builder:latest.integration") {
+				":rest-client-builder:latest.integration",
+
+                ":jquery:latest.integration",
+                ":jquery-ui:latest.integration",
+                ":modernizr:latest.integration",
+
+                ":resources:latest.integration",
+                ":hibernate:$grailsVersion"
+        ) {
 			// plugin only plugin, should not be transitive to the application
 			export = false
 		}
-
-		compile(":resources:latest.integration",
-				":hibernate:$grailsVersion") {
-			export = false
-		}
-
-		runtime(":jquery:latest.integration",
-				":jquery-ui:latest.integration",
-				":modernizr:latest.integration") {
-			export = false
-		}
+//
+//		compile(":resources:latest.integration",
+//				":hibernate:$grailsVersion") {
+//			export = false
+//		}
+//
+//		runtime(":jquery:latest.integration",
+//				":jquery-ui:latest.integration",
+//				":modernizr:latest.integration") {
+//			export = false
+//		}
 	}
 }
