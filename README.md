@@ -11,6 +11,10 @@ Screenshot showing 7 files being uploaded, separated into two pages (maximum of 
 
 ![example2](https://dl.dropbox.com/s/mhc6nelsc2nnd5l/uploadr-uploadingPaginated.png?dl=1)
 
+## Build status
+
+![build status](http://jenkins.osx.eu/job/ci-uploadr/badge/icon)
+
 ## Note on Grails 2.2.0
 If you are using Grails 2.2.0, there is an issue with resolving and installing the webflow plugin (on which ajaxflow depends). 
 You need to add the webflow dependency as follows to your BuildConfig.groovy in order for it to work:
