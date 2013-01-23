@@ -50,6 +50,8 @@ grails.project.dependency.resolution = {
 				":release:latest.integration",
 				":rest-client-builder:latest.integration",
 
+                ":grom:latest.integration",
+
                 ":jquery:latest.integration",
                 ":jquery-ui:latest.integration",
                 ":modernizr:latest.integration",
