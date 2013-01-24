@@ -81,7 +81,7 @@ More information can be found in the [Grails ticket](http://jira.grails.org/brow
 This plugin heavily relies on the HTML5 Drag and Drop and File API's which Microsoft has unfortunately only implemented in Internet Explorer 10.0.8102.0 (part of the [Windows 8 developer preview](http://msdn.microsoft.com/en-us/windows/apps/br229516) distribution).
 
 ## Quickstart
-The plugin incorporates a demo tag which demonstrates some examples of how to use the uploadr tag with examples and source code. You can see a live (continuous integration) demo [here](http://ci.uploadr.nmcdsp.org/):
+The plugin incorporates a demo tag which demonstrates some examples of how to use the uploadr tag with examples and source code. You can see a live (continuous integration) demo [here](http://ci.uploadr.osx.eu/):
 
 ```rhtml
 <uploadr:demo/>
@@ -518,6 +518,9 @@ Fixed an issue where some file tags did not always work properly (color, rating,
 
 ###Version 0.5.1
 Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in ```file.fileSize``` , ```file.fileName``` and ```file.contentType``` , Firefox 7's File API now uses ```file.name``` , ```file.size``` and ```file.type``` instead. Implemented a fix to support this new behavior.
+
+## Build status
+![build status](http://jenkins.osx.eu/job/ci-uploadr/badge/icon)
 
 ## License
 
