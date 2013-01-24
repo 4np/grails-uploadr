@@ -21,12 +21,12 @@
 // controller, as in MVC your controller should never contain business logic
 // and just provide the view to your data. But for clarity sake I am breaking
 // this rule and defining them in here...
-def desktop = "${System.getProperty('user.home')}/Desktop"
-def path1 = new File("${desktop}/myFirstUploadr")
-def path2 = new File("${desktop}/mySecondUploadr")
-def path3 = new File("${desktop}/myThirdUploadr")
-def path4 = new File("${desktop}/myFourthUploadr")
-def path5 = new File("${desktop}/myFifthUploadr")
+def downloads = "${System.getProperty('user.home')}/Downloads/uploadr"
+def path1 = new File("${downloads}/myFirstUploadr")
+def path2 = new File("${downloads}/mySecondUploadr")
+def path3 = new File("${downloads}/myThirdUploadr")
+def path4 = new File("${downloads}/myFourthUploadr")
+def path5 = new File("${downloads}/myFifthUploadr")
 %>
 
 <h1>1. Default uploadr</h1>
