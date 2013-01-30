@@ -478,7 +478,8 @@ uploadr.error.wrongExtension=You tried to upload a file with extension "%s" whil
 ![example user feedback](https://dl.dropbox.com/s/bq5cqiecgz8fa0h/uploadr-allowedExtensions.png?dl=1)
 
 ###Version 0.6.1
-Upgrade to Grails 2.2.0 and changed dependencies to provided / ci
+- Upgrade to Grails 2.2.0 and changed dependencies to provided / c
+- removed dependency on jquery-ui (resolved #4 - thx [fdammassa](https://github.com/fdammassa)!)
 
 ###Version 0.6.0.1
 Bugfixed plugin description
