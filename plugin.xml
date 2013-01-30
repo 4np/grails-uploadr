@@ -1,4 +1,4 @@
-<plugin name='uploadr' version='0.6.0.1' grailsVersion='1.3.7 &gt; *'>
+<plugin name='uploadr' version='0.6.1' grailsVersion='1.3.7 &gt; *'>
   <author>Jeroen Wesbeek</author>
   <authorEmail>work@osx.eu</authorEmail>
   <title>A HTML5 drag and drop multi-file upload plugin</title>
@@ -12,15 +12,12 @@
   </resources>
   <repositories>
     <repository name='grailsCentral' url='http://grails.org/plugins' />
-    <repository name='http://repo.grails.org/grails/core' url='http://repo.grails.org/grails/core/' />
-    <repository name='http://grails.org/plugins' url='http://grails.org/plugins' />
     <repository name='mavenCentral' url='http://repo1.maven.org/maven2/' />
   </repositories>
   <dependencies />
   <plugins />
   <runtimePluginRequirements>
     <plugin name='jquery' version='1.4 &gt; *' />
-    <plugin name='jqueryUi' version='1.8 &gt; *' />
     <plugin name='modernizr' version='1.7.2 &gt; *' />
     <plugin name='resources' version='1.0 &gt; *' />
   </runtimePluginRequirements>
