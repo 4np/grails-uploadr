@@ -53,13 +53,12 @@ grails.project.dependency.resolution = {
                 ":grom:latest.integration",
 
                 ":jquery:latest.integration",
-                ":jquery-ui:latest.integration",
                 ":modernizr:latest.integration",
 
                 ":resources:latest.integration",
                 ":hibernate:$grailsVersion"
         ) {
-			// plugin only plugin, should not be transitive to the application
+			// this is a plugin only plugin, should not be transitive to the application
 			export = false
 		}
 
@@ -73,7 +72,6 @@ grails.project.dependency.resolution = {
             }
 
             runtime(":jquery:latest.integration",
-                    ":jquery-ui:latest.integration",
                     ":modernizr:latest.integration") {
                 export = false
             }

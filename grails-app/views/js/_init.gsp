@@ -19,20 +19,12 @@ $(document).ready(function() {
 				<g:if test="${handlers.onAbort}">${handlers.onAbort}</g:if>
 			},
 			onView: function(file, domObj) { <g:if test="${handlers.onView}">${handlers.onView}</g:if><g:else>
-				// open a modal dialog to view the file contents
-				var width = 640;
-				var height= 400;
-				$( '<iframe frameborder="0" src="http://www.google.com" style="width:600px; height: 450px;" seamless />' ).dialog({
-					title 		: 'viewing ${fileName}',
-					position 	: 'center',
-					autoOpen 	: true,
-					width 		: width,
-					height 		: height,
-					modal 		: true,
-					buttons 	: {
-						close: function() { $(this).dialog('close'); }
-					}
-				}).width(width - 10).height(height).animate({ top: '0' });
+                console.log('You clicked the \'view\' action for the following uploaded file:');
+                console.log(file);
+                console.log('in the following DOM element:');
+                console.log(domObj);
+                console.log('Implement a \'onView\' event handler to actually do something in the UI.');
+                console.log('see: https://github.com/4np/grails-uploadr#event-handlers');
 </g:else>},
 			onDelete: function(file, domObj) { <g:if test="${handlers.onDelete}">${handlers.onDelete}</g:if><g:else>
 				var a = $.ajax(
