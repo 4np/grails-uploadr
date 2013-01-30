@@ -21,7 +21,8 @@
 // controller, as in MVC your controller should never contain business logic
 // and just provide the view to your data. But for clarity sake I am breaking
 // this rule and defining them in here...
-def downloads = "${System.getProperty('user.home')}/Downloads/uploadr"
+
+def downloads = grailsApplication.config.uploadr.defaultUploadPath
 def path1 = new File("${downloads}/myFirstUploadr")
 def path2 = new File("${downloads}/mySecondUploadr")
 def path3 = new File("${downloads}/myThirdUploadr")

@@ -24,3 +24,8 @@ log4j = {
 }
 grails.views.default.codec="none" // none, html, base64
 grails.views.gsp.encoding="UTF-8"
+
+// used by the demo tag
+uploadr.defaultUploadPath="${System.getProperty('user.home')}/Downloads/uploadr"
+// used by the cleanUploadedFilesJob Quartz job (on ci and development)
+uploadr.maxAgeUploadedFile=1000 * 60  * 60  * 4  // 4 hours in milliseconds
