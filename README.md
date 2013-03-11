@@ -69,7 +69,7 @@ The plugin incorporates a demo tag which demonstrates some examples of how to us
 <uploadr:demo/>
 ```
 	
-As the *uploadr* plugin depends on the resources plugin to pull in dependencies, your project should use the resources plugin as well (as will be the standard in Grails 2.x). If you are not familiar with the [resources plugin|http://grails.org/plugin/resources], the _demo_ tag can be used in a view as follows:*
+As the *uploadr* plugin depends on the resources plugin to pull in dependencies, your project should use the resources plugin as well (as will be the standard in Grails 2.x). If you are not familiar with the [resources plugin](http://grails.org/plugin/resources), the _demo_ tag can be used in a view as follows:*
 
 ```rhtml
 <!DOCTYPE HTML>
