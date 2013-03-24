@@ -32,9 +32,9 @@ class UploadController {
 
 	def handle = {
 		def contentType	= request.getHeader("Content-Type") as String
-		def fileName    = request.getHeader('X-File-Name') as String
+		def fileName    = URLDecoder.decode(request.getHeader('X-File-Name'), 'UTF-8') as String
 		def fileSize 	= request.getHeader('X-File-Size') as Long
-		def name 		= request.getHeader('X-Uploadr-Name') as String
+		def name 		= URLDecoder.decode(request.getHeader('X-Uploadr-Name'), 'UTF-8') as String
 		def info		= session.getAttribute('uploadr')
 		def savePath	= ((name && info && info.get(name) && info.get(name).path) ? info.get(name).path : "/tmp") as String
 		def dir 		= new File(savePath)
@@ -143,8 +143,8 @@ class UploadController {
 	}
 
 	def delete = {
-		def fileName 	= request.getHeader('X-File-Name')
-		def name 		= request.getHeader('X-Uploadr-Name')
+		def fileName 	= URLDecoder.decode(request.getHeader('X-File-Name'), 'UTF-8')
+		def name 		= URLDecoder.decode(request.getHeader('X-Uploadr-Name'), 'UTF-8')
 		def info		= session.getAttribute('uploadr')
 		def savePath	= (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
 		def file		= new File(savePath,fileName)
@@ -164,17 +164,20 @@ class UploadController {
 	}
 
 	def download = {
-		def fileName 	= params.get('file')
-		def name 		= params.get('uploadr')
+		def fileName 	= URLDecoder.decode(params.get('file'), 'UTF-8')
+		def name 		= URLDecoder.decode(params.get('uploadr'), 'UTF-8')
 		def info		= session.getAttribute('uploadr')
 		def savePath	= (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
 		def file		= new File(savePath, fileName)
 
 		if (file.exists()) {
 			response.setStatus(200)
-			response.setHeader("Content-disposition", "attachment; filename=\"${fileName}\"")
 			response.setContentType("application/octet-stream")
 			response.setContentLength(file.size() as int)
+
+            // browser do not handle RFC5987 properly, so Safari will be unable to decode the unicode filename
+            // @see http://greenbytes.de/tech/tc2231/
+            response.setHeader("Content-Disposition", "attachment; filename=${URLEncoder.encode(fileName, 'ISO-8859-1')}; filename*= UTF-8''${URLEncoder.encode(fileName, 'UTF-8')}")
 
 			// define input and output streams
 			InputStream inStream = null

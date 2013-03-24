@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 class UploadrGrailsPlugin {
-	def version = "0.6.1"
+	def version = "0.7.0"
 	def grailsVersion = "1.3.7 > *"
 	def dependsOn = [
             jquery: "1.4 > *",

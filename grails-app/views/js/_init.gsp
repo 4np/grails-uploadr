@@ -32,8 +32,8 @@ $(document).ready(function() {
 					{
 						async: false,
 						headers: {
-							'X-File-Name': file.fileName,
-							'X-Uploadr-Name': this.id
+							'X-File-Name': encodeURIComponent(file.fileName),
+							'X-Uploadr-Name': encodeURIComponent(this.id)
 						}
 					}
 				);
@@ -41,10 +41,10 @@ $(document).ready(function() {
 				return (a.status == 200);
 </g:else>},
 			onDownload: function(file, domObj) { <g:if test="${handlers.onDownload}">${handlers.onDownload}</g:if><g:else>
-				// redirect to file, not that the backend should implement
+				// redirect to file, note that the backend should implement
 				// authentication and authorization to asure the user has
 				// access to this file
-				window.open('<g:createLink plugin="uploadr" controller="upload" action="download"/>?uploadr=' + escape('${name}') + '&file='+escape(file.fileName));
+				window.open('<g:createLink plugin="uploadr" controller="upload" action="download"/>?uploadr=' + encodeURIComponent('${name}') + '&file='+encodeURIComponent(file.fileName));
 </g:else>},<g:if test="${classname != 'uploadr'}">
 			dropableClass: '${classname}-dropable',
 			hoverClass: '${classname}-hover',</g:if>

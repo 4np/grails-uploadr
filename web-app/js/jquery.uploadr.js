@@ -573,11 +573,11 @@
 			// start data transfer
 			xhr.open("POST",options.uri);
         	xhr.setRequestHeader("Cache-Control", "no-cache");
-        	xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-        	xhr.setRequestHeader("X-File-Name", (file.name) ? file.name : file.fileName);
+        	xhr.setRequestHeader("X-Requested-With", "Grails Uploadr");
+        	xhr.setRequestHeader("X-File-Name", encodeURIComponent((file.name) ? file.name : file.fileName));
         	xhr.setRequestHeader("X-File-Size", (file.size) ? file.size : file.fileSize);
-        	xhr.setRequestHeader("X-Uploadr-Name", options.id);
-			xhr.setRequestHeader("Content-Type", (file.type) ? file.type : file.contentType);
+        	xhr.setRequestHeader("X-Uploadr-Name", encodeURIComponent(options.id));
+			xhr.setRequestHeader("Content-Type", ((file.type) ? file.type : file.contentType) + '; charset=utf-8');
         	xhr.send(file);
 		},
 
