@@ -436,8 +436,11 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 
 ## Changelog
 
+###Version 0.7.0.1
+I forgot to minify the Javascript in the 0.7.0 release...
+
 ###Version 0.7.0
-Added unicode support (thanks to Dmitry, see [#6](https://github.com/4np/grails-uploadr/issues/6) )
+Added unicode support (thanks to [Dmitry](https://github.com/dementiev), see [#6](https://github.com/4np/grails-uploadr/issues/6) )
 
 ###Version 0.6.1
 - Upgrade to Grails 2.2.0 and changed dependencies to provided / c
