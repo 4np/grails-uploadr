@@ -18,8 +18,12 @@ grails.project.dependency.resolution = {
         // excludes 'ehcache'
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
-    checksums true // Whether to verify checksums on resolve
-    legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    if (System.getProperty("grails.version") >= "2.0.0") {
+        checksums true // Whether to verify checksums on resolve
+    }
+    if (System.getProperty("grails.version") >= "2.2.0") {
+        legacyResolve false // whether to do a secondary resolve on plugin installation, not advised and here for backwards compatibility
+    }
 
     repositories {
         inherits true // Whether to inherit repository definitions from plugins
