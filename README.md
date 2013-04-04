@@ -436,6 +436,9 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 
 ## Changelog
 
+###Version 0.7.2
+Got rid of an error in Grails < 2.2.0 ([#8](https://github.com/4np/grails-uploadr/issues/8))
+
 ###Version 0.7.1
 As the plugin can be run standalone in demonstration mode (in development and ci), a Quartz jub runs on the background to keep the upload folder clean for demonstration purposes. In previous versions the job would run when Quartz was installed, which is not the appropriate behaviour. It should only run the job when run standalone, in development and ci (see [Config.groovy](https://github.com/4np/grails-uploadr/blob/master/grails-app/conf/Config.groovy#L28) for configuration options). Thanks again [Dmitry](https://github.com/dementiev) ([#7](https://github.com/4np/grails-uploadr/issues/7) :)
 
