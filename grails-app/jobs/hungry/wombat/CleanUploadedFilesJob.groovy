@@ -20,6 +20,9 @@ class CleanUploadedFilesJob {
         def uploadPath  = new File(grailsApplication.config.uploadr.defaultUploadPath)
         def dirsToDelete= []
 
+        // log info
+        log.info "running cleanUploadedFiles job (jobEnabled: ${jobEnabled}, fileExpiry: ${fileExpiry}, uploadPath: ${uploadPath})"
+
         // run job?
         if (jobEnabled) {
             // does the upload path exist?
