@@ -68,6 +68,8 @@ grails.project.dependency.resolution = {
 			export = false
 		}
 
+        compile ":quartz:1.0-RC5"
+
         // continuous integration specific plugins
         println "environment is ${System.getProperty("grails.env")}"
         if (System.getProperty("grails.env") == "ci") {
