@@ -23,6 +23,7 @@ class CleanUploadedFilesJob {
         def dirsToDelete= []
 
         println "running job:"
+        println "  - quartz = ${grailsApplication.config.quartz}"
         println "  - jobEnabled = ${jobEnabled}"
         println "  - fileExpiry = ${fileExpiry}"
         println "  - currentDate = ${currentDate}"

@@ -1,4 +1,5 @@
 <%@ page import="org.apache.commons.lang.RandomStringUtils" %>
+${grailsApplication.config.quartz}
 <%
 /**
  *  Uploadr, a multi-file uploader plugin
