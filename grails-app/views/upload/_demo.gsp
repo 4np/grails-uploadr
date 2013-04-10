@@ -1,5 +1,70 @@
 <%@ page import="org.apache.commons.lang.RandomStringUtils" %>
 ${grailsApplication.config.quartz}
+
+<h1>Application Status</h1>
+<ul>
+    <li>App version: <g:meta name="app.version"></g:meta></li>
+    <li>Grails version: <g:meta name="app.grails.version"></g:meta></li>
+    <li>Groovy version: ${groovy.lang.GroovySystem.getVersion()}</li>
+    <li>JVM version: ${System.getProperty('java.version')}</li>
+    <li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
+    <li>Domains: ${grailsApplication.domainClasses.size()}</li>
+    <li>Services: ${grailsApplication.serviceClasses.size()}</li>
+    <li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>
+</ul>
+<h1>Installed Plugins</h1>
+<ul>
+    <g:set var="pluginManager"
+           value="${applicationContext.getBean('pluginManager')}"></g:set>
+
+    <g:each var="plugin" in="${pluginManager.allPlugins}">
+        <g:set var="comma" value="${false}"/>
+        <li<g:if test="${plugin.properties.containsKey("description")}"> description="${plugin.properties.description}"</g:if>>
+            ${plugin.name} - ${plugin.version}
+            <g:if test="${plugin.properties.author}">
+                <g:if test="${plugin.properties.containsKey('authorEmail')}">
+                    by <a href="mailto:${plugin.properties.authorEmail.replaceAll(" and ", ",").replaceAll(" / ",",")}?subject=Grails plugin ${plugin.name} - ${plugin.version}">${plugin.properties.author}</a>
+                </g:if>
+                <g:else>
+                    by ${plugin.properties.author}
+                </g:else>
+            </g:if>
+            <g:if test="${plugin.properties.containsKey("license")}">
+                ( license:
+                <g:if test="${plugin.properties.license == "APACHE"}"><green>${plugin.properties.license}</green></g:if>
+                <g:else><red>${plugin.properties.license}</red></g:else>
+                <g:set var="comma" value="${true}"/>
+            </g:if>
+            <g:if test="${plugin.properties.containsKey("documentation")}">
+                <g:if test="${comma}">, </g:if><g:else>( </g:else><a href="${plugin.properties.documentation}" target="_new">documentation</a>
+                <g:set var="comma" value="${true}"/>
+            </g:if>
+            <g:if test="${plugin.properties.containsKey("scm")}">
+                <g:if test="${comma}">, </g:if><g:else>( </g:else><a href="${plugin.properties.scm.url}">source</a>
+                <g:set var="comma" value="${true}"/>
+            </g:if>
+            <g:if test="${comma}"> )</g:if>
+        </li>
+    </g:each>
+</ul>
+
+<h1>Available Controllers:</h1>
+<ul>
+    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.naturalName } }">
+        <li class="controller" description="package name: ${c.getFullName()}">
+            <g:if test="${!c.properties.available}"><disabled></g:if>
+            ${c.getNaturalName()}
+            (
+            <g:link controller="${c.logicalPropertyName}" action="${c.defaultAction}">direct link</g:link>
+            <g:if test="${c.properties.flows.size() > 0}">, <comment>webflow</comment></g:if>
+            )
+            <g:if test="${!c.properties.available}"></disabled></g:if>
+        </li>
+    </g:each>
+</ul>
+
+
+
 <%
 /**
  *  Uploadr, a multi-file uploader plugin
