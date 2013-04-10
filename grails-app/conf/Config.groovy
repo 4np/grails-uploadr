@@ -22,8 +22,23 @@ log4j = {
 
     warn   'org.mortbay.log'
 }
+
 grails.views.default.codec="none" // none, html, base64
 grails.views.gsp.encoding="UTF-8"
+
+// make sure quartz automatically start in development and ci instances
+environments {
+    development {
+        quartz {
+            autoStartup = true
+        }
+    }
+    ci {
+        quartz {
+            autoStartup = true
+        }
+    }
+}
 
 // used by the demo tag
 uploadr.defaultUploadPath="${System.getProperty('user.home')}/Downloads/uploadr"

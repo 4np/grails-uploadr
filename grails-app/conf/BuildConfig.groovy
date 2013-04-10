@@ -59,7 +59,7 @@ grails.project.dependency.resolution = {
                 ":jquery:latest.integration",
                 ":modernizr:latest.integration",
 
-                ":quartz:1.0-RC5",
+                ":quartz:latest.integration",
 
                 ":resources:latest.integration",
                 ":hibernate:$grailsVersion"
@@ -68,7 +68,7 @@ grails.project.dependency.resolution = {
 			export = false
 		}
 
-        compile ":quartz:1.0-RC5"
+        compile ":quartz:latest.integration"
 
         // continuous integration specific plugins
         println "environment is ${System.getProperty("grails.env")}"
@@ -77,7 +77,7 @@ grails.project.dependency.resolution = {
             // as the ci should be able to run natively, we require
             // a couple of plugins to function properly
             compile(":resources:latest.integration",
-                    ":quartz:1.0-RC5",
+                    ":quartz:latest.integration",
                     ":hibernate:$grailsVersion") {
                 export = false
             }

@@ -15,6 +15,7 @@ class CleanUploadedFilesJob {
     }
 
     def execute() {
+        println "bla"
         def jobEnabled  = (grailsApplication.metadata['app.name'] == 'uploadr' && System.getProperty("grails.env") in ["ci","development"])
         def fileExpiry  = grailsApplication.config.uploadr.maxAgeUploadedFile // in milliseconds
         def currentDate = new Date().getTime()
