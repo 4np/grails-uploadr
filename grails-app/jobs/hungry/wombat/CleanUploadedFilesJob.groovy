@@ -11,7 +11,7 @@ class CleanUploadedFilesJob {
     static triggers = {
         // cronjob that runs every ten minutes
         //cron name: 'removeExpiredAPITokens', cronExpression: "0 */10 * * * ?"
-        cron name: 'removeExpiredAPITokens', cronExpression: "* * * * * ?"
+        cron name: 'removeExpiredAPITokens', cronExpression: "*/10 * * * * ?"
     }
 
     def execute() {
