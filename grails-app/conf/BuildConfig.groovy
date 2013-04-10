@@ -69,7 +69,9 @@ grails.project.dependency.resolution = {
 		}
 
         // continuous integration specific plugins
+        println "environment is ${System.getProperty("grails.env")}"
         if (System.getProperty("grails.env") == "ci") {
+            println "WE ARE RUNNING A CI"
             // as the ci should be able to run natively, we require
             // a couple of plugins to function properly
             compile(":resources:latest.integration",
