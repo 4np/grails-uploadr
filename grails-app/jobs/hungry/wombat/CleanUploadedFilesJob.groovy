@@ -10,24 +10,15 @@ class CleanUploadedFilesJob {
 
     static triggers = {
         // cronjob that runs every ten minutes
-        //cron name: 'removeExpiredAPITokens', cronExpression: "0 */10 * * * ?"
-        cron name: 'removeExpiredAPITokens', cronExpression: "*/10 * * * * ?"
+        cron name:'cleanUploadedFilesTrigger', startDelay:10000, cronExpression: '0 */10 * * * ?'
     }
 
     def execute() {
-        println "bla"
         def jobEnabled  = (grailsApplication.metadata['app.name'] == 'uploadr' && System.getProperty("grails.env") in ["ci","development"])
         def fileExpiry  = grailsApplication.config.uploadr.maxAgeUploadedFile // in milliseconds
         def currentDate = new Date().getTime()
         def uploadPath  = new File(grailsApplication.config.uploadr.defaultUploadPath)
         def dirsToDelete= []
-
-        println "running job:"
-        println "  - quartz = ${grailsApplication.config.quartz}"
-        println "  - jobEnabled = ${jobEnabled}"
-        println "  - fileExpiry = ${fileExpiry}"
-        println "  - currentDate = ${currentDate}"
-        println "  - uploadPath = ${uploadPath}"
 
         // run job?
         if (jobEnabled) {
@@ -41,7 +32,6 @@ class CleanUploadedFilesJob {
                             def parentFile = file.getParentFile()
 
                             if (file.delete()) {
-println "cleaned up file ${file}"
                                 log.info "cleaned up file ${file}"
 
                                 // is the parent path empty?
@@ -49,7 +39,6 @@ println "cleaned up file ${file}"
                                     dirsToDelete << parentFile
                                 }
                             } else {
-println "could not clean up file ${file}"
                                 log.error "could not cleanup file ${file}"
                             }
                         }
@@ -63,10 +52,8 @@ println "could not clean up file ${file}"
                 dirsToDelete.each { dir ->
                     if (dir.isDirectory() && dir.listFiles().size() == 0) {
                         if (dir.deleteDir()) {
-println "clean up directory ${dir}"
                             log.info "cleaned up directory ${dir}"
                         } else {
-println "could not clean up directory ${dir}"
                             log.error "could not cleanup directory ${dir}"
                         }
                     }
