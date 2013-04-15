@@ -345,6 +345,22 @@ The plugin plays some sound effects whether a file upload was completed, aborted
 </uploadr:add>
 ```
 
+## Passing custom variables to the controller
+Since version [0.7.3](https://github.com/4np/grails-uploadr#version-073) it is possible to pass variables to the controller. This requires that you implement [your own controller](#advanced-usage-creating-your-custom-controller-to-handle-file-uploads) to handle the uploaded files, and handle the custom controller variables.
+
+```rhtml
+<uploadr:add name="…" path="…" … model="[booleanOne:true, variableTwo: 'foo', variableThree: 'bar', variableFour: 4, myObject: someObject]" />
+```
+
+In the controller you can access the passed model:
+
+```groovy
+		def name 		= URLDecoder.decode(request.getHeader('X-Uploadr-Name'), 'UTF-8') as String
+		def info		= session.getAttribute('uploadr')
+        def myInfo      = (name && info && info.containsKey(name)) ? info.name : [:]
+        def model       = (myInfo.containsKey('model')) ? myInfo.model : [:]
+```
+
 ## Advanced usage: Creating your custom controller to handle file uploads
 While the default controller works out of the box, your project's requirements might require a custom plugin. For example, if you would like to deploy your application on cloudfoundry, you need to create your own controller as you do not have file access. In order to accomplish this you can write your own controller, and specify to use it in your uploadr tag:
 
@@ -435,6 +451,18 @@ Take a look at the documentation above, and the default event handlers in the up
 The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](grails-uploadr/blob/master/web-app/css/uploadr.css), [minified](grails-uploadr/blob/master/web-app/css/uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
 
 ## Changelog
+
+###Version 0.7.3
+Added the possibility to suply the controller with custom variables:
+
+```html
+<uploadr:add name="…" path="…" … model="[booleanOne:true, variableTwo: 'foo', variableThree: 'bar', variableFour: 4, myObject: someObject]" />
+```
+
+As passing variables to the controller is a custom operation, you will need to implement [your own controller](#advanced-usage-creating-your-custom-controller-to-handle-file-uploads) to handle the uploaded files (thanks to [Tom](https://github.com/tcrossland) [#9](https://github.com/4np/grails-uploadr/issues/9) :+1:).
+
+_see demo example 2_
+
 
 ###Version 0.7.2
 Got rid of an error in Grails < 2.2.0 ([#8](https://github.com/4np/grails-uploadr/issues/8))

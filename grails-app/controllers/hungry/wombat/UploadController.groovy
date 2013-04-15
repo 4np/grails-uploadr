@@ -36,7 +36,9 @@ class UploadController {
 		def fileSize 	= request.getHeader('X-File-Size') as Long
 		def name 		= URLDecoder.decode(request.getHeader('X-Uploadr-Name'), 'UTF-8') as String
 		def info		= session.getAttribute('uploadr')
-		def savePath	= ((name && info && info.get(name) && info.get(name).path) ? info.get(name).path : "/tmp") as String
+        def myInfo      = (name && info && info.containsKey(name)) ? info.get(name) : [:]
+        def model       = (myInfo.containsKey('model')) ? myInfo.get('model') : [:] // unused, demonstration purposes only
+		def savePath	= ((myInfo.containsKey('path')) ? myInfo.get('path') : "/tmp") as String
 		def dir 		= new File(savePath)
 		def file		= new File(savePath,fileName)
 		int dot         = 0

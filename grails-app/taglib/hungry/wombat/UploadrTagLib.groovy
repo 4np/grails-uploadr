@@ -43,6 +43,7 @@ class UploadrTagLib {
 		def viewable		= (attrs.containsKey('viewable') ? attrs.get('viewable').toString().toBoolean() : true)
 		def downloadable	= (attrs.containsKey('downloadable') ? attrs.get('downloadable').toString().toBoolean() : true)
 		def allowedExtensions   = (attrs.containsKey('allowedExtensions') ? attrs.get('allowedExtensions').toString() : "")
+        def model           = (attrs.containsKey('model') ? attrs.get('model') : [:])
 
 		// define uri
 		if (attrs.get('controller')) {
@@ -76,11 +77,17 @@ class UploadrTagLib {
 			if (!session.uploadr[name]) {
 				session.uploadr[name] = [
 					uri		: uri,
-					path	: attrs.path
+					path	: attrs.path,
+                    model   : model
 				]
 			} else if (session.uploadr[name].path != attrs.path) {
-				println "uploadr: warning! Another uploadr with the same name (${name}) is already using another upload path (${attrs.path}). Make sure you are using unique names for your uploadr elements!"
-			}
+				// another uploadr with this name already exists in the session
+                // spit out a warning
+                log.error "uploadr: warning! Another uploadr with the same name (${name}) is already using another upload path (${attrs.path}). Make sure you are using unique names for your uploadr elements!"
+			} else {
+                // update the model in the session
+                session.uploadr[name].model = model
+            }
 		}
 
 		// init pageScope

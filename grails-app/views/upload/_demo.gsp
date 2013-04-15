@@ -36,8 +36,8 @@ def path5 = new File("${downloads}/myFifthUploadr")
 &lt;uploadr:add name="myFirstUploadr" path="${path1}"/>
 </pre>
 
-<h1>2. Initial files, files added on top, paginate into 5 files per page, allowed extensions .jpg, .png and .gif</h1>
-<uploadr:add name="mySecondUploadr" path="${path2}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxSize="52428800">
+<h1>2. Initial files, files added on top, paginate into 5 files per page, allowed extensions .jpg, .png and .gif and additional custom variable passed to the controller (<i>model</i>)</h1>
+<uploadr:add name="mySecondUploadr" path="${path2}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxSize="52428800" model="[booleanOne:true, variableTwo: 'foo', variableThree: 'bar', variableFour: 4, myObject: someObject]">
     <g:each in="${path2.listFiles()}" var="file">
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -47,7 +47,7 @@ def path5 = new File("${downloads}/myFifthUploadr")
     </g:each>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-	&lt;uploadr:add name="mySecondUploadr" path="${path2}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+	&lt;uploadr:add name="mySecondUploadr" path="${path2}" allowedExtensions="jpg,png,gif" direction="up" maxVisible="5" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" model="[booleanOne:true, variableTwo: 'foo', variableThree: 'bar', variableFour: 4, myObject: someObject]">
     <g:each in="${path2.listFiles()}" var="file">
 		&lt;uploadr:file name="${file.name}">
 			&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>
