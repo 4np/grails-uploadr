@@ -96,7 +96,7 @@ Parameters
 
 |*parameter* | *description* | *example* | *default* | *required*|
 |------------|---------------|-----------|-----------|----------:|
-|name | a unique name for your uploadr | myFirstUploadr | uploadr | yes|
+|name | a unique name for your uploadr | myFirstUploadr | random uuid | yes|
 |path | the upload path, this may be a temporary path | /tmp | none | yes|
 |direction | manages whether new files will be added on top or on bottom (up/down) | up | down | no|
 |maxVisible | determines how many files should be visible and handles pagination | 5 | 0 (=unlimited) | no|

@@ -29,7 +29,7 @@ class UploadrTagLib {
 	def add = { attrs, body ->
 		def uri
 		def sound 			= !(attrs.containsKey('noSound') && attrs.get('noSound').toString().toBoolean())
-		def name			= (attrs.containsKey('name') ? attrs.get('name') : 'uploadr')
+		def name			= (attrs.containsKey('name') ? attrs.get('name') : UUID.randomUUID())
 		def classname		= (attrs.containsKey('class') ? attrs.get('class') : 'uploadr')
 		def direction 		= (attrs.containsKey('direction') ? attrs.get('direction') : 'down')
 		def placeholder		= (attrs.containsKey('placeholder') ? attrs.get('placeholder') : '')
@@ -78,7 +78,8 @@ class UploadrTagLib {
 				session.uploadr[name] = [
 					uri		: uri,
 					path	: attrs.path,
-                    model   : model
+                    model   : model,
+                    created : new Date()
 				]
 			} else if (session.uploadr[name].path != attrs.path) {
 				// another uploadr with this name already exists in the session
@@ -87,6 +88,8 @@ class UploadrTagLib {
 			} else {
                 // update the model in the session
                 session.uploadr[name].model = model
+                session.uploadr[name].lastUsed = new Date()
+                session.uploadr[name].lastAction = "render"
             }
 		}
 
@@ -219,7 +222,7 @@ class UploadrTagLib {
 					modified 	: file.lastModified()
 				]
 			} else {
-				println "ignoring predefined file '${file}' as it does not exist!"
+				log.error "ignoring predefined file '${file}' as it does not exist!"
 			}
 		} else {
 			pageScope.files[ pageScope.files.size() ] = pageScope.temp

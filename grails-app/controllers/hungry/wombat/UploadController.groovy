@@ -52,6 +52,12 @@ class UploadController {
 		// set response content type to json
 		response.contentType    = 'application/json'
 
+        // update lastUsed stamp in session
+        if (name && info && info.containsKey(name)) {
+            session.uploadr[name].lastUsed = new Date()
+            session.uploadr[name].lastAction = "upload"
+        }
+
 		// does the path exist?
 		if (!dir.exists()) {
 			// attempt to create the path
@@ -151,6 +157,12 @@ class UploadController {
 		def savePath	= (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
 		def file		= new File(savePath,fileName)
 
+        // update lastUsed stamp in session
+        if (name && info && info.containsKey(name)) {
+            session.uploadr[name].lastUsed = new Date()
+            session.uploadr[name].lastAction = "delete"
+        }
+
 		if (file.exists()) {
 			try {
 				// delete file
@@ -171,6 +183,12 @@ class UploadController {
 		def info		= session.getAttribute('uploadr')
 		def savePath	= (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
 		def file		= new File(savePath, fileName)
+
+        // update lastUsed stamp in session
+        if (name && info && info.containsKey(name)) {
+            session.uploadr[name].lastUsed = new Date()
+            session.uploadr[name].lastAction = "download"
+        }
 
 		if (file.exists()) {
 			response.setStatus(200)
@@ -202,7 +220,7 @@ class UploadController {
 				}
 			} catch (Exception e) {
 				// whoops, looks like something went wrong
-				println "download failed! ${e.getMessage()}"
+				log.error "download failed! ${e.getMessage()}"
 			} finally {
 				if (inStream != null) inStream.close()
 				if (outStream != null) outStream.close()
