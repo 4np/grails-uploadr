@@ -95,7 +95,7 @@ class UploadrTagLib {
 
 		// init pageScope
 		pageScope.name			= name
-		pageScope.path			= session.uploadr[name].path
+		pageScope.path			= session.uploadr?.get(name)?.path
 		pageScope.handlers		= [:]
 		pageScope.files			= []
 		pageScope.temp			= [:]

@@ -531,7 +531,7 @@
 					spinner.show('slow');
 
 					// callback when done uploading
-					options.onSuccess(fileAttrs, domObj, function() {
+					options.onSuccess(fileAttrs, domObj, response, function() {
 						// hide the spinner
 						spinner.hide();
 
@@ -1059,7 +1059,7 @@
 				// return false to cancel default progress handler
 				return true;
 			},
-			onSuccess			: function(file, domObj, callback) { callback(); },
+			onSuccess			: function(file, domObj, response, callback) { callback(); },
 			onFailure			: function(file, domObj) { return true; },
 			onAbort             : function(file, domObj) { return true; },
 			onView              : function(file, domObj) { return true; },
