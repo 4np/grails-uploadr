@@ -13,7 +13,7 @@ Screenshot showing 7 files being uploaded, separated into two pages (maximum of 
 
 ## Build status
 
-![build status](http://jenkins.osx.eu/job/ci-uploadr/badge/icon)
+![build status](https://jenkins.osx.eu/job/ci-uploadr/badge/icon)
 
 ## Features
 * upload files by
