@@ -12,7 +12,7 @@ $(document).ready(function() {
 			onLike: function(file, domObj, callback) { ${handlers.onLike} },</g:if><g:if test="${handlers.onUnlike}">
 			onUnlike: function(file, domObj, callback) { ${handlers.onUnlike} },</g:if><g:if test="${handlers.onChangeColor}">
 			onChangeColor: function(file, domObj, color) { ${handlers.onChangeColor} },</g:if>
-			onFailure: function(file, domObj, response) {
+			onFailure: function(file, domObj) {
 				<g:if test="${handlers.onFailure}">${handlers.onFailure}</g:if>
 			},
 			onAbort: function(file, domObj) {
