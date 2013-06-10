@@ -51,7 +51,7 @@ grails.project.dependency.resolution = {
 	plugins {
 		provided(
                 ":tomcat:$grailsVersion",
-				":release:latest.integration",
+				":release:2.2.1",
 				":rest-client-builder:latest.integration",
 
                 ":grom:latest.integration",

@@ -8,11 +8,11 @@ $(document).ready(function() {
 		var ${name} = $('.${classname}[name=${name}]').uploadr({<g:if test="${handlers.onStart}">
 			onStart: function(file) { ${handlers.onStart} },</g:if><g:if test="${handlers.onProgress}">
 			onProgress: function(file, domObj, percentage) { ${handlers.onProgress} },</g:if><g:if test="${handlers.onSuccess}">
-			onSuccess: function(file, domObj, callback) { ${handlers.onSuccess} },</g:if><g:if test="${handlers.onLike}">
+			onSuccess: function(file, domObj, callback, response) { ${handlers.onSuccess} },</g:if><g:if test="${handlers.onLike}">
 			onLike: function(file, domObj, callback) { ${handlers.onLike} },</g:if><g:if test="${handlers.onUnlike}">
 			onUnlike: function(file, domObj, callback) { ${handlers.onUnlike} },</g:if><g:if test="${handlers.onChangeColor}">
 			onChangeColor: function(file, domObj, color) { ${handlers.onChangeColor} },</g:if>
-			onFailure: function(file, domObj) {
+			onFailure: function(file, domObj, response) {
 				<g:if test="${handlers.onFailure}">${handlers.onFailure}</g:if>
 			},
 			onAbort: function(file, domObj) {

@@ -105,6 +105,8 @@ def path5 = new File("${downloads}/myFifthUploadr")
 	</uploadr:onProgress>
 	<uploadr:onSuccess>
 		console.log('done uploading \'' + file.fileName + '\', setting some random file id for demonstration purposes');
+        console.log('response was:');
+        console.log(response);
 
 		var text = "";
 		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -204,6 +206,8 @@ def path5 = new File("${downloads}/myFifthUploadr")
 	&lt;/uploadr:onProgress>
 	&lt;uploadr:onSuccess>
 		console.log('done uploading \'' + file.fileName + '\', setting some random file id for demonstration purposes');
+        console.log('response was:');
+        console.log(response);
 
 		var text = "";
 		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

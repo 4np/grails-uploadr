@@ -546,7 +546,7 @@
 
 						// add buttons
 						methods.addButtons(fileAttrs, domObj, options);
-					});
+					}, response);
 				} else {
 					methods.playError(options);
 
@@ -1059,7 +1059,7 @@
 				// return false to cancel default progress handler
 				return true;
 			},
-			onSuccess			: function(file, domObj, callback) { callback(); },
+			onSuccess			: function(file, domObj, callback, response) { callback(); },
 			onFailure			: function(file, domObj) { return true; },
 			onAbort             : function(file, domObj) { return true; },
 			onView              : function(file, domObj) { return true; },
