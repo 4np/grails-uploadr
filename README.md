@@ -294,7 +294,7 @@ By default the uploadr is fully functional as is, but it is possible to add your
 ```
 
 ## Internationalization / custom texts
-The text labels the plugin uses are stored in [i18n messages](/4np/grails-uploadr/blob/master/grails-app/i18n/messages.properties), which can be overwritten / internationalized in your own application:
+The text labels the plugin uses are stored in [i18n messages](https://github.com/4np/grails-uploadr/blob/master/grails-app/i18n/messages.properties), which can be overwritten / internationalized in your own application:
 
 ```properties
 # labels that appears in the uploadr's percentage text when
@@ -348,7 +348,7 @@ The plugin plays some sound effects whether a file upload was completed, aborted
 ```
 
 ## Passing custom variables to the controller
-Since version [0.7.3](/4np/grails-uploadr#version-073) it is possible to pass variables to the controller. This requires that you implement [your own controller](#advanced-usage-creating-your-custom-controller-to-handle-file-uploads) to handle the uploaded files, and handle the custom controller variables.
+Since version [0.7.3](https://github.com/4np/grails-uploadr#version-073) it is possible to pass variables to the controller. This requires that you implement [your own controller](#advanced-usage-creating-your-custom-controller-to-handle-file-uploads) to handle the uploaded files, and handle the custom controller variables.
 
 ```rhtml
 <uploadr:add name="…" path="…" … model="[booleanOne:true, variableTwo: 'foo', variableThree: 'bar', variableFour: 4, myObject: someObject]" />
@@ -382,7 +382,7 @@ To have the file uploads being handled by _myAction_ action of _myController_.
 
 This would make the uploadr use the ```myAction``` of ```myController``` in ```myPlugin```. 
 
-View the default [controller](/4np/grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy)'s ```handle``` action to get an idea of how to implement your own controller to handle file uploads (_note that the JavaScript expects JSON_).
+View the default [controller](https://github.com/4np/grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy)'s ```handle``` action to get an idea of how to implement your own controller to handle file uploads (_note that the JavaScript expects JSON_).
 
 If you do this, you probably also want to create your own code to view, download and delete uploaded files. You can do this by creating your own event handlers (respectively: ```onView``` , ```onDownload``` and ```onDelete``` ). 
 
@@ -447,10 +447,10 @@ and the ```uploadedFile``` controller's ```downloadUploadedFile``` action in ```
     }
 ```
 
-Take a look at the documentation above, and the default event handlers in the uploadr [initialization JavaScript](/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) for more information on how to create your own back-end logic to handle file upload, download, view and delete events.
+Take a look at the documentation above, and the default event handlers in the uploadr [initialization JavaScript](https://github.com/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) for more information on how to create your own back-end logic to handle file upload, download, view and delete events.
 
 ## jQuery plugin
-The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](/4np/grails-uploadr/blob/master/web-app/css/uploadr.css), [minified](grails-uploadr/tree/master/web-app/css/uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](/4np/grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
+The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/css/uploadr.css), [minified](grails-uploadr/tree/master/web-app/css/uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](https://github.com/4np/grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](https://github.com/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
 
 ## Changelog
 
@@ -464,33 +464,33 @@ Added the possibility to suply the controller with custom variables:
 <uploadr:add name="…" path="…" … model="[booleanOne:true, variableTwo: 'foo', variableThree: 'bar', variableFour: 4, myObject: someObject]" />
 ```
 
-As passing variables to the controller is a custom operation, you will need to implement [your own controller](#advanced-usage-creating-your-custom-controller-to-handle-file-uploads) to handle the uploaded files (thanks to [Tom](https://github.com/tcrossland) [#9](/4np/grails-uploadr/issues/9) :+1:).
+As passing variables to the controller is a custom operation, you will need to implement [your own controller](#advanced-usage-creating-your-custom-controller-to-handle-file-uploads) to handle the uploaded files (thanks to [Tom](https://github.com/tcrossland) [#9](https://github.com/4np/grails-uploadr/issues/9) :+1:).
 
 _see demo example 2_
 
 
 ###Version 0.7.2
-Got rid of an error in Grails < 2.2.0 ([#8](https://github.com/4np/grails-uploadr/issues/8))
+Got rid of an error in Grails < 2.2.0 ([#8](https://github.comhttps://github.com/4np/grails-uploadr/issues/8))
 
 ###Version 0.7.1
-As the plugin can be run standalone in demonstration mode (in development and ci), a Quartz jub runs on the background to keep the upload folder clean for demonstration purposes. In previous versions the job would run when Quartz was installed, which is not the appropriate behaviour. It should only run the job when run standalone, in development and ci (see [Config.groovy](/4np/grails-uploadr/blob/master/grails-app/conf/Config.groovy#L28) for configuration options). Thanks again [Dmitry](https://github.com/dementiev) ([#7](/4np/grails-uploadr/issues/7) :)
+As the plugin can be run standalone in demonstration mode (in development and ci), a Quartz jub runs on the background to keep the upload folder clean for demonstration purposes. In previous versions the job would run when Quartz was installed, which is not the appropriate behaviour. It should only run the job when run standalone, in development and ci (see [Config.groovy](https://github.com/4np/grails-uploadr/blob/master/grails-app/conf/Config.groovy#L28) for configuration options). Thanks again [Dmitry](https://github.com/dementiev) ([#7](https://github.com/4np/grails-uploadr/issues/7) :)
 
 ###Version 0.7.0.1
 I forgot to minify the Javascript in the 0.7.0 release...
 
 ###Version 0.7.0
-Added unicode support (thanks to [Dmitry](https://github.com/dementiev), see [#6](/4np/grails-uploadr/issues/6) )
+Added unicode support (thanks to [Dmitry](https://github.com/dementiev), see [#6](https://github.com/4np/grails-uploadr/issues/6) )
 
 ###Version 0.6.1
 - Upgrade to Grails 2.2.0 and changed dependencies to provided / c
-- removed dependency on jquery-ui (resolved [#4](/4np/grails-uploadr/issues/4) - thx [fdammassa](https://github.com/fdammassa)!)
+- removed dependency on jquery-ui (resolved [#4](https://github.com/4np/grails-uploadr/issues/4) - thx [fdammassa](https://github.com/fdammassa)!)
 
 ###Version 0.6.0.1
 Bugfixed plugin description
 
 ###Version 0.6.0
 - Removed obsolete svn keywords which were oddly sometimes causing compilation problems
-- Added support for an ```allowedExtensions``` parameter comma separated list (feature request [#1](/4np/grails-uploadr/issues/1)). When undefined/empty, all file uploads are allowed.
+- Added support for an ```allowedExtensions``` parameter comma separated list (feature request [#1](https://github.com/4np/grails-uploadr/issues/1)). When undefined/empty, all file uploads are allowed.
 
 example:
 ```groovy
@@ -501,7 +501,7 @@ allowedExtensions="jpg,gif,png"
 This means that _"jpg, gif, png"_ does not work and will try to validate the ```. png``` extentions (```bla. png```) instead
 of the desired ```.png``` (```bla.png```).*
 
-This new feature has also introduced two new [i18n internationalization labels](/4np/grails-uploadr/blob/master/grails-app/i18n/messages.properties), namely:
+This new feature has also introduced two new [i18n internationalization labels](https://github.com/4np/grails-uploadr/blob/master/grails-app/i18n/messages.properties), namely:
 
 ```groovy
 uploadr.label.invalidFileExtension=invalid
