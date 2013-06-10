@@ -213,6 +213,8 @@ By default the uploadr is fully functional as is, but it is possible to add your
 	</uploadr:onProgress>
 	<uploadr:onSuccess>
 		console.log('done uploading \'' + file.fileName + '\', setting some random file id for demonstration purposes');
+        console.log('response was:');
+        console.log(response);
 
 		var text = "";
 		var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
