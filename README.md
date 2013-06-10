@@ -450,12 +450,12 @@ and the ```uploadedFile``` controller's ```downloadUploadedFile``` action in ```
 Take a look at the documentation above, and the default event handlers in the uploadr [initialization JavaScript](https://github.com/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) for more information on how to create your own back-end logic to handle file upload, download, view and delete events.
 
 ## jQuery plugin
-The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/css/uploadr.css), [minified](grails-uploadr/tree/master/web-app/css/uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](https://github.com/4np/grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](https://github.com/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
+The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/css/jquery.uploadr.css), [minified](grails-uploadr/tree/master/web-app/css/jquery.uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](https://github.com/4np/grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](https://github.com/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
 
 ## Changelog
 
 ###Version 0.7.4
-Now passing the 'response' variable to the onSuccess handler by suggestion of [domurtag](https://github.com/domurtag). See demo tag's example 4 for an example.
+Now passing the 'response' variable to the onSuccess handler (_by suggestion of [domurtag](https://github.com/domurtag) [#12](https://github.com/4np/grails-uploadr/issues/12)_). See demo tag's example 4 for an example.
 
 ###Version 0.7.3
 Added the possibility to suply the controller with custom variables:
@@ -470,7 +470,7 @@ _see demo example 2_
 
 
 ###Version 0.7.2
-Got rid of an error in Grails < 2.2.0 ([#8](https://github.comhttps://github.com/4np/grails-uploadr/issues/8))
+Got rid of an error in Grails < 2.2.0 ([#8](https://github.com/4np/grails-uploadr/issues/8))
 
 ###Version 0.7.1
 As the plugin can be run standalone in demonstration mode (in development and ci), a Quartz jub runs on the background to keep the upload folder clean for demonstration purposes. In previous versions the job would run when Quartz was installed, which is not the appropriate behaviour. It should only run the job when run standalone, in development and ci (see [Config.groovy](https://github.com/4np/grails-uploadr/blob/master/grails-app/conf/Config.groovy#L28) for configuration options). Thanks again [Dmitry](https://github.com/dementiev) ([#7](https://github.com/4np/grails-uploadr/issues/7) :)
@@ -546,7 +546,7 @@ Fixed an issue where some file tags did not always work properly (color, rating,
 Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in ```file.fileSize``` , ```file.fileName``` and ```file.contentType``` , Firefox 7's File API now uses ```file.name``` , ```file.size``` and ```file.type``` instead. Implemented a fix to support this new behavior.
 
 ## Build status
-![build status](http://jenkins.osx.eu/job/ci-uploadr/badge/icon)
+![build status](https://jenkins.osx.eu/job/ci-uploadr/badge/icon)
 
 ## License
 
