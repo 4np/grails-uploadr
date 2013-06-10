@@ -64,7 +64,7 @@ class UploadController {
 			try {
 				dir.mkdirs()
 			} catch (Exception e) {
-				response.setStatus(500, "could not create upload path ${savePath}")
+                response.sendError(500, "could not create upload path ${savePath}")
 				render([written: false, fileName: file.name] as JSON)
 				return false
 			}
@@ -74,7 +74,7 @@ class UploadController {
 		def freeSpace = dir.getUsableSpace()
 		if (fileSize > freeSpace) {
 			// not enough free space
-			response.setStatus(500, "cannot store '${fileName}' (${fileSize} bytes), only ${freeSpace} bytes of free space left on device")
+            response.sendError(500, "cannot store '${fileName}' (${fileSize} bytes), only ${freeSpace} bytes of free space left on device")
 			render([written: false, fileName: file.name] as JSON)
 			return false
 		}
@@ -83,7 +83,7 @@ class UploadController {
 		if (!dir.canWrite()) {
 			// no, try to make it writable
 			if (!dir.setWritable(true)) {
-				response.setStatus(500, "'${savePath}' is not writable, and unable to change rights")
+                response.sendError(500, "'${savePath}' is not writable, and unable to change rights")
 				render([written: false, fileName: file.name] as JSON)
 				return false
 			}
@@ -146,7 +146,7 @@ class UploadController {
 		}
 
 		// render json response
-		response.setStatus(status, statusText)
+		response.setStatus(status)
 		render([written: (status == 200), fileName: file.name, status: status, statusText: statusText] as JSON)
 	}
 
@@ -195,7 +195,7 @@ class UploadController {
 			response.setContentType("application/octet-stream")
 			response.setContentLength(file.size() as int)
 
-            // browser do not handle RFC5987 properly, so Safari will be unable to decode the unicode filename
+            // browsers do not handle RFC5987 properly, so Safari will be unable to decode the unicode filename
             // @see http://greenbytes.de/tech/tc2231/
             response.setHeader("Content-Disposition", "attachment; filename=${URLEncoder.encode(fileName, 'ISO-8859-1')}; filename*= UTF-8''${URLEncoder.encode(fileName, 'UTF-8')}")
 
