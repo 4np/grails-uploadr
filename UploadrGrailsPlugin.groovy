@@ -15,12 +15,12 @@
  *  limitations under the License.
  */
 class UploadrGrailsPlugin {
-	def version         = "0.7.4"
+	def version         = "0.7.5"
 	def grailsVersion   = "1.3.7 > *"
 	def dependsOn       = [
-            jquery: "1.4 > *",
-            modernizr: "1.7.2 > *",
-            resources: "1.0 > *"
+            jquery      : "1.4 > *",
+            modernizr   : "1.7.2 > *",
+            resources   : "1.0 > *"
     ]
 	def pluginExcludes  = [
 			"grails-app/views/error.gsp"

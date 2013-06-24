@@ -59,8 +59,6 @@ grails.project.dependency.resolution = {
                 ":jquery:latest.integration",
                 ":modernizr:latest.integration",
 
-                ":quartz:latest.integration",
-
                 ":resources:latest.integration",
                 ":hibernate:$grailsVersion"
         ) {
@@ -73,7 +71,6 @@ grails.project.dependency.resolution = {
             // as the ci should be able to run natively, we require
             // a couple of plugins to function properly
             compile(":resources:latest.integration",
-                    ":quartz:latest.integration",
                     ":hibernate:$grailsVersion") {
                 export = false
             }
