@@ -454,6 +454,9 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 
 ## Changelog
 
+###Version 0.7.5
+Removed obsolete Quartz job (_thanks to [Luka](https://github.com/luciferche) [#13](https://github.com/4np/grails-uploadr/issues/13)_)
+
 ###Version 0.7.4
 Now passing the 'response' variable to the onSuccess handler (_by suggestion of [domurtag](https://github.com/domurtag) [#12](https://github.com/4np/grails-uploadr/issues/12)_). See demo tag's example 4 for an example.
 
@@ -467,7 +470,6 @@ Added the possibility to suply the controller with custom variables:
 As passing variables to the controller is a custom operation, you will need to implement [your own controller](#advanced-usage-creating-your-custom-controller-to-handle-file-uploads) to handle the uploaded files (thanks to [Tom](https://github.com/tcrossland) [#9](https://github.com/4np/grails-uploadr/issues/9) :+1:).
 
 _see demo example 2_
-
 
 ###Version 0.7.2
 Got rid of an error in Grails < 2.2.0 ([#8](https://github.com/4np/grails-uploadr/issues/8))
