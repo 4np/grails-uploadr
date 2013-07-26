@@ -62,6 +62,25 @@ Screenshot showing 7 files being uploaded, separated into two pages (maximum of 
 
 This plugin heavily relies on the HTML5 Drag and Drop and File API's which Microsoft has unfortunately only implemented in Internet Explorer 10.0.8102.0 (part of the [Windows 8 developer preview](http://msdn.microsoft.com/en-us/windows/apps/br229516) distribution).
 
+## Installation
+Add a compile time dependency to your Grails project's ```grails-app/conf/Buildconf.groovy```:
+
+```groovy
+plugins {
+	runtime ":hibernate:$grailsVersion"
+	build ":tomcat:$grailsVersion"
+	runtime ":jquery:latest.integration"
+	runtime ":resources:latest.integration"
+	compile ":uploadr:latest.integration"
+}
+```
+
+**Grails versions Pre 2.x:**
+
+```
+grails install-plugin uploadr
+```
+
 ## Quickstart
 The plugin incorporates a demo tag which demonstrates some examples of how to use the uploadr tag with examples and source code. You can see a live (continuous integration) demo [here](http://ci.uploadr.osx.eu/):
 
