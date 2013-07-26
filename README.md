@@ -3,7 +3,7 @@ This plugin allows dragging and dropping files on your browser window to upload 
 
 ![example](https://dl.dropbox.com/s/yjkgq00jd7l6oca/uploadr-blank.png?dl=1)
 
-Screenshot showing 6 files being uploaded:
+Screenshot showing 6 files being uploaded (2 are done and 4 uploads in progress):
 
 ![example1](https://dl.dropbox.com/s/y1hn2ix5jb3ianj/uploadr-uploading.png?dl=1)
 
