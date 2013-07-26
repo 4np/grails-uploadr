@@ -13,7 +13,7 @@ Screenshot showing 7 files being uploaded, separated into two pages (maximum of 
 
 ## Build status
 
-![build status](https://jenkins.osx.eu/job/ci-uploadr/badge/icon)
+![build status](https://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
 
 ## Features
 * upload files by
@@ -548,7 +548,7 @@ Fixed an issue where some file tags did not always work properly (color, rating,
 Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in ```file.fileSize``` , ```file.fileName``` and ```file.contentType``` , Firefox 7's File API now uses ```file.name``` , ```file.size``` and ```file.type``` instead. Implemented a fix to support this new behavior.
 
 ## Build status
-![build status](https://jenkins.osx.eu/job/ci-uploadr/badge/icon)
+![build status](https://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
 
 ## License
 
