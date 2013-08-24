@@ -11,6 +11,12 @@ Screenshot showing 7 files being uploaded, separated into two pages (maximum of 
 
 ![example2](https://dl.dropbox.com/s/mhc6nelsc2nnd5l/uploadr-uploadingPaginated.png?dl=1)
 
+## Press
+
+Featured in the Plugin Corner of [GroovyMag of July 2013](http://www.groovymag.com/main.issues.description/id=59/)
+
+[![groovymag](http://www.groovymag.com/images/gm57_400.jpg)](http://www.groovymag.com/main.issues.description/id=59/)
+
 ## Build status
 
 ![build status](https://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
