@@ -13,7 +13,13 @@ Screenshot showing 7 files being uploaded, separated into two pages (maximum of 
 
 ## Press
 
-Featured in the Plugin Corner of [GroovyMag of July 2013](http://www.groovymag.com/main.issues.description/id=59/)
+Reviewed in the Plugin Corner of [GroovyMag 6](http://www.groovymag.com/main.issues.description/id=59/), July 2013:
+```
+The Uploadr plugin is a short cut way to implement and use the Drag & Drop features of HTML5. This plugin provide
+numerous parameters that can be configured as per need. Also, this plugin supports rating, voting and downloading
+of files. It provides event handlers by which you can add your customized code. It also supports i18n messages so,
+overall it’s a complete package for uploading files using HTML5 as a platform underneath it.
+```
 
 [![groovymag](http://www.groovymag.com/images/gm57_400.jpg)](http://www.groovymag.com/main.issues.description/id=59/)
 
