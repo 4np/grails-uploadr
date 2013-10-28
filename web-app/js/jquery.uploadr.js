@@ -47,7 +47,7 @@
 		dragEnter: function(event, obj, domObj, hoverClass, options) {
 			obj.addClass(hoverClass);
 			methods.cancel(event, obj, domObj, hoverClass, options);
-			if (!options.workvars.gotFiles) $('.placeholder', obj).hide(); 
+			if (!options.workvars.gotFiles) $('.placeholder', obj).hide();
 		},
 
 		dragLeave: function(event, obj, domObj, hoverClass, options) {
@@ -56,7 +56,7 @@
 			}
 			methods.cancel(event);
 			$('.placeholder', obj).html(options.placeholderText);
-			if (!options.workvars.gotFiles) $('.placeholder', obj).show(); 
+			if (!options.workvars.gotFiles) $('.placeholder', obj).show();
 		},
 
 		addFile: function(domObj, file, options) {
@@ -373,7 +373,7 @@
 
   			return false;
 		},
-		
+
 		startUpload: function(file, fileAttrs, domObj, options) {
 			var status = "";
 
@@ -487,7 +487,7 @@
 					methods.removeFileElement(domObj, options);
 				});
 			}, false);
-			
+
 			// attach abort listener
 			upload.addEventListener("abort", function (ev) {
 				methods.playError(options);
@@ -569,7 +569,7 @@
 					return;
 				}
 			};
-			
+
 			// start data transfer
 			xhr.open("POST",options.uri);
         	xhr.setRequestHeader("Cache-Control", "no-cache");
@@ -665,7 +665,7 @@
 				fileAttrs.speed = null;
 			}
 		},
-		
+
 		addVotingButtons: function(file, domObj, options) {
 			if (!options.voting) return true;
 
@@ -874,7 +874,7 @@
 				}
 			}
 		},
-		
+
 		/**
 		 * return human readable file sizes
 		 * @param int bytes
@@ -882,7 +882,7 @@
 		 */
 		bytesToSize: function(bytes) {
 			var sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-			if (bytes == 0) return 'n/a';
+			if (bytes == 0) return "0 B";
 			var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
 			return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
 		},
