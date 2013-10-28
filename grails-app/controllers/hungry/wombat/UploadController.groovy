@@ -33,7 +33,7 @@ class UploadController {
 	def handle = {
 		def contentType	= request.getHeader("Content-Type") as String
 		def fileName    = URLDecoder.decode(request.getHeader('X-File-Name'), 'UTF-8') as String
-		def fileSize 	= request.getHeader('X-File-Size') as Long
+		def fileSize 	= (request.getHeader('X-File-Size') != "undefined") ? request.getHeader('X-File-Size') as Long : 0L
 		def name 		= URLDecoder.decode(request.getHeader('X-Uploadr-Name'), 'UTF-8') as String
 		def info		= session.getAttribute('uploadr')
         def myInfo      = (name && info && info.containsKey(name)) ? info.get(name) : [:]
