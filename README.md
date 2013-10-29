@@ -478,12 +478,40 @@ and the ```uploadedFile``` controller's ```downloadUploadedFile``` action in ```
     }
 ```
 
+## Clearing out an already initialized Uploadr
+In several occasions it might be useful to be able to hook into an already initialized Uploadr to perform certain actions (e.g. after an Ajax call). As of version _0.7.6_ it is possible to clear out an already initialized uploadr:
+
+```
+$('.uploadr[name=myUploadr]').data('uploadr').clear([options]);
+```
+
+By default the call will play a delete sound and execute the _onDelete_ handler (effectively deleting the files on the back-end as well). This default behaviour can be customized by passing in options:
+
+```
+$('.uploadr[name=myUploadr]').data('uploadr').clear({
+	sound: true,
+	erase, false
+});
+```
+
+The following options are available for customization:
+
+| option | description                                         | default |
+|--------|-----------------------------------------------------|---------|
+| sound  | play delete sound                                   | true    |
+| erase  | erase the file (execute _onDelete_ handler) as well | true    |
+
+
 Take a look at the documentation above, and the default event handlers in the uploadr [initialization JavaScript](https://github.com/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) for more information on how to create your own back-end logic to handle file upload, download, view and delete events.
 
 ## jQuery plugin
 The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/css/jquery.uploadr.css), [minified](grails-uploadr/tree/master/web-app/css/jquery.uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](https://github.com/4np/grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](https://github.com/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
 
 ## Changelog
+
+###Version 0.7.6
+- fixed issues #17 and #18 regarding empty files (thanks to [Murf80](https://github.com/murf80))
+- added support for clearing the uploadr in ajax calls (#16, thanks for bringing this up [Viseth](https://github.com/viseth))
 
 ###Version 0.7.5
 Removed obsolete Quartz job (_thanks to [Luka](https://github.com/luciferche) [#13](https://github.com/4np/grails-uploadr/issues/13)_)

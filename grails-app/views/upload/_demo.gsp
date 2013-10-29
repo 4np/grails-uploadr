@@ -82,6 +82,31 @@ def path5 = new File("${downloads}/myFifthUploadr")
 	&lt;/uploadr:add>
 </pre>
 
+<input type="button" id="clearButton3" name="test" value="clear the uploadr but do not erase files">
+<r:script>
+$(document).ready(function() {
+   $('#clearButton3').on('click', function() {
+       $('.uploadr[name=myThirdUploadr]').data('uploadr').clear({
+           sound: true,
+           erase: false
+       });
+   });
+});
+</r:script>
+<pre class="brush:html collapse:true">
+    &lt;input type="button" id="test" name="test" value="clear the uploadr but do not erase files">
+    &lt;r:script>
+        $(document).ready(function() {
+            $('#test').on('click', function() {
+                $('.uploadr[name=myThirdUploadr]').data('uploadr').clear({
+                    sound: true,
+                    erase: false
+                });
+            });
+        });
+    &lt;/r:script>
+</pre>
+
 <h1>4. Initial files, files are added to the bottom (default), custom event handlers, rating & voting, rating tooltips, override default file colors to <span style="color:#c78cda">#c78cda</span>, colorpicker, and disable file deletions</h1>
 <h3>note that due to using a custom <i>onDelete</i> handler the uploaded files do <i>not</i> get deleted anymore!</h3>
 <uploadr:add name="myFourthUploadr" path="${path4}" maxVisible="5" rating="true" voting="true" colorPicker="true" maxSize="52428800">

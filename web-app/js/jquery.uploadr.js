@@ -193,14 +193,17 @@
 			// handle pagination
 			methods.handlePagination(domObj, options);
 
+			file.obj = fileDiv;
+
 			return fileDiv;
 		},
 
-		removeFileElement: function(domObj, options) {
+		removeFileElement: function(domObj, options, noSound) {
 			var parent = domObj.parent();
 
 			// play delete sound effect
-			methods.playDelete(options);
+			if (!noSound)
+				methods.playDelete(options);
 
 			// remove file
 			domObj.animate({height: '0px'}, 200, 'swing', function() {
@@ -978,6 +981,37 @@
 		}
 	};
 
+	// class containing public methods
+	var Uploadr = function(element, options, methods) {
+		// clear all files from the uploadr
+		this.clear = function(myOptions) {
+			var myDefaults = {
+				sound 	: true,
+				erase	: true
+			};
+
+			// extend the jQuery options
+			var myOptions = $.extend(myDefaults, myOptions);
+
+			// store sound option locally so we can make sure the
+			// delete sound will only play once when multiple files
+			// are deleted
+			var playSound = myOptions.sound;
+
+			$.each(options.files, function(index, file) {
+				var div = $(file.obj);
+				if (myOptions.erase) {
+					if (options.onDelete(file, div)) {
+						methods.removeFileElement(div, options, !playSound);
+						playSound = false;
+					}
+				} else {
+					methods.removeFileElement(div, options, !playSound);
+				}
+			});
+		};
+	};
+
 	// define the jquery plugin code
 	$.fn.uploadr = function(options) {
 		// default settings
@@ -1077,6 +1111,9 @@
 			var obj	= $(this);
 			var e	= obj.get(0);
 
+			// Return early if this element already has a plugin instance
+			if (obj.data('uploadr')) return;
+
 			// add file upload field
 			if (options.uploadField) methods.addFileUploadField(obj,e,options);
 
@@ -1154,6 +1191,9 @@
 			if (options.notificationSound) options.workvars.notificationSoundEffect = new Audio(options.notificationSound);
 			if (options.errorSound) options.workvars.errorSoundEffect = new Audio(options.errorSound);
 			if (options.deleteSound) options.workvars.deleteSoundEffect = new Audio(options.deleteSound);
+
+			// store plugin object's public methods in this element's data so we can reference it
+			obj.data('uploadr', new Uploadr(this, options, methods));
 		});
 	};
 })(jQuery);

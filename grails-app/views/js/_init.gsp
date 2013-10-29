@@ -5,7 +5,7 @@ $(document).ready(function() {
 	if (Modernizr.draganddrop && (!msie || (msie && version > 9))) {
 		// Browser supports HTML5 drag & drop
 		// initialize uploadr and use native HTML5 implementation
-		var ${name} = $('.${classname}[name=${name}]').uploadr({<g:if test="${handlers.onStart}">
+		$('.${classname}[name=${name}]').uploadr({<g:if test="${handlers.onStart}">
 			onStart: function(file) { ${handlers.onStart} },</g:if><g:if test="${handlers.onProgress}">
 			onProgress: function(file, domObj, percentage) { ${handlers.onProgress} },</g:if><g:if test="${handlers.onSuccess}">
 			onSuccess: function(file, domObj, callback, response) { ${handlers.onSuccess} },</g:if><g:if test="${handlers.onLike}">
