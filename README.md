@@ -509,7 +509,7 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 
 ## Changelog
 
-###Version 0.7.6
+###Version 0.7.6 / 0.7.6.1
 - fixed issues #17 and #18 regarding empty files (thanks to [Murf80](https://github.com/murf80))
 - added support for clearing the uploadr in ajax calls (#16, thanks for bringing this up [Viseth](https://github.com/viseth))
 
