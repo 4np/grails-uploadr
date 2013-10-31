@@ -198,7 +198,7 @@
 			return fileDiv;
 		},
 
-		removeFileElement: function(domObj, options, noSound) {
+		removeFileElement: function(domObj, options, noSound, skipFileRemoval) {
 			var parent = domObj.parent();
 
 			// play delete sound effect
@@ -207,19 +207,21 @@
 
 			// remove file
 			domObj.animate({height: '0px'}, 200, 'swing', function() {
-				// remove file from files array
-				for (var c = 0; c < options.workvars.files.length; c++) {
-					if (options.workvars.files[c] == domObj.get(0)) {
-						options.workvars.files.splice(c, 1);
-						break;
+				if (!skipFileRemoval) {
+					// remove file from files array
+					for (var c = 0; c < options.workvars.files.length; c++) {
+						if (options.workvars.files[c] == domObj.get(0)) {
+							options.workvars.files.splice(c, 1);
+							break;
+						}
 					}
-				}
 
-				// change viewing parameter
-				if (options.insertDirection == 'up') {
-					options.workvars.viewing = (c > 0) ? c-1 : 0;
-				} else {
-					options.workvars.viewing = (c > (options.workvars.files.length - 1)) ? (options.workvars.files.length - 1) : c;
+					// change viewing parameter
+					if (options.insertDirection == 'up') {
+						options.workvars.viewing = (c > 0) ? c-1 : 0;
+					} else {
+						options.workvars.viewing = (c > (options.workvars.files.length - 1)) ? (options.workvars.files.length - 1) : c;
+					}
 				}
 
 				// remove element from DOM
@@ -549,6 +551,9 @@
 
 						// add buttons
 						methods.addButtons(fileAttrs, domObj, options);
+
+						options.workvars.fileIterator++;
+						options.files[ options.workvars.fileIterator ] = fileAttrs;
 					}, response);
 				} else {
 					methods.playError(options);
@@ -998,16 +1003,25 @@
 			// are deleted
 			var playSound = myOptions.sound;
 
+			// remove and erase files
 			$.each(options.files, function(index, file) {
 				var div = $(file.obj);
-				if (myOptions.erase) {
-					if (options.onDelete(file, div)) {
+				if (!file.erased) {
+					if (myOptions.erase) {
+						if (options.onDelete(file, div))
+							methods.removeFileElement(div, options, !playSound);
+					} else {
 						methods.removeFileElement(div, options, !playSound);
-						playSound = false;
 					}
-				} else {
-					methods.removeFileElement(div, options, !playSound);
+					playSound = false;
+					file.erased = true;
 				}
+			});
+
+			// remove any remaining divs
+			$('.file', options.workvars.uploadrDiv).each(function() {
+				methods.removeFileElement($(this), options, !playSound, true);
+				playSound = false;
 			});
 		};
 	};
@@ -1084,7 +1098,8 @@
 				paginationDiv 				: null,
 				pagesDiv 					: null,
 				nextButton 					: null,
-				prevButton 					: null
+				prevButton 					: null,
+				fileIterator				: -1
 			},
 
 			// default event handlers
@@ -1184,6 +1199,7 @@
 			if (options.files) {
 				for (var iterator in options.files) {
 					methods.addFile(e, options.files[iterator], options);
+					options.workvars.fileIterator = iterator;
 				}
 			}
 
