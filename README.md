@@ -477,8 +477,11 @@ and the ```uploadedFile``` controller's ```downloadUploadedFile``` action in ```
 		return false
     }
 ```
+## Interacting with an already initialized Uploadr
 
-## Clearing out an already initialized Uploadr
+There are several occasions you might want to be able to interact with an already initialized Uploadr, for example in ajax calls or in your handlers. At the moment only clearing out (and / or erasing all uploaded files) is supported. If you have any feature requests, you can [submit them here](https://github.com/4np/grails-uploadr/issues).
+
+### Clearing out an already initialized Uploadr
 In several occasions it might be useful to be able to hook into an already initialized Uploadr to perform certain actions (e.g. after an Ajax call). As of version _0.7.6_ it is possible to clear out an already initialized uploadr:
 
 ```
