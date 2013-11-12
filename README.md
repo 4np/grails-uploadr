@@ -512,8 +512,11 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 
 ## Changelog
 
+###Version 0.8.0
+- fixed security flaw [#21](https://github.com/4np/grails-uploadr/issues/21) in the default file download action where it was possible to use a path traversal attack. *_Everybody is advised to upgrade to 0.8.0!_* (Again, thanks to [Murf80](https://github.com/murf80) for reporting this issue!)
+
 ###Version 0.7.6 / 0.7.6.1
-- fixed issues #17 and #18 regarding empty files (thanks to [Murf80](https://github.com/murf80))
+- fixed issues [#17](https://github.com/4np/grails-uploadr/issues/17) and [#18](https://github.com/4np/grails-uploadr/issues/18) regarding empty files (thanks to [Murf80](https://github.com/murf80))
 - added support for clearing the uploadr in ajax calls (#16, thanks for bringing this up [Viseth](https://github.com/viseth))
 
 ###Version 0.7.5
