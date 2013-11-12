@@ -178,28 +178,25 @@ class UploadController {
 	}
 
 	def download = {
-		def fileName = URLDecoder.decode(params.get('file'), 'UTF-8')
+		def fileName    = URLDecoder.decode(params.get('file'), 'UTF-8')
         def name 		= URLDecoder.decode(params.get('uploadr'), 'UTF-8')
         def info		= session.getAttribute('uploadr')
         def savePath	= (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
+        def file        = new File(savePath, fileName)
 
         // path traversal protection
-        if (fileName =~ /\\|\/|\./) {
+        if (file && file.exists() && fileName =~ /\\|\//) {
             response.sendError(400, "could not download '${fileName}': access denied")
             return false
-        }
+        } else if (file && file.exists() && file.canRead()) {
+            // update lastUsed stamp in session
+            if (name && info && info.containsKey(name)) {
+                session.uploadr[name].lastUsed = new Date()
+                session.uploadr[name].lastAction = "download"
+            }
 
-        // open file
-		def file = new File(savePath, fileName)
-
-        // update lastUsed stamp in session
-        if (name && info && info.containsKey(name)) {
-            session.uploadr[name].lastUsed = new Date()
-            session.uploadr[name].lastAction = "download"
-        }
-
-		if (file.exists() && file.canRead()) {
-			response.setStatus(200)
+            // download file
+            response.setStatus(200)
 			response.setContentType("application/octet-stream")
 			response.setContentLength(file.size() as int)
 
@@ -233,10 +230,12 @@ class UploadController {
 				if (inStream != null) inStream.close()
 				if (outStream != null) outStream.close()
 			}
-        } else if (file.exists() && !file.canRead()) {
+        } else if (file && file.exists() && !file.canRead()) {
+            // file not readable
             response.sendError(400, "could not download '${fileName}': access denied")
             return false
 		} else {
+            // file not found
             response.sendError(400, "could not download '${fileName}': file not found")
             return false
         }
