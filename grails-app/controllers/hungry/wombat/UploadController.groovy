@@ -178,11 +178,19 @@ class UploadController {
 	}
 
 	def download = {
-		def fileName 	= URLDecoder.decode(params.get('file'), 'UTF-8')
-		def name 		= URLDecoder.decode(params.get('uploadr'), 'UTF-8')
-		def info		= session.getAttribute('uploadr')
-		def savePath	= (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
-		def file		= new File(savePath, fileName)
+		def fileName = URLDecoder.decode(params.get('file'), 'UTF-8')
+        def name 		= URLDecoder.decode(params.get('uploadr'), 'UTF-8')
+        def info		= session.getAttribute('uploadr')
+        def savePath	= (name && info && info.get(name) && info.get(name).path) ? info.get(name).path : '/tmp'
+
+        // path traversal protection
+        if (fileName =~ /\\|\/|\./) {
+            response.sendError(400, "could not download '${fileName}': access denied")
+            return false
+        }
+
+        // open file
+		def file = new File(savePath, fileName)
 
         // update lastUsed stamp in session
         if (name && info && info.containsKey(name)) {
@@ -190,7 +198,7 @@ class UploadController {
             session.uploadr[name].lastAction = "download"
         }
 
-		if (file.exists()) {
+		if (file.exists() && file.canRead()) {
 			response.setStatus(200)
 			response.setContentType("application/octet-stream")
 			response.setContentLength(file.size() as int)
@@ -225,7 +233,13 @@ class UploadController {
 				if (inStream != null) inStream.close()
 				if (outStream != null) outStream.close()
 			}
-		}
+        } else if (file.exists() && !file.canRead()) {
+            response.sendError(400, "could not download '${fileName}': access denied")
+            return false
+		} else {
+            response.sendError(400, "could not download '${fileName}': file not found")
+            return false
+        }
 
 		// return false as we do not have a view
 		return false
