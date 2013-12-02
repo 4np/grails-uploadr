@@ -71,7 +71,7 @@ grails.project.dependency.resolution = {
             // as the ci should be able to run natively, we require
             // a couple of plugins to function properly
             compile(":resources:latest.integration",
-                    ":hibernate:$grailsVersion") {
+                    ":hibernate:3.6.10.4") {
                 export = false
             }
 
