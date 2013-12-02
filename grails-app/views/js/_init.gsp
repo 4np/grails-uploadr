@@ -1,3 +1,4 @@
+<%@page expressionCodec="raw" %>
 $(document).ready(function() {
 	var msie = (navigator.appVersion.indexOf("MSIE") != -1);
 	var version = (msie) ? parseFloat(navigator.appVersion.split("MSIE")[1]) : 0;

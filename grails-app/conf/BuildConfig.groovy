@@ -50,17 +50,17 @@ grails.project.dependency.resolution = {
 
 	plugins {
 		provided(
-                ":tomcat:$grailsVersion",
-				":release:2.2.1",
-				":rest-client-builder:1.0.3",
+                ":tomcat:7.0.47",
+				":release:3.0.1",
+				":rest-client-builder:2.0.0",
 
                 ":grom:latest.integration",
 
-                ":jquery:latest.integration",
-                ":modernizr:latest.integration",
+                ":jquery:1.10.2",
+                //":modernizr:2.6.2",
 
-                ":resources:latest.integration",
-                ":hibernate:$grailsVersion"
+                ":resources:1.2.1",
+                ":hibernate:3.6.10.4"
         ) {
 			// this is a plugin only plugin, should not be transitive to the application
 			export = false
@@ -75,10 +75,12 @@ grails.project.dependency.resolution = {
                 export = false
             }
 
-            runtime(":jquery:latest.integration",
-                    ":modernizr:latest.integration") {
+            runtime(":jquery:1.10.2") {
                 export = false
             }
         }
-	}
+
+        // we depend on modernizr
+        compile ":modernizr:2.6.2"
+    }
 }

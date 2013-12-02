@@ -18,6 +18,9 @@
 package hungry.wombat
 
 class UploadrTagLib {
+    // set encoding
+    static defaultEncodeAs = [all: 'raw']
+
 	// define namespace
 	static namespace = "uploadr"
 
