@@ -1,3 +1,4 @@
+<%@page expressionCodec="raw" %>
 <!DOCTYPE HTML>
 <html>
 <head>

@@ -1,4 +1,5 @@
-<%@ page import="org.apache.commons.lang.RandomStringUtils" %>
+<%@page import="org.apache.commons.lang.RandomStringUtils" %>
+<%@page expressionCodec="raw" %>
 <%
 /**
  *  Uploadr, a multi-file uploader plugin
