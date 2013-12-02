@@ -60,7 +60,7 @@ grails.project.dependency.resolution = {
                 //":modernizr:2.6.2",
 
                 ":resources:1.2.1",
-                ":hibernate:3.6.10.4"
+                //":hibernate:3.6.10.4"
         ) {
 			// this is a plugin only plugin, should not be transitive to the application
 			export = false
@@ -70,8 +70,7 @@ grails.project.dependency.resolution = {
         if (System.getProperty("grails.env") == "ci") {
             // as the ci should be able to run natively, we require
             // a couple of plugins to function properly
-            compile(":resources:latest.integration",
-                    ":hibernate:3.6.10.4") {
+            compile(":resources:1.2.1") {
                 export = false
             }
 

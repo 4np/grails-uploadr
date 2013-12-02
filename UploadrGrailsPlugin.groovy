@@ -17,7 +17,7 @@
 class UploadrGrailsPlugin {
 	def version         = "0.8.1"
 	def grailsVersion   = "1.3.7 > *"
-	def dependsOn       = [
+    def dependsOn       = [
             jquery      : "1.4 > *",
             modernizr   : "1.7.2 > *",
             resources   : "1.0 > *"
