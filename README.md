@@ -25,7 +25,7 @@ overall it’s a complete package for uploading files using HTML5 as a platform 
 
 ## Build status
 
-![build status](https://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
+![build status](http://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
 
 ## Features
 * upload files by
@@ -613,7 +613,7 @@ Fixed an issue where some file tags did not always work properly (color, rating,
 Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in ```file.fileSize``` , ```file.fileName``` and ```file.contentType``` , Firefox 7's File API now uses ```file.name``` , ```file.size``` and ```file.type``` instead. Implemented a fix to support this new behavior.
 
 ## Build status
-![build status](https://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
+![build status](http://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
 
 ## License
 
