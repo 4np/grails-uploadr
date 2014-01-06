@@ -615,6 +615,15 @@ Implemented support for the changed Firefox 7 File API. While in the previous ve
 ## Build status
 ![build status](http://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
 
+## Developed With
+
+[![Intellij](https://dl.dropboxusercontent.com/s/iy2bj9wwcrf3dld/Intellij%20IDEA%20Banner.png?dl=1&token_hash=AAHA0AU2GXH1OHSt_rSfbxXftQgMMmJW8hGOLnCdvK0dJA)](http://www.jetbrains.com/idea/)
+
+[![Grails](http://grails.org/img/grails.png)](http://www.grails.org)
+
+[![jQuery](http://danielpaul.me/projects/share+/images/jquery_logo.png)](http://jquery.com)
+
+
 ## License
 
    Copyright 2011-2014 Jeroen Wesbeek
