@@ -617,7 +617,7 @@ Implemented support for the changed Firefox 7 File API. While in the previous ve
 
 ## License
 
-   Copyright 2011 Jeroen Wesbeek
+   Copyright 2011-2014 Jeroen Wesbeek
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
