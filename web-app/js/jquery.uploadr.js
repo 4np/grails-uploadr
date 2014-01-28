@@ -262,6 +262,27 @@
 				// remove old tooltip
 				badgeDiv.unbind('hover');
 			}
+
+			// if count has decreased, check if we have any paused uploads
+			if (count < 0 && options.workvars.paused.length > 0) {
+				var newPaused = [];
+
+				// resume file upload(s)
+				$.each(options.workvars.paused, function(index, file) {
+					var canUpload = methods.canUpload(options);
+
+					if (canUpload) {
+						// start upload
+						methods.startUpload(file.file, file.fileAttrs, $(file.fileDiv), options);
+
+					} else {
+						newPaused.push(file);
+					}
+				});
+
+				// update paused array
+				options.workvars.paused = newPaused;
+			}
 		},
 
 		handlePagination: function(domObj, options) {
@@ -365,18 +386,57 @@
 				// set work var
 				options.workvars.gotFiles = true;
 
+				var failed = [];
+
 				// iterate through files
 				$.each(files, function(index, file) {
 					// add file DOM elements
 					var fileAttrs = { fileName: ((file.name) ? file.name : file.fileName), fileSize: ((file.size) ? file.size : file.fileSize), startTime: new Date().getTime(), fileRating: 0, deletable: true }
 					var fileDiv = methods.addFileElements(domObj, fileAttrs, options);
+					var fileDivObj = $(fileDiv);
 
-					// and start file upload
-					methods.startUpload(file, fileAttrs, $(fileDiv), options);
+					// check if we can upload (maximum number of concurrent uploads has been exceeded)
+					if (methods.canUpload(options)) {
+						// yes, start file upload
+						methods.startUpload(file, fileAttrs, fileDivObj, options);
+					} else if (options.maxConcurrentUploadsMethod == 'pause') {
+						// no, add to paused list to upload later
+						options.workvars.paused.push({
+							file        : file,
+							fileAttrs   : fileAttrs,
+							fileDiv     : fileDiv
+						});
+
+						methods.onProgressHandler(fileDivObj, file, 0, options.labelPaused, '', options);
+					} else if (options.maxConcurrentUploadsMethod == 'cancel') {
+						// no, cancel upload
+						methods.onProgressHandler(fileDivObj, file, 0, options.labelAborted, '', options);
+
+						// attach tooltip on status
+						var tooltipText = options.maxConcurrentUploadsExceeded.replace('%d', options.maxConcurrentUploads);
+						tooltipText = tooltipText.replace("%a", (options.maxConcurrentUploads == 1) ? "" : "s");
+						tooltipText = tooltipText.replace("%b", (options.maxConcurrentUploads == 1) ? " is" : "s are");
+						$('div.percentage', fileDivObj).tipTip({content: tooltipText, maxWidth: 600});
+
+						// add a delete button to remove the file div
+						methods.addButton(fileDivObj, 'delete', options.removeFromViewText, '', options, function() {
+							methods.removeFileElement(fileDivObj, options);
+						});
+
+						// remember we failed
+						fileAttrs.failed = true;
+
+						// mark as failed
+						$('.progress', fileDivObj).addClass('failed');
+					}
 				});
 			}
 
   			return false;
+		},
+
+		canUpload: function(options) {
+			return (options.maxConcurrentUploads == 0 || options.workvars.uploading <= options.maxConcurrentUploads);
 		},
 
 		startUpload: function(file, fileAttrs, domObj, options) {
@@ -1040,6 +1100,7 @@
 			fileViewText		: 'Click to view this file',
 			fileTooLargeText	: 'The upload size of %s is larger than allowed maximum of %s',
 			fileExtensionNotAllowedText : 'You tried to upload a file with extension "%s" while only files with extensions "%s" are allowed to be uploaded',
+			maxConcurrentUploadsExceeded: 'Only %d concurrent upload%a allowed, please retry when the other upload%b finished',
 			likeText			: 'Click to like',
 			unlikeText			: 'Click to unlike',
 			colorPickerText		: 'Click to change background color',
@@ -1047,6 +1108,7 @@
 			badgeTooltipPlural	: '%d files are still being uploaded...',
 			removeFromViewText	: 'Click to remove this aborted transfer from your view',
 			labelDone			: 'done',
+			labelPaused         : 'paused',
 			labelFailed 		: 'failed',
 			labelAborted 		: 'aborted',
 			labelFileTooLarge	: 'too large',
@@ -1056,25 +1118,27 @@
 			uri					: '/upload/uri',
 			id					: 'uploadr',
 			maxFileNameLength	: 34,
-			maxSize				: 0,	// 0 = unlimited
-			maxVisible 			: 5,	// 0 = unlimited
+			maxSize				: 0,	        // 0 = unlimited
+			maxVisible 			: 5,	        // 0 = unlimited
 			files				: [],
 			uploadField 		: true,
 			insertDirection 	: 'down',
+			maxConcurrentUploads: 0,            // 0 = unlimited
+			maxConcurrentUploadsMethod: 'cancel',  // pause (until upload slot available) / cancel (cancel upload)
 			rating 				: true,
 			voting 				: true,
 			colorPicker 		: true,
-			deletable 			: true,	// delete button visible?
-			downloadable 		: true,	// download button visible?
-			viewable 			: true,	// view button visible?
-			allowedExtensions   : "",   // comma ceperated list of allowed extensions, all if empty
+			deletable 			: true,	        // delete button visible?
+			downloadable 		: true,	        // download button visible?
+			viewable 			: true,	        // view button visible?
+			allowedExtensions   : "",           // comma separated list of allowed extensions, all if empty
 
 			// default sound effects
 			notificationSound   : '',
 			errorSound          : '',
 			deleteSound 		: '',
 
-			// colorpickr colors
+			// color picker colors
 			colorPickerColors 	: [
 				'#bce08a',	// default green
 				'#00a8e1',	// blue
@@ -1084,7 +1148,7 @@
 				'#e70033'	// red
 			],
 
-			// workvariables, internal use only
+			// work variables, internal use only
 			workvars 			: {
 				gotFiles					: false,
 				files						: [],
@@ -1099,7 +1163,8 @@
 				pagesDiv 					: null,
 				nextButton 					: null,
 				prevButton 					: null,
-				fileIterator				: -1
+				fileIterator				: -1,
+				paused                      : []
 			},
 
 			// default event handlers

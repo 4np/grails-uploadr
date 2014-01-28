@@ -59,8 +59,8 @@ def path5 = new File("${downloads}/myFifthUploadr")
 	&lt;/uploadr:add>
 </pre>
 
-<h1>3. Initial files, new files on top, 5 files per page, max file size is 200kb, enable rating and voting</h1>
-<uploadr:add name="myThirdUploadr" path="${path3}" direction="up" maxVisible="5" maxSize="204800" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+<h1>3. Initial files, new files on top, 5 files per page, max file size is 500kb, maximum of 2 concurrent uploads (pausing others), enable rating and voting</h1>
+<uploadr:add name="myThirdUploadr" path="${path3}" direction="up" maxVisible="5" maxSize="512000" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxConcurrentUploads="2" maxConcurrentUploadsMethod="pause">
     <g:each in="${path3.listFiles()}" var="file">
 	<uploadr:file name="${file.name}">
 		<uploadr:fileSize>${file.size()}</uploadr:fileSize>
@@ -71,7 +71,7 @@ def path5 = new File("${downloads}/myFifthUploadr")
     </g:each>
 </uploadr:add>
 <pre class="brush:html collapse:true">
-	&lt;uploadr:add name="myThirdUploadr" path="${path3}" direction="up" maxVisible="5" maxSize="204800" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}">
+	&lt;uploadr:add name="myThirdUploadr" path="${path3}" direction="up" maxVisible="5" maxSize="512000" rating="true" voting="true" unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}" maxConcurrentUploads="2" maxConcurrentUploadsMethod="pause">
     <g:each in="${path3.listFiles()}" var="file">
 		&lt;uploadr:file name="${file.name}">
 			&lt;uploadr:fileSize>${file.size()}&lt;/uploadr:fileSize>

@@ -75,6 +75,8 @@ $(document).ready(function() {
 			badgeTooltipPlural: '<g:message code="uploadr.badge.tooltip.plural" />',
 			colorPickerText: '<g:message code="uploadr.button.color.picker" />',
 			maxVisible: ${maxVisible},
+			maxConcurrentUploads: ${maxConcurrentUploads},
+			maxConcurrentUploadsMethod: '${maxConcurrentUploadsMethod}',
 			rating: ${rating as String},
 			voting: ${voting as String},
 			colorPicker: ${colorPicker as String},

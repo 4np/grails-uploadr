@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 class UploadrGrailsPlugin {
-	def version         = "0.8.1.1"
+	def version         = "0.8.2"
 	def grailsVersion   = "1.3.7 > *"
     def loadBefore      = ['jquery', 'modernizr', 'resources']
 	def pluginExcludes  = [

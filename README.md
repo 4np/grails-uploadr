@@ -44,6 +44,7 @@ overall it’s a complete package for uploading files using HTML5 as a platform 
 * * background progress
 * * calculated file upload speed
 * * estimated file upload duration
+* * support for maximum concurrent uploads
 * adding default files (e.g. files uploaded in a previous session)
 * customizable css
 * internationalization through i18n
@@ -127,24 +128,26 @@ Parameters
 
 |*parameter* | *description* | *example* | *default* | *required*|
 |------------|---------------|-----------|-----------|----------:|
-|name | a unique name for your uploadr | myFirstUploadr | random uuid | yes|
-|path | the upload path, this may be a temporary path | /tmp | none | yes|
-|direction | manages whether new files will be added on top or on bottom (up/down) | up | down | no|
-|maxVisible | determines how many files should be visible and handles pagination | 5 | 0 (=unlimited) | no|
-|unsupported | shown when unsupported browser is used | /my/controller/action | default | no|
-|class | override the default uploadr stylesheet with your own implementation | demo | uploadr | no|
-|noSound | disable sound effects | noSound="true" | false | no|
-|rating | enable / disable rating | rating="true" | false | no|
-|voting | enable / disable voting | voting="true" | false | no|
-|colorPicker | enable / disable colorPicker | colorPicker="true" | false | no|
-|viewable | enable / disable view button | viewable="false" | true | no|
-|downloadable | enable / disable download button | downloadable="false" | true | no|
-|deletable | enable / disable delete button | deletable="false" | true | no|
-|maxSize | max allowed size in bytes | maxSize="204800" | 0 (=unlimited) | no|
-|allowedExtensions | only allow these extensions to be uploaded | allowedExtensions="gif,png,jpg,jpeg" | "" (= all) | no |
-|controller | use your own controller to handle file uploads | controller="myController" | default controller/action | no|
-|action | use your own action to handle file uploads | action="myAction" | default controller/action | no|
-|plugin | plugin that contains your custom controller/action | plugin="myPlugin" | default plugin | no|
+|name | a unique name for your uploadr | myFirstUploadr | random uuid | ✔|
+|path | the upload path, this may be a temporary path | /tmp | none | ✔|
+|direction | manages whether new files will be added on top or on bottom (up/down) | up | down | ✗|
+|maxVisible | determines how many files should be visible and handles pagination | 5 | 0 (=unlimited) | ✗|
+|unsupported | shown when unsupported browser is used | /my/controller/action | default | ✗|
+|class | override the default uploadr stylesheet with your own implementation | demo | uploadr | ✗|
+|noSound | disable sound effects | noSound="true" | false | ✗|
+|rating | enable / disable rating | rating="true" | false | ✗|
+|voting | enable / disable voting | voting="true" | false | ✗|
+|colorPicker | enable / disable colorPicker | colorPicker="true" | false | ✗|
+|viewable | enable / disable view button | viewable="false" | true | ✗|
+|downloadable | enable / disable download button | downloadable="false" | true | ✗|
+|deletable | enable / disable delete button | deletable="false" | true | ✗|
+|maxSize | max allowed size in bytes | maxSize="204800" | 0 (=unlimited) | ✗|
+|allowedExtensions | only allow these extensions to be uploaded | allowedExtensions="gif,png,jpg,jpeg" | "" (= all) | ✗ |
+|controller | use your own controller to handle file uploads | controller="myController" | default controller/action | ✗|
+|action | use your own action to handle file uploads | action="myAction" | default controller/action | ✗|
+|plugin | plugin that contains your custom controller/action | plugin="myPlugin" | default plugin | ✗|
+|maxConcurrentUploads|maximum number of concurrent uploads|maxConcurrentUploads="2"|0 (unlimited)| ✗|
+|maxConcurrentUploadsMethod|how to handle uploads that exceed _maxConcurrentUploads_|maxConcurrentUploadsMethod="cancel"|_pause_| ✗|
 
 A screenshot of how the ```maxSize``` parameter (maxSize="204800") is handled in the front end:
 
@@ -512,8 +515,24 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 
 ## Changelog
 
+###Version 0.8.2
+Added support for defining the maximum number of concurrent file uploads, and how to handle file uploads that _exceed_ this maximum number (by request of [viseth](https://github.com/viseth), [#22](https://github.com/4np/grails-uploadr/issues/22))
+
+```
+<uploadr:add … maxConcurrentUploads="2" maxConcurrentUploadsMethod="pause">
+	…
+</uploadr>
+```
+
+The _maxConcurrentUploads_ takes an integer where _0_ means '_unlimited_', and _maxConcurrentUploadsMethod_ can be either '_pause_' (default) or '_cancel_'. When it is set to _pause_, all file uploads that exceed the maximum number of concurrent file uploads will be paused and be resumed whenever an upload slot is available. If set to _cancel_, any file upload that exceeds the maximum number of concurrent file uploads will be aborted. In the case of the latter the file should be re-uploaded when other running file upload(s) have finished (and uploads slots have been freed up).
+
+###Version 0.8.1 / 0.8.1.1
+
+Due to a bug in the handeling of resources in Grails 2.3.0 and 2.3.1, the plugin did not work properly. This bus was resolved in Grails 2.3.2 and required some updated to the plugin, which are added in this update. Please make sure you _are not using Grails 2.3.0 / 2.3.1_ together with this plugin (see issue [#15](https://github.com/4np/grails-uploadr/issues/15))
+ 
 ###Version 0.8.0 / 0.8.0.1
-- fixed security flaw [#21](https://github.com/4np/grails-uploadr/issues/21) in the default file download action where it was possible to use a path traversal attack. *_Everybody is advised to upgrade to 0.8.0.1!_* (Again, thanks to [Murf80](https://github.com/murf80) for reporting this issue!)
+
+fixed security flaw [#21](https://github.com/4np/grails-uploadr/issues/21) in the default file download action where it was possible to use a path traversal attack. *_Everybody is advised to upgrade to 0.8.0.1!_* (Again, thanks to [Murf80](https://github.com/murf80) for reporting this issue!)
 
 ###Version 0.7.6 / 0.7.6.1
 - fixed issues [#17](https://github.com/4np/grails-uploadr/issues/17) and [#18](https://github.com/4np/grails-uploadr/issues/18) regarding empty files (thanks to [Murf80](https://github.com/murf80))
