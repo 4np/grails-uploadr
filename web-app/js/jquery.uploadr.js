@@ -413,9 +413,8 @@
 						methods.onProgressHandler(fileDivObj, file, 0, options.labelAborted, '', options);
 
 						// attach tooltip on status
-						var tooltipText = options.maxConcurrentUploadsExceeded.replace('%d', options.maxConcurrentUploads);
-						tooltipText = tooltipText.replace("%a", (options.maxConcurrentUploads == 1) ? "" : "s");
-						tooltipText = tooltipText.replace("%b", (options.maxConcurrentUploads == 1) ? " is" : "s are");
+						var tooltipText = (options.maxConcurrentUploads == 1) ? options.maxConcurrentUploadsExceededSingular : options.maxConcurrentUploadsExceededPlural;
+						tooltipText = tooltipText.replace('%d', options.maxConcurrentUploads);
 						$('div.percentage', fileDivObj).tipTip({content: tooltipText, maxWidth: 600});
 
 						// add a delete button to remove the file div
@@ -1100,7 +1099,8 @@
 			fileViewText		: 'Click to view this file',
 			fileTooLargeText	: 'The upload size of %s is larger than allowed maximum of %s',
 			fileExtensionNotAllowedText : 'You tried to upload a file with extension "%s" while only files with extensions "%s" are allowed to be uploaded',
-			maxConcurrentUploadsExceeded: 'Only %d concurrent upload%a allowed, please retry when the other upload%b finished',
+			maxConcurrentUploadsExceededSingular: 'Only 1 upload at a time allowed, please retry when the other upload is finished',
+			maxConcurrentUploadsExceededPlural: 'Only %d concurrent uploads allowed, please retry when the other uploads are finished',
 			likeText			: 'Click to like',
 			unlikeText			: 'Click to unlike',
 			colorPickerText		: 'Click to change background color',
@@ -1118,20 +1118,20 @@
 			uri					: '/upload/uri',
 			id					: 'uploadr',
 			maxFileNameLength	: 34,
-			maxSize				: 0,	        // 0 = unlimited
-			maxVisible 			: 5,	        // 0 = unlimited
+			maxSize				: 0,	            // 0 = unlimited
+			maxVisible 			: 5,	            // 0 = unlimited
 			files				: [],
 			uploadField 		: true,
 			insertDirection 	: 'down',
-			maxConcurrentUploads: 0,            // 0 = unlimited
-			maxConcurrentUploadsMethod: 'cancel',  // pause (until upload slot available) / cancel (cancel upload)
+			maxConcurrentUploads: 0,                // 0 = unlimited
+			maxConcurrentUploadsMethod: 'cancel',   // pause (until upload slot available) / cancel (cancel upload)
 			rating 				: true,
 			voting 				: true,
 			colorPicker 		: true,
-			deletable 			: true,	        // delete button visible?
-			downloadable 		: true,	        // download button visible?
-			viewable 			: true,	        // view button visible?
-			allowedExtensions   : "",           // comma separated list of allowed extensions, all if empty
+			deletable 			: true,	            // delete button visible?
+			downloadable 		: true,	            // download button visible?
+			viewable 			: true,	            // view button visible?
+			allowedExtensions   : "",               // comma separated list of allowed extensions, all if empty
 
 			// default sound effects
 			notificationSound   : '',

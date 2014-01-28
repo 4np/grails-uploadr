@@ -335,8 +335,10 @@ The text labels the plugin uses are stored in [i18n messages](https://github.com
 # an upload is complete, failed or aborted
 uploadr.label.done=done
 uploadr.label.failed=failed
+uploadr.label.paused=paused
 uploadr.label.aborted=aborted
 uploadr.label.maxsize=too large
+uploadr.label.invalidFileExtension=invalid
 
 # label for the 'select files' button
 uploadr.button.select=Click to upload files
@@ -350,6 +352,10 @@ uploadr.badge.tooltip.plural=%d files are still being uploaded...
 
 # error messages / tooltips
 uploadr.error.maxsize=The upload size of %s is larger than allowed maximum of %s
+uploadr.error.wrongExtension=You tried to upload a file with extension "%s" while only files with extensions "%s" \
+  are allowed to be uploaded
+uploadr.error.maxConcurrentUploadsExceededSingular=Only 1 concurrent upload allowed, please retry when the other upload is finished
+uploadr.error.maxConcurrentUploadsExceededPlural=Only %d concurrent uploads allowed, please retry when the other uploads are finished
 
 # file control tooltips
 uploadr.button.delete=Click to delete this file
@@ -525,6 +531,14 @@ Added support for defining the maximum number of concurrent file uploads, and ho
 ```
 
 The _maxConcurrentUploads_ takes an integer where _0_ means '_unlimited_', and _maxConcurrentUploadsMethod_ can be either '_pause_' (default) or '_cancel_'. When it is set to _pause_, all file uploads that exceed the maximum number of concurrent file uploads will be paused and be resumed whenever an upload slot is available. If set to _cancel_, any file upload that exceeds the maximum number of concurrent file uploads will be aborted. In the case of the latter the file should be re-uploaded when other running file upload(s) have finished (and uploads slots have been freed up).
+
+Three new i18n strings have been added as well:
+
+```
+uploadr.label.paused=paused
+uploadr.error.maxConcurrentUploadsExceededSingular=Only 1 upload at a time allowed, please retry when the other upload is finished
+uploadr.error.maxConcurrentUploadsExceededPlural=Only %d concurrent uploads allowed, please retry when the other uploads are finished
+```
 
 ###Version 0.8.1 / 0.8.1.1
 
