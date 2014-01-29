@@ -530,9 +530,9 @@ Added support for defining the maximum number of concurrent file uploads, and ho
 </uploadr>
 ```
 
-The _maxConcurrentUploads_ takes an integer where _0_ means '_unlimited_', and _maxConcurrentUploadsMethod_ can be either '_pause_' (default) or '_cancel_'. When it is set to _pause_, all file uploads that exceed the maximum number of concurrent file uploads will be paused and be resumed whenever an upload slot is available. If set to _cancel_, any file upload that exceeds the maximum number of concurrent file uploads will be aborted. In the case of the latter the file should be re-uploaded when other running file upload(s) have finished (and uploads slots have been freed up).
+Two (optional) new [parameters](#adding-an-uploadr-to-your-view) have been added to support upload concurrency. The _maxConcurrentUploads_ parameter takes an integer where _0_ means '_unlimited_', and the _maxConcurrentUploadsMethod_ parameter can be either '_pause_' (default) or '_cancel_'. When it is set to _pause_, all file uploads that exceed the maximum number of concurrent file uploads will be paused and be resumed whenever an upload slot is available. If set to _cancel_, any file upload that exceeds the maximum number of concurrent file uploads will be aborted. In the case of the latter the file should be re-uploaded when other running file upload(s) have finished (and uploads slots have been freed up).
 
-Three new i18n strings have been added as well:
+Three new [i18n](#internationalization--custom-texts) strings have been added as well:
 
 ```
 uploadr.label.paused=paused
