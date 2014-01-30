@@ -32,7 +32,7 @@ overall it’s a complete package for uploading files using HTML5 as a platform 
 * * dragging & dropping files onto the uploadr element
 * * button (optional)
 * pagination (customizable number of uploads per 'page')
-* sound effects (disablable)
+* sound effects (optional)
 * * file upload complete
 * * transfer aborted
 * * file deleted
@@ -95,7 +95,7 @@ grails install-plugin uploadr
 ```
 
 ## Quickstart
-The plugin incorporates a demo tag which demonstrates some examples of how to use the uploadr tag with examples and source code. You can see a live (continuous integration) demo [here](http://ci.uploadr.osx.eu/):
+The plugin incorporates a demo tag which demonstrates some examples of how to use the uploadr tag with examples and source code. You can see a live (continuous integration) demo [here](http://ci.uploadr.osx.eu/) (which is running [this](https://github.com/4np/grails-uploadr-demo)):
 
 ```rhtml
 <uploadr:demo/>
@@ -168,7 +168,7 @@ You could just use the uploadr as an upload facility, but it can also be used to
 	</uploadr:file>
 ```
 
-If you would like to show the list of files in a certain folder on disk, you could do that by doing something like this (also see the demo tag's second example) although it would be better to pass the file list from the controller to your view:
+If you would like to show the list of files in a certain folder on disk, you could do that by doing something like this (also see the demo tag's second example):
 
 ```rhtml
 <% def path = new File("/path/to/folder") %>
@@ -183,7 +183,7 @@ If you would like to show the list of files in a certain folder on disk, you cou
 </uploadr:add>
 ```
 
-Of course in MVC one should not put logic in a view, and the above examples are merely here to provide some insight. Normally you
+Of course in MVC one should not put logic in a view but in the controller (or the model) instead, and the above examples are merely here to provide some insight. Normally you
 would pass -for example- a ```files``` variable to your view from your controller. So the example would be something like:
 
 ```rhtml
@@ -203,6 +203,8 @@ _note though that these examples use RandomStringUtils which you should include:
 ```rhtml
 <%@ page import="org.apache.commons.lang.RandomStringUtils" %>
 ```
+
+## File overrides
 
 To override the color of a file you can user the color attribute:
 
@@ -486,6 +488,7 @@ and the ```uploadedFile``` controller's ```downloadUploadedFile``` action in ```
 		return false
     }
 ```
+
 ## Interacting with an already initialized Uploadr
 
 There are several occasions you might want to be able to interact with an already initialized Uploadr, for example in ajax calls or in your handlers. At the moment only clearing out (and / or erasing all uploaded files) is supported. If you have any feature requests, you can [submit them here](https://github.com/4np/grails-uploadr/issues).
@@ -502,7 +505,7 @@ By default the call will play a delete sound and execute the _onDelete_ handler 
 ```
 $('.uploadr[name=myUploadr]').data('uploadr').clear({
 	sound: true,
-	erase, false
+	erase: false
 });
 ```
 
