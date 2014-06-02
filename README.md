@@ -84,6 +84,7 @@ plugins {
 	build ":tomcat:$grailsVersion"
 	runtime ":jquery:latest.integration"
 	runtime ":resources:latest.integration"
+	compile ":modernizr:latest.integration"
 	compile ":uploadr:latest.integration"
 }
 ```
