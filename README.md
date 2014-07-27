@@ -101,7 +101,7 @@ Add a compile time dependency to your Grails project's ```grails-app/conf/Buildc
         //compile ":handlebars-asset-pipeline:1.3.0.3"
         
         // Load the Uploadr plugin
-        compile ":uploadr:latest.integration"
+        compile ":uploadr:1.0.0"
     }
 ```
 
@@ -121,7 +121,7 @@ plugins {
 	runtime ":jquery:latest.integration"
 	runtime ":resources:latest.integration"
 	compile ":modernizr:latest.integration"
-	compile ":uploadr:latest.integration"
+	compile ":uploadr:1.0.0"
 }
 ```
 
