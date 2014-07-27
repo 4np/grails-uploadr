@@ -2,11 +2,12 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<r:require modules="uploadr"/>
-	<r:layoutResources/>
+    <asset:javascript src="uploadr.manifest.js"/>
+    <asset:javascript src="uploadr.demo.manifest.js"/>
+    <asset:stylesheet href="uploadr.manifest.css"/>
+    <asset:stylesheet href="uploadr.demo.manifest.css"/>
 </head>
 <body>
-	<uploadr:demo/>
-	<r:layoutResources/>
+    <uploadr:demo/>
 </body>
 </html>

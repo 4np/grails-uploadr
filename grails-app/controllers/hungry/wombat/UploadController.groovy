@@ -23,7 +23,7 @@ class UploadController {
 	static final byte[] buffer = new byte[BUFF_SIZE];
 
     def index = {
-		render(plugin: 'uploadr', template: '/index', model:[desktop: System.getProperty('user.home') + '/Desktop'])
+        redirect(uri: "/")
 	}
 
 	def warning = {

@@ -112,7 +112,11 @@ class UploadrTagLib {
 		out << "<div name=\"${name}\" class=\"${classname}\"></div>"
 
 		// and render inline initialization javascript
-		out << r.script([:], g.render(
+//        asset.script(assetScriptBlocks: g.render(
+//        asset.script([:], g.render(
+//		out << r.script([:], g.render(
+        out << "<script>"
+        out << g.render(
 			plugin	: 'uploadr',
 			template:'/js/init',
 			model	:[
@@ -138,22 +142,11 @@ class UploadrTagLib {
 				maxConcurrentUploadsMethod: maxConcurrentUploadsMethod,
 				unsupported	        : (attrs.get('unsupported')) ? attrs.unsupported : createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')
 			]
-		))
+		)
+        out << "</script>"
 	}
 
 	def demo = { attrs, body ->
-		// pull in external resources
-		out << r.external(type:"css", plugin:'uploadr', dir:'css', file:'demo.css')
-		out << r.external(type:"css", plugin:'uploadr', dir:'css', file:'demopage.css')
-		out << r.external(type:"css", plugin:'uploadr', dir:'css', file:'shThemeEclipse.css')
-		out << r.external(type:"css", plugin:'uploadr', dir:'css', file:'shCore.css')
-		out << r.external(type:"js", plugin:'uploadr', dir:'js', file:'shCore.js')
-		out << r.external(type:"js", plugin:'uploadr', dir:'js', file:'shAutoloader.js')
-		out << r.external(type:"js", plugin:'uploadr', dir:'js', file:'shBrushXml.js')
-
-		// initialize the syntax highlighter
-		out << r.script([:], "\$(document).ready(function() { SyntaxHighlighter.all(); });")
-
 		out << g.render(plugin: 'uploadr', template:'/upload/demo')
 	}
 

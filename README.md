@@ -76,7 +76,43 @@ overall it’s a complete package for uploading files using HTML5 as a platform 
 This plugin heavily relies on the HTML5 Drag and Drop and File API's which Microsoft has unfortunately only implemented in Internet Explorer 10.0.8102.0 (part of the [Windows 8 developer preview](http://msdn.microsoft.com/en-us/windows/apps/br229516) distribution).
 
 ## Installation
+**Grails version 2.4 (and higher):**
 Add a compile time dependency to your Grails project's ```grails-app/conf/Buildconf.groovy```:
+
+```groovy
+    plugins {
+        // plugins for the build system only
+        build ":tomcat:7.0.54"
+
+        // plugins for the compile step
+        compile ":scaffolding:2.1.2"
+        compile ':cache:1.1.7'
+        compile ":asset-pipeline:1.8.11"
+
+        // plugins needed at runtime but not for compilation
+        runtime ":hibernate4:4.3.5.4" // or ":hibernate:3.6.10.16"
+        runtime ":database-migration:1.4.0"
+        runtime ":jquery:1.11.1"
+
+        // Uncomment these to enable additional asset-pipeline capabilities
+        //compile ":sass-asset-pipeline:1.7.4"
+        //compile ":less-asset-pipeline:1.7.0"
+        //compile ":coffee-asset-pipeline:1.7.0"
+        //compile ":handlebars-asset-pipeline:1.3.0.3"
+        
+        // Load the Uploadr plugin
+        compile ":uploadr:latest.integration"
+    }
+```
+
+and load the Uploadr assets in the views / templates that use the Uploadr plugin:
+
+```groovy
+	<asset:javascript src="uploadr.manifest.js"/>
+	<asset:stylesheet href="uploadr.manifest.css"/>
+```
+
+**Grails versions Pre 2.4:**
 
 ```groovy
 plugins {
@@ -101,6 +137,28 @@ The plugin incorporates a demo tag which demonstrates some examples of how to us
 ```rhtml
 <uploadr:demo/>
 ```
+
+**Grails version 2.4 (and higher):**
+
+The *uploadr* plugin version 1.0.0 (and higher) depends in the Asset Pipeline plugin, so your project needs to load the plugin's assets as well as the demo assets:
+
+```rhtml
+<%@page expressionCodec="raw" %>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <asset:javascript src="uploadr.manifest.js"/>
+    <asset:javascript src="uploadr.demo.manifest.js"/>
+    <asset:stylesheet href="uploadr.manifest.css"/>
+    <asset:stylesheet href="uploadr.demo.manifest.css"/>
+</head>
+<body>
+    <uploadr:demo/>
+</body>
+</html>
+```
+
+**Grails versions Pre 2.4:**
 	
 As the *uploadr* plugin depends on the resources plugin to pull in dependencies, your project should use the resources plugin as well (as will be the standard in Grails 2.x). If you are not familiar with the [resources plugin](http://grails.org/plugin/resources), the _demo_ tag can be used in a view as follows:*
 
@@ -153,6 +211,8 @@ Parameters
 A screenshot of how the ```maxSize``` parameter (maxSize="204800") is handled in the front end:
 
 ![example1](https://dl.dropbox.com/s/dgwtupymrjt1ujs/uploadr-tooLarge.png?dl=1)
+
+** The below section _only_ applies to plugin versions older than 1.0.0 as that version deprecated the dependency on the modernizr plugin. You should probably introcude some sort of validation in your end to make sure users have browser that support the HTML5 drag & drop API! **
 
 A screenshot of the default warning when an unsupported browser is used. This can be changed by setting the _unsupported_ parameter to load your own warning or fallback upload support (e.g. ```unsupported="${createLink(plugin: 'uploadr', controller: 'upload', action: 'warning')}"```):
 
@@ -524,6 +584,39 @@ Take a look at the documentation above, and the default event handlers in the up
 The front-end side (the gui) of the upload plugin is developed as a [jQuery](http://jquery.com/) plugin (javascript: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.js), [minified](https://github.com/4np/grails-uploadr/blob/master/web-app/js/jquery.uploadr.minified.js), css: [full](https://github.com/4np/grails-uploadr/blob/master/web-app/css/jquery.uploadr.css), [minified](grails-uploadr/tree/master/web-app/css/jquery.uploadr.minified.css)) which means you can also use the front-end in _non-Grails_ projects. You will, however, have to create your own back-end logic (take the _handle_ method in the [default controller](https://github.com/4np/grails-uploadr/blob/master/grails-app/controllers/hungry/wombat/UploadController.groovy) as an example) to handle the file uploads. The use of the jQuery plugin is currently undocumented, but the [initialization JavaScript](https://github.com/4np/grails-uploadr/blob/master/grails-app/views/js/_init.gsp) will probably provide you with all the information you require...
 
 ## Changelog
+
+##Version 1.0.0 (Grails 2.4 > *)
+
+Version 1.0.0 drops support for the Grails resources plugin in favor of the Asset Pipeline plugin (default as of Grails 2.4 - resolves [#26](https://github.com/4np/grails-uploadr/issues/26)).
+The previous versions of the uploadr also had a dependency on the modernizr plugin to display a warning when the browser did not support the HTML5 drag & drop API. I have decided to drop the dependency
+and have the developer implement their own compliancy validation. Mainly because the modernizr plugin is not -yet- compatible witht the asset pipeline, but also because that responsbility probably
+lies with the developer; you probably would have already wanted to implemented some sort of check anyways because in general your would not have wanted your users to end
+up in a warning page. 
+
+** plugin assets **
+
+
+```groovy
+<asset:javascript src="uploadr.manifest.js"/>
+<asset:stylesheet href="uploadr.manifest.css"/>
+```
+
+** demo tag **
+
+To view the demo you now need to load the demo assets and execute the demo tag:
+
+```groovy
+<head>
+    <asset:javascript src="uploadr.manifest.js"/>
+    <asset:javascript src="uploadr.demo.manifest.js"/>
+    <asset:stylesheet href="uploadr.manifest.css"/>
+    <asset:stylesheet href="uploadr.demo.manifest.css"/>
+</head>
+<body>
+    <uploadr:demo/>
+</body>
+```
+
 
 ###Version 0.8.2
 Added support for defining the maximum number of concurrent file uploads, and how to handle file uploads that _exceed_ this maximum number (by request of [viseth](https://github.com/viseth), [#22](https://github.com/4np/grails-uploadr/issues/22))
