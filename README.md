@@ -593,7 +593,7 @@ and have the developer implement their own compliancy validation. Mainly because
 lies with the developer; you probably would have already wanted to implemented some sort of check anyways because in general your would not have wanted your users to end
 up in a warning page. 
 
-*plugin assets*
+**Plugin assets**
 
 
 ```groovy
@@ -601,7 +601,7 @@ up in a warning page.
 <asset:stylesheet href="uploadr.manifest.css"/>
 ```
 
-*demo tag*
+**Demo tag**
 
 To view the demo you now need to load the demo assets and execute the demo tag:
 
