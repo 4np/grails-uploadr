@@ -142,10 +142,10 @@ def path5 = new File("${downloads}/myFifthUploadr")
 		</div>
 		<div class="col-md-6">
 			<pre class="brush:html collapse:false">
-				&lt;input type="button" id="test" name="test" value="clear the uploadr but do not erase files">
+				&lt;input type="button" id="test1" name="test" value="clear the uploadr but do not erase files">
 				&lt;script>
 				$(document).ready(function() {
-					$('#test').on('click', function() {
+					$('#test1').on('click', function() {
 						$('.uploadr[name=myThirdUploadr]').data('uploadr').clear({
 							sound: true,
 							erase: false
@@ -162,10 +162,10 @@ def path5 = new File("${downloads}/myFifthUploadr")
 		</div>
 		<div class="col-md-6">
 			<pre class="brush:html collapse:false">
-				&lt;input type="button" id="test" name="test" value="change the initialed uploadr to only allow .png">
+				&lt;input type="button" id="test2" name="test" value="change the initialed uploadr to only allow .png">
 				&lt;script>
 				$(document).ready(function() {
-					$('#test').on('click', function() {
+					$('#test2').on('click', function() {
 						$('.uploadr[name=myThirdUploadr]').data('uploadr').set('allowedExtensions', 'png');
 					});
 				});
