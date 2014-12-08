@@ -176,6 +176,16 @@ As the *uploadr* plugin depends on the resources plugin to pull in dependencies,
 </html>
 ```
 
+## Using together with the spring-security plugin
+
+For the plugin to work properly, you need extend the Spring Security configuration to allow access to ```/uploadr/*```. Example:
+
+```rhtml
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+..
+'/upload/**': ['ROLE_ADMIN','ROLE_USER',],
+```
+
 ## Adding an uploadr to your view
 This tag will initialize the uploadr
 

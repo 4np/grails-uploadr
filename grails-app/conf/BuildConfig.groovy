@@ -56,17 +56,17 @@ grails.project.dependency.resolution = {
     plugins {
         // build time dependencies
         build(":release:3.0.1",
-              ":rest-client-builder:1.0.3") {
+              ":rest-client-builder:2.0.3") {
             export = false
         }
 
         // when running the plugin
         provided(
-                ":tomcat:7.0.54",
+                ":tomcat:7.0.55",
                 ":grom:latest.integration",
                 ":jquery:1.11.1",
-                ':cache:1.1.7',
-                ":asset-pipeline:1.8.11"
+                ':cache:1.1.8',
+                ":asset-pipeline:1.9.9"
         ) {
             // this is a plugin only plugin, should not be transitive to the application
             export = false

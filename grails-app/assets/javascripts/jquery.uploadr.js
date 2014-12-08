@@ -808,6 +808,9 @@
 
 			// add tooltip?
 			if (tooltipText) {
+
+				console.log('bind tiptip to', domObj);
+
 				button.tipTip({content: tooltipText, maxWidth: 600});
 			}
 
