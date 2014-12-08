@@ -66,14 +66,15 @@ grails.project.dependency.resolution = {
                 ":grom:latest.integration",
                 ":jquery:1.11.1",
                 ':cache:1.1.8',
-                ":asset-pipeline:1.9.9"
+                ":asset-pipeline:1.9.9",
+                ":sass-asset-pipeline:1.9.0"
         ) {
             // this is a plugin only plugin, should not be transitive to the application
             export = false
         }
 
         // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.7.4"
+        //compile ":sass-asset-pipeline:1.9.0"
         //compile ":less-asset-pipeline:1.7.0"
         //compile ":coffee-asset-pipeline:1.7.0"
         //compile ":handlebars-asset-pipeline:1.3.0.3"

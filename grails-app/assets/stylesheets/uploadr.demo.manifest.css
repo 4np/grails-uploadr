@@ -7,9 +7,18 @@
 * You're free to add application-wide styles to this file and they'll appear at the top of the
 * compiled file, but it's generally better to create a new file per style scope.
 *
-*= require demo.css
-*= require demopage.css
-*= require shThemeEclipse.css
-*= require shCore.css
-* require_self
+*= require demo
+*= require demopage
+*= require shThemeEclipse
+*= require shCore
+*= require_self
 */
+
+$(document).ready(function() {
+    $('#clearButton3').on('click', function() {
+        $('.uploadr[name=myThirdUploadr]').data('uploadr').clear({
+            sound: true,
+            erase: false
+        });
+    });
+});

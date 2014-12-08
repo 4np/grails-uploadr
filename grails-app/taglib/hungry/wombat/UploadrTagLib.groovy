@@ -52,10 +52,10 @@ class UploadrTagLib {
 
 		// define uri
 		if (attrs.get('controller')) {
-			//get parameters if any to pass to the custom controller/action
-                        def params = attrs.containsKey('params') ? attrs.get('params') : []
-		        
-		        // got an action attribute?
+			// get parameters if any to pass to the custom controller/action
+			def params = attrs.containsKey('params') ? attrs.get('params') : []
+
+			// got an action attribute?
 			if (attrs.get('action')) {
 				// got a plugin attribute?
 				if (attrs.get('plugin')) {
@@ -72,7 +72,7 @@ class UploadrTagLib {
 				}
 			}
 		} else {
-			// use default controller for handeling file uploads
+			// use default controller for handling file uploads
 			uri = createLink(plugin: 'uploadr', controller: 'upload', action: 'handle')
 		}
 

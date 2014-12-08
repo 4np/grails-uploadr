@@ -355,3 +355,8 @@
 .demo .warning .browsers .anchor {
 	margin-top: 80px;
 }
+
+/** bootstrap overrides **/
+.container .demo {
+	width: 50%;
+}

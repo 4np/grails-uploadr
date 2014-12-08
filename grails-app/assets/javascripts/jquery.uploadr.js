@@ -67,7 +67,7 @@
 			// got a color?
 			if (file.fileColor) {
 				// yes override default background color
-				$('.progress', fileDomObj).css('background-color', file.fileColor);
+				$('.upload-progress', fileDomObj).css('background-color', file.fileColor);
 			}
 
 			// and set to complete
@@ -96,7 +96,7 @@
 
 			// add a progress bar div
 			var progressDiv = document.createElement('div');
-			progressDiv.setAttribute('class', 'progress');
+			progressDiv.setAttribute('class', 'upload-progress');
 
 			// add fileinfo div
 			// - info
@@ -426,7 +426,7 @@
 						fileAttrs.failed = true;
 
 						// mark as failed
-						$('.progress', fileDivObj).addClass('failed');
+						$('.upload-progress', fileDivObj).addClass('failed');
 					}
 				});
 			}
@@ -447,10 +447,10 @@
 			// call onStart event handler
 			options.onStart(fileAttrs);
 
-			// initialze XML Http Request
+			// initialize XML Http Request
 			var xhr			= new XMLHttpRequest(),
 				upload		= xhr.upload,
-				progressBar	= $('.progress', domObj);
+				progressBar	= $('.upload-progress', domObj);
 
 			// check for file extension?
 			if (options.allowedExtensions.length>0) {
@@ -458,7 +458,7 @@
 				var fileName = file.name.split(".");
 				var fileExtension = fileName[ fileName.length-1 ];
 
-				// check if extension matched the whitelist
+				// check if extension matched the white list
 				if ($.inArray(fileExtension, allowedExtensions) < 0) {
 					// no, deny upload
 					methods.playError(options);
@@ -650,7 +650,7 @@
 
 		onProgressHandler: function(domObj, fileAttrs, percentage, text, tooltipText, options, failed) {
 			var progressMaxWidth	= domObj.parent().width();
-			var progressBar			= $('.progress', domObj);
+			var progressBar			= $('.upload-progress', domObj);
 			var percentageDiv 		= $('.percentage', domObj);
 			var speedDiv			= $('.speed', domObj);
 
@@ -772,7 +772,7 @@
 			}
 			if (options.colorPicker) {
 				var colorPicker = methods.addButton(domObj, 'color', options.colorPickerText, '', options, function() {
-					var p = $('.progress', domObj);
+					var p = $('.upload-progress', domObj);
 					var c = p.css('background-color');
 					methods.launchColorPicker(domObj, c, options, function(color) {
 						// change background color
@@ -808,9 +808,6 @@
 
 			// add tooltip?
 			if (tooltipText) {
-
-				console.log('bind tiptip to', domObj);
-
 				button.tipTip({content: tooltipText, maxWidth: 600});
 			}
 
@@ -1202,7 +1199,7 @@
 
 			// add badge
 			var badgeDiv = document.createElement('div');
-				badgeDiv.setAttribute('class', 'badge hidden');
+				badgeDiv.setAttribute('class', 'info-badge');
 
 			// add placeholder text
 			var placeholderDiv = document.createElement('div');
