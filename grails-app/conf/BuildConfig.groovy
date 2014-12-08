@@ -65,12 +65,16 @@ grails.project.dependency.resolution = {
                 ":tomcat:7.0.55",
                 ":grom:latest.integration",
                 ":jquery:1.11.1",
-                ':cache:1.1.8',
-                ":asset-pipeline:1.9.9",
-                ":sass-asset-pipeline:1.9.0"
+                ':cache:1.1.8'
         ) {
             // this is a plugin only plugin, should not be transitive to the application
             export = false
+        }
+
+        // dependencies
+        compile(":asset-pipeline:1.9.9",
+                ":sass-asset-pipeline:1.9.0") {
+            export = true
         }
 
         // Uncomment these to enable additional asset-pipeline capabilities
