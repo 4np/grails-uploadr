@@ -1083,6 +1083,13 @@
 				playSound = false;
 			});
 		};
+
+		// change any option after initialization
+		this.set = function(name, value) {
+			if (typeof options[name] !== "undefined") {
+				options[name] = value;
+			}
+		};
 	};
 
 	// define the jquery plugin code

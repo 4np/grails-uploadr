@@ -565,6 +565,14 @@ and the ```uploadedFile``` controller's ```downloadUploadedFile``` action in ```
 
 There are several occasions you might want to be able to interact with an already initialized Uploadr, for example in ajax calls or in your handlers. At the moment only clearing out (and / or erasing all uploaded files) is supported. If you have any feature requests, you can [submit them here](https://github.com/4np/grails-uploadr/issues).
 
+### Changing a property on an already initialized uploadr
+
+As of version 1.1.0 it is possible to set / change most properties of an already initialized uploadr. This example allows you to change the allowed extensions for an uploadr after it has been initialized (also see example 3 in the live demo):
+
+```
+$('.uploadr[name=myUploadr]').data('uploadr').set('allowedExtensions', 'png');
+```
+
 ### Clearing out an already initialized Uploadr
 In several occasions it might be useful to be able to hook into an already initialized Uploadr to perform certain actions (e.g. after an Ajax call). As of version _0.7.6_ it is possible to clear out an already initialized uploadr:
 
@@ -598,7 +606,13 @@ The front-end side (the gui) of the upload plugin is developed as a [jQuery](htt
 
 ##Version 1.1.0
 
-Version 1.1.0 adds support for Bootstrap ([#29](https://github.com/4np/grails-uploadr/issues/29) - by suggestion of [ortimanu](https://github.com/ortimanu)) and the demo is now also optimized for Bootstrap. CSS has been rewritten as SCSS which means the plugin now dependes on the _sass-asset-pipeline_ plugin.
+Version 1.1.0 adds support for Bootstrap ([#29](https://github.com/4np/grails-uploadr/issues/29) - by suggestion of [ortimanu](https://github.com/ortimanu)) and the demo is now also optimized for Bootstrap. CSS has been rewritten as SCSS which means the plugin now dependes on the _sass-asset-pipeline_ plugin. 
+
+This version also allows more interation with an already initialized uploadr by changing configuration options ([#34](https://github.com/4np/grails-uploadr/issues/34) - thanks [redwoodswede](https://github.com/redwoodswede)), for example to change the allowed extenstions to only allow ```png```s:
+
+```
+$('.uploadr[name=myUploadr]').data('uploadr').set('allowedExtensions', 'png');
+```
 
 ##Version 1.0.0 (Grails 2.4 > *)
 
