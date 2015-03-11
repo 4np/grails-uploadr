@@ -133,7 +133,7 @@ grails install-plugin uploadr
 ```
 
 ## Quickstart
-The plugin incorporates a demo tag which demonstrates some examples of how to use the uploadr tag with examples and source code. You can see a live (continuous integration) demo [here](http://ci.uploadr.osx.eu/) (which is running [this](https://github.com/4np/grails-uploadr-demo)):
+The plugin incorporates a demo tag which demonstrates some examples of how to use the uploadr tag with examples and source code. You can see a live (continuous integration) demo [here](http://uploadr.osx.eu/) (which is running [this](https://github.com/4np/grails-uploadr-demo)):
 
 ```rhtml
 <uploadr:demo/>
