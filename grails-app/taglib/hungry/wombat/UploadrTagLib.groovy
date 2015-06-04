@@ -45,7 +45,7 @@ class UploadrTagLib {
 		def deletable		= (attrs.containsKey('deletable') ? attrs.get('deletable').toString().toBoolean() : true)
 		def viewable		= (attrs.containsKey('viewable') ? attrs.get('viewable').toString().toBoolean() : true)
 		def downloadable	= (attrs.containsKey('downloadable') ? attrs.get('downloadable').toString().toBoolean() : true)
-		def allowedExtensions= (attrs.containsKey('allowedExtensions') ? attrs.get('allowedExtensions').toString() : "")
+		def allowedExtensions= (attrs.containsKey('allowedExtensions') ? attrs.get('allowedExtensions').toString().toLowerCase() : "")
         def model           = (attrs.containsKey('model') ? attrs.get('model') : [:])
 		def maxConcurrentUploads= (attrs.containsKey('maxConcurrentUploads') ? attrs.get('maxConcurrentUploads').toString().toInteger() : 0)
 		def maxConcurrentUploadsMethod = (attrs.containsKey('maxConcurrentUploadsMethod') ? attrs.get('maxConcurrentUploadsMethod').toString() : 'pause')

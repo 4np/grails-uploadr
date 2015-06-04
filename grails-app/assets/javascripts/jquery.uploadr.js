@@ -456,7 +456,7 @@
 			if (options.allowedExtensions.length>0) {
 				var allowedExtensions = options.allowedExtensions.split(",");
 				var fileName = file.name.split(".");
-				var fileExtension = fileName[ fileName.length-1 ];
+				var fileExtension = fileName[ fileName.length-1].toLowerCase();
 
 				// check if extension matched the white list
 				if ($.inArray(fileExtension, allowedExtensions) < 0) {
