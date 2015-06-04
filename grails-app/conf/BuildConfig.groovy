@@ -72,8 +72,8 @@ grails.project.dependency.resolution = {
         }
 
         // dependencies
-        compile(":asset-pipeline:1.9.9",
-                ":sass-asset-pipeline:1.9.0") {
+        compile(":asset-pipeline:2.2.3",
+                ":sass-asset-pipeline:2.1.1") {
             export = true
         }
 
