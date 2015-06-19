@@ -456,7 +456,7 @@
 			if (options.allowedExtensions.length>0) {
 				var allowedExtensions = options.allowedExtensions.split(",");
 				var fileName = file.name.split(".");
-				var fileExtension = fileName[ fileName.length-1 ];
+				var fileExtension = fileName[fileName.length - 1].toLowerCase();
 
 				// check if extension matched the white list
 				if ($.inArray(fileExtension, allowedExtensions) < 0) {
@@ -484,6 +484,8 @@
 					}
 
 					progressBar.addClass('failed');
+
+					options.onFailure(fileAttrs, domObj);
 
 					return false;
 				}
@@ -516,6 +518,9 @@
 
 				progressBar.addClass('failed');
 
+				// callback after failure
+				options.onFailure(fileAttrs, domObj);
+
 				return false;
 			}
 
@@ -541,10 +546,13 @@
 					methods.onProgressHandler(domObj, fileAttrs, 100, options.labelFailed, '', options, true);
 
 					// decrease upload counter
-					methods.handleBadge(-1,options);
+					methods.handleBadge(-1, options);
 				}
 
 				progressBar.addClass('failed');
+
+				// callback after failure
+				options.onFailure(fileAttrs, domObj);
 
 				// add a delete button to remove the file div
 				methods.addButton(domObj, 'delete', options.removeFromViewText, '', options, function() {
