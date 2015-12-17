@@ -1,6 +1,8 @@
 # About
 This plugin allows dragging and dropping files on your browser window to upload them. It works out of the box, and it is also possible to add custom (javascript / ajax) event handlers and add initial files.
 
+_**NOTE: Due to shifting focus and time constraints I do not maintain this plugin anymore. If you are interested to take over, feel free contact me and fork the project**_
+
 ![example](https://dl.dropbox.com/s/yjkgq00jd7l6oca/uploadr-blank.png?dl=1)
 
 Screenshot showing 6 files being uploaded (2 are done and 4 uploads in progress):
@@ -22,10 +24,6 @@ overall it’s a complete package for uploading files using HTML5 as a platform 
 ```
 
 [![groovymag](http://www.groovymag.com/images/gm57_400.jpg)](http://www.groovymag.com/main.issues.description/id=59/)
-
-## Build status
-
-![build status](http://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
 
 ## Features
 * upload files by
@@ -770,9 +768,6 @@ Fixed an issue where some file tags did not always work properly (color, rating,
 
 ###Version 0.5.1
 Implemented support for the changed Firefox 7 File API. While in the previous versions (and in webkit based browsers) the file information was stored in ```file.fileSize``` , ```file.fileName``` and ```file.contentType``` , Firefox 7's File API now uses ```file.name``` , ```file.size``` and ```file.type``` instead. Implemented a fix to support this new behavior.
-
-## Build status
-![build status](http://jenkins.osx.eu/buildStatus/icon?job=ci-uploadr)
 
 ## Developed With
 
