@@ -1,7 +1,7 @@
 # About
 This plugin allows dragging and dropping files on your browser window to upload them. It works out of the box, and it is also possible to add custom (javascript / ajax) event handlers and add initial files.
 
-_**NOTE: Due to shifting focus and time constraints I do not maintain this plugin anymore. If you are interested to take over, feel free contact me and fork the project**_
+_**NOTE: Due to shifting focus and time constraints I do not maintain this plugin anymore. [Dustin Clark](https://github.com/dustindclark/grails-uploadr/) has forked the plugin and is now the new maintainer. Please refer to [his fork](https://github.com/dustindclark/grails-uploadr/) for the most up to date code **_
 
 ![example](https://dl.dropbox.com/s/yjkgq00jd7l6oca/uploadr-blank.png?dl=1)
 
